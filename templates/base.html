@@ -1,0 +1,221 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>{% block title %}{{ settings.site_name_full }} — TIIU{% endblock %}</title>
+<meta name="description" content="{% block meta_desc %}{{ settings.site_name_full }} — zamonaviy bilim va koʻnikmalar orqali kelajak mutaxassislarini tayyorlaydigan nodavlat oliy ta'lim muassasasi.{% endblock %}"/>
+<link rel="icon" href="{% static 'img/favicon.pngʻ %}"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="{% static 'css/style.css' %}?v=5"/>
+{% block extra_css %}{% endblock %}
+</head>
+<body>
+
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="pre-logo">TIIU</div>
+  <div class="pre-ring"></div>
+  <p class="pre-text">Yuklanmoqda...</p>
+</div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="nav-inner">
+
+    <a href="{% url 'index' %}" class="nav-logo">
+      {% if settings.logo %}
+        <img src="{{ settings.logo.url }}" alt="{{ settings.site_name }}"/>
+      {% endif %}
+      <div>
+        <div class="logo-t1">{{ settings.site_name }}</div>
+        <div class="logo-t2">{{ settings.site_name_full }}</div>
+      </div>
+    </a>
+
+    <ul class="nav-links">
+
+      <li><a href="{% url 'index' %}" {% if request.resolver_match.url_name == 'index' %}class="active"{% endif %}>Bosh sahifa</a></li>
+
+      <!-- Universitet haqida -->
+      <li class="has-drop">
+        <a href="#">Universitet haqida <span class="caret">▾</span></a>
+        <div class="dropdown drop-split">
+          <div class="split-col">
+            <a href="{% url 'about' %}">Universitet haqida</a>
+            <a href="{% url 'leadership' %}">Rahbariyat</a>
+            <a href="{% url 'departments' %}" class="has-sub" data-panel="nav-depts-panel">Kafedralar <span class="sub-arrow">›</span></a>
+            <a href="{% url 'centers' %}">Markazlar Va Boʻlimlar</a>
+            <a href="{% url 'gallery' %}">Galereya</a>
+          </div>
+          <div class="split-panel" id="nav-depts-panel">
+            {% for d in nav_departments %}
+            <a href="{% url 'departments' %}">{{ d.name }}</a>
+            {% endfor %}
+            {% if not nav_departments %}
+            <a href="{% url 'departments' %}">Barcha kafedralar</a>
+            {% endif %}
+          </div>
+        </div>
+      </li>
+
+      <!-- Axborot xizmati -->
+      <li class="has-drop">
+        <a href="#">Axborot xizmati <span class="caret">▾</span></a>
+        <div class="dropdown">
+          <a href="{% url 'news_list' %}">Yangiliklar</a>
+          <a href="{% url 'events' %}">Tadbirlar</a>
+          <a href="{% url 'gallery' %}">Galereya</a>
+          <a href="#">E'lonlar</a>
+          <a href="#">Press-relizlar</a>
+        </div>
+      </li>
+
+      <!-- Ilm-fan -->
+      <li class="has-drop">
+        <a href="#">Ilm-fan <span class="caret">▾</span></a>
+        <div class="dropdown">
+          <a href="#">Ilmiy faoliyat</a>
+          <a href="#">Ilmiy maqolalar</a>
+          <a href="#">Dissertatsiyalar</a>
+          <a href="#">Ilmiy jurnal</a>
+          <a href="#">Konferensiyalar</a>
+        </div>
+      </li>
+
+      <!-- Talabalarga -->
+      <li class="has-drop">
+        <a href="#">Talabalarga <span class="caret">▾</span></a>
+        <div class="dropdown">
+          <a href="#">Elektron Ta'lim Tizimi</a>
+          <a href="#">Dars Jadvali</a>
+          <a href="#">Iqtidorli Talabalar</a>
+          <a href="#">Tanlovlar</a>
+          <a href="#">Elektron Kutubxona</a>
+          <a href="#">Talabalar Oʻrtasida Soʻrovnoma</a>
+          <a href="#">Video Darslar</a>
+        </div>
+      </li>
+
+      <!-- Abituriyentlarga -->
+      <li class="has-drop">
+        <a href="#">Abituriyentlarga <span class="caret">▾</span></a>
+        <div class="dropdown drop-mega">
+          <div class="mega-col">
+            {% for f in nav_faculties %}
+            <a href="{% url 'faculty_detail' f.slug %}">{{ f.name }}</a>
+            {% endfor %}
+          </div>
+          <div class="mega-side">
+            <a href="{% url 'faculties' %}" class="mega-head-link">Ta'lim Yoʻnalishlari <span>›</span></a>
+            <div class="mega-divider"></div>
+            <a href="{% url 'contact' %}">Qabul</a>
+            <a href="{% url 'contact' %}">Roʻyhatdan Oʻtish</a>
+          </div>
+        </div>
+      </li>
+
+      <li><a href="{% url 'contact' %}" {% if request.resolver_match.url_name == 'contact' %}class="active"{% endif %}>Aloqa</a></li>
+
+    </ul>
+
+    <div class="nav-actions">
+      <div class="lang-switch">
+        <button class="lang-btn">Oʻzbek <span class="caret">▾</span></button>
+        <div class="lang-drop">
+          <a href="#">Oʻzbek</a>
+          <a href="#">Русский</a>
+          <a href="#">English</a>
+        </div>
+      </div>
+      <a href="{% url 'contact' %}" class="nav-cta">HUJJAT TOPSHIRISH</a>
+      <button class="burger" id="burger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div id="mob-menu">
+  <a href="{% url 'index' %}" onclick="toggleMenu()">Bosh sahifa</a>
+  <a href="{% url 'about' %}" onclick="toggleMenu()">Universitet haqida</a>
+  <a href="{% url 'leadership' %}" onclick="toggleMenu()">Rahbariyat</a>
+  <a href="{% url 'departments' %}" onclick="toggleMenu()">Kafedralar</a>
+  <a href="{% url 'centers' %}" onclick="toggleMenu()">Markazlar Va Boʻlimlar</a>
+  <a href="{% url 'faculties' %}" onclick="toggleMenu()">Ta'lim Yoʻnalishlari</a>
+  <a href="{% url 'news_list' %}" onclick="toggleMenu()">Yangiliklar</a>
+  <a href="{% url 'events' %}" onclick="toggleMenu()">Tadbirlar</a>
+  <a href="{% url 'gallery' %}" onclick="toggleMenu()">Galereya</a>
+  <a href="{% url 'teachers' %}" onclick="toggleMenu()">Oʻqituvchilar</a>
+  <a href="{% url 'contact' %}" onclick="toggleMenu()">Aloqa</a>
+  <a href="{% url 'contact' %}" class="mcta" onclick="toggleMenu()">Hujjat topshirish →</a>
+</div>
+
+<!-- PAGE CONTENT -->
+{% block content %}{% endblock %}
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">{{ settings.site_name }}</div>
+        <p>{{ settings.about_text|default:settings.site_name_full }} — zamonaviy bilim va koʻnikmalar orqali kelajak mutaxassislarini tayyorlaydigan nodavlat oliy ta'lim muassasasi.</p>
+        <div class="fsocials">
+          {% if settings.facebook %}<a href="{{ settings.facebook }}" class="soc-btn" target="_blank" rel="noopener"><b>f</b></a>{% endif %}
+          {% if settings.instagram %}<a href="{{ settings.instagram }}" class="soc-btn" target="_blank" rel="noopener">📷</a>{% endif %}
+          {% if settings.telegram %}<a href="{{ settings.telegram }}" class="soc-btn" target="_blank" rel="noopener">✈</a>{% endif %}
+          {% if settings.youtube %}<a href="{{ settings.youtube }}" class="soc-btn" target="_blank" rel="noopener">▶</a>{% endif %}
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Universitet</div>
+        <ul class="footer-links">
+          <li><a href="{% url 'about' %}">Haqida</a></li>
+          <li><a href="{% url 'teachers' %}">Oʻqituvchilar</a></li>
+          <li><a href="{% url 'faculties' %}">Yoʻnalishlar</a></li>
+          <li><a href="{% url 'gallery' %}">Galereya</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Ta'lim</div>
+        <ul class="footer-links">
+          <li><a href="{% url 'faculties' %}">Bakalavr</a></li>
+          <li><a href="{% url 'news_list' %}">Yangiliklar</a></li>
+          <li><a href="{% url 'events' %}">Tadbirlar</a></li>
+          <li><a href="{% url 'contact' %}">Abituriyentlarga</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Aloqa</div>
+        <ul class="footer-links">
+          {% if settings.phone1 %}<li><a href="tel:{{ settings.phone1 }}">{{ settings.phone1 }}</a></li>{% endif %}
+          {% if settings.phone2 %}<li><a href="tel:{{ settings.phone2 }}">{{ settings.phone2 }}</a></li>{% endif %}
+          {% if settings.email %}<li><a href="mailto:{{ settings.email }}">{{ settings.email }}</a></li>{% endif %}
+          <li><a href="{% url 'contact' %}">Murojaat</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© {{ settings.founded_year }}–{% now "Y" %} <a href="{% url 'index' %}">{{ settings.site_name }}</a>. Barcha huquqlar himoyalangan.</span>
+      <span>{{ settings.address }}</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script src="{% static 'js/three.min.js' %}"></script>
+<script src="{% static 'js/gsap.min.js' %}"></script>
+<script src="{% static 'js/ScrollTrigger.min.js' %}"></script>
+<script src="{% static 'js/main.js' %}?v=3"></script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

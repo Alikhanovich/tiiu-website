@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Oʻqituvchilar — {{ settings.site_name }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="container">
+    <div class="breadcrumb"><a href="{% url 'index' %}">Bosh sahifa</a><span>/</span><span>Oʻqituvchilar</span></div>
+    <h1 class="page-title">Professor-<span>oʻqituvchilar</span></h1>
+    <p class="page-sub">Koʻp yillik ilmiy va amaliy tajribaga ega professor-oʻqituvchilar hamda amaliyotchi mutaxassislar jamoamiz.</p>
+  </div>
+</div>
+
+<section style="padding:80px 0;background:var(--bg)">
+  <div class="container">
+    <div class="teachers-grid">
+      {% for t in teachers %}
+      <div class="teacher-card">
+        <div class="tc-photo">
+          {% if t.photo %}
+            <img src="{{ t.photo.url }}" alt="{{ t.full_name }}"
+                 onerror="this.parentElement.innerHTML='<div class=tc-placeholder>👤</div>'"/>
+          {% else %}
+            <div class="tc-placeholder">👤</div>
+          {% endif %}
+        </div>
+        <div class="tc-body">
+          <div class="tc-name">{{ t.full_name }}</div>
+          <div class="tc-pos">{{ t.get_position_display }}</div>
+          {% if t.department %}<div class="tc-dept">{{ t.department }}</div>{% endif %}
+          {% if t.experience %}
+          <div style="margin-top:8px;font-size:.72rem;color:var(--text3)">
+            🏅 {{ t.experience }} yil tajriba
+          </div>
+          {% endif %}
+          {% if t.email or t.linkedin %}
+          <div style="display:flex;gap:8px;justify-content:center;margin-top:12px">
+            {% if t.email %}
+            <a href="mailto:{{ t.email }}" class="soc-btn" style="width:34px;height:34px;font-size:.75rem">✉</a>
+            {% endif %}
+            {% if t.linkedin %}
+            <a href="{{ t.linkedin }}" target="_blank" class="soc-btn" style="width:34px;height:34px;font-size:.75rem">in</a>
+            {% endif %}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      {% empty %}
+      <p style="color:var(--text2);grid-column:1/-1;text-align:center;padding:60px 0">Oʻqituvchilar hali qoʻshilmagan.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

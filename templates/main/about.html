@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Universitet haqida — {{ settings.site_name }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="container">
+    <div class="breadcrumb"><a href="{% url 'index' %}">Bosh sahifa</a><span>/</span><span>Haqida</span></div>
+    <h1 class="page-title">Universitet <span>haqida</span></h1>
+    <p class="page-sub">{{ settings.site_name_full }} — ilgʻor ta'lim texnologiyalari asosida zamonaviy mutaxassislar tayyorlaydigan nodavlat oliy ta'lim muassasasi.</p>
+  </div>
+</div>
+
+<section style="padding:90px 0;background:var(--bg)">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-vis reveal-l">
+        <div class="about-img">
+          <img src="{% static 'img/campus.jpgʻ %}" alt="Kampus"
+               onerror="this.parentElement.style.background='linear-gradient(135deg,#0d1f4a,#1a3a7a)';this.style.display='none'"/>
+        </div>
+        <div class="ab-badge glass ab1"><div class="abi">🎓</div><div class="abv">{{ settings.founded_year }}</div><div class="abl">Tashkil yili</div></div>
+        <div class="ab-badge glass ab2"><div class="abi">🏆</div><div class="abv">Akkred.</div><div class="abl">Davlat litsenziyasi</div></div>
+      </div>
+      <div class="reveal-r">
+        <div class="tag"><span class="dot"></span>Missiya va Maqsad</div>
+        <h2 class="sec-title">Bilim orqali <span>kelajakni</span> bunyod etamiz</h2>
+        <p class="sec-sub">{{ settings.about_text|default:"Toshkent ijtimoiy innovatsiya universiteti ilgʻor ta'lim texnologiyalariga asoslangan holda ijtimoiy soha va iqtisodiyot tarmoqlari uchun zamonaviy bilim va koʻnikmalarga ega, mustaqil fikrlaydigan malakali kadrlarni yetishtirib beruvchi nodavlat oliy ta'lim tashkiloti hisoblanadi." }}</p>
+        <p class="sec-sub" style="margin-top:12px">TIIU talaba-yoshlarga yuqori sifatli ta'lim xizmatlarini taklif etadi. Universitet mamlakatimizning yetakchi oliy ta'lim tashkiloti sifatida ijtimoiy-iqtisodiy sohadagi oʻzgarishlarga innovatsion yechimlar bilan hissa qoʻshishni maqsad qilib qoʻygan.</p>
+        <div class="about-btns" style="margin-top:28px">
+          <a href="{% url 'faculties' %}" class="btn-primary">Yoʻnalishlarni koʻrish →</a>
+          <a href="{% url 'contact' %}" class="btn-outline">Bogʻlanish</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<section id="stats-bar">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-card reveal d1">
+        <div class="stat-icon">🎓</div>
+        <div class="stat-num"><span data-target="{{ settings.direction_count }}" data-suffix="">0</span></div>
+        <div class="stat-label">Ta'lim yoʻnalishi</div>
+      </div>
+      <div class="stat-card reveal d2">
+        <div class="stat-icon">👨‍🏫</div>
+        <div class="stat-num"><span data-target="{{ settings.teacher_count }}" data-suffix="+">0</span></div>
+        <div class="stat-label">Oʻqituvchilar</div>
+      </div>
+      <div class="stat-card reveal d3">
+        <div class="stat-icon">👥</div>
+        <div class="stat-num"><span data-target="{{ settings.student_count }}" data-suffix="+">0</span></div>
+        <div class="stat-label">Talabalar</div>
+      </div>
+      <div class="stat-card reveal d4">
+        <div class="stat-icon">📅</div>
+        <div class="stat-num"><span data-target="{{ settings.founded_year }}" data-suffix="">0</span></div>
+        <div class="stat-label">Tashkil yili</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Teachers preview -->
+{% if teachers %}
+<section style="padding:90px 0;background:var(--bg2)">
+  <div class="container">
+    <div class="sec-header reveal">
+      <div class="tag"><span class="dot"></span>Jamoamiz</div>
+      <h2 class="sec-title">Professor-<span>oʻqituvchilar</span></h2>
+    </div>
+    <div class="teachers-grid">
+      {% for t in teachers|slice:":8" %}
+      <div class="teacher-card">
+        <div class="tc-photo">
+          {% if t.photo %}
+            <img src="{{ t.photo.url }}" alt="{{ t.full_name }}"
+                 onerror="this.parentElement.innerHTML='<div class=tc-placeholder>👤</div>'"/>
+          {% else %}
+            <div class="tc-placeholder">👤</div>
+          {% endif %}
+        </div>
+        <div class="tc-body">
+          <div class="tc-name">{{ t.full_name }}</div>
+          <div class="tc-pos">{{ t.get_position_display }}</div>
+          {% if t.department %}<div class="tc-dept">{{ t.department }}</div>{% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% if teachers.count > 8 %}
+    <div class="news-all reveal" style="margin-top:36px">
+      <a href="{% url 'teachers' %}" class="btn-outline">Barcha oʻqituvchilar →</a>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endif %}
+
+<!-- Faculties -->
+<section style="padding:90px 0;background:var(--bg)">
+  <div class="container">
+    <div class="sec-header reveal">
+      <div class="tag"><span class="dot"></span>Ta'lim</div>
+      <h2 class="sec-title">Bizning <span>yoʻnalishlar</span></h2>
+    </div>
+    <div class="fac-grid">
+      {% for f in faculties %}
+      <div class="fac-card reveal-s">
+        <div class="fac-inner">
+          <div class="fac-front" {% if f.image %}style="background-image:url('{{ f.image.url }}')"{% endif %}>
+            {% if f.short_name %}<div class="fac-badge">{{ f.short_name }}</div>{% endif %}
+            <div class="fac-front-c">
+              <div class="fac-num">0{{ forloop.counter }} — {{ f.get_degree_display }}</div>
+              <div class="fac-title">{{ f.name }}</div>
+            </div>
+          </div>
+          <div class="fac-back">
+            <div class="fac-back-icon">{{ f.icon }}</div>
+            <h3>{{ f.name }}</h3>
+            <p>{{ f.description|truncatewords:16 }}</p>
+            <a href="{% url 'faculty_detail' f.slug %}" class="fac-back-btn">Batafsil →</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

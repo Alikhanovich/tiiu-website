@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Kafedralar — {{ settings.site_name }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="container">
+    <div class="breadcrumb"><a href="{% url 'index' %}">Bosh sahifa</a><span>/</span><span>Kafedralar</span></div>
+    <h1 class="page-title">Universitet <span>kafedralari</span></h1>
+    <p class="page-sub">Ilmiy-pedagogik faoliyat olib boruvchi kafedra va boʻlimlar.</p>
+  </div>
+</div>
+
+<section style="padding:80px 0;background:var(--bg)">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:28px">
+      {% for dept in departments %}
+      <div style="border-radius:var(--r);overflow:hidden;background:var(--bg2);border:1px solid var(--border);transition:transform .3s,box-shadow .3s" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 40px rgba(59,130,246,.18)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+        {% if dept.image %}
+        <div style="height:180px;overflow:hidden">
+          <img src="{{ dept.image.url }}" alt="{{ dept.name }}" style="width:100%;height:100%;object-fit:cover"/>
+        </div>
+        {% else %}
+        <div style="height:120px;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;align-items:center;justify-content:center">
+          <span style="font-size:3rem">🎓</span>
+        </div>
+        {% endif %}
+        <div style="padding:24px">
+          <h3 style="font-size:1rem;font-weight:700;color:var(--text);margin-bottom:8px;line-height:1.4">{{ dept.name }}</h3>
+          {% if dept.head %}
+          <div style="font-size:.8rem;color:var(--blue);margin-bottom:10px">
+            <span style="opacity:.6">Mudiri:</span> {{ dept.head }}
+          </div>
+          {% endif %}
+          {% if dept.faculty %}
+          <div style="font-size:.78rem;color:var(--text3);margin-bottom:10px">
+            {{ dept.faculty.icon }} {{ dept.faculty.name }}
+          </div>
+          {% endif %}
+          {% if dept.description %}
+          <p style="font-size:.82rem;color:var(--text2);line-height:1.6;margin-bottom:14px">{{ dept.description|truncatewords:25 }}</p>
+          {% endif %}
+          {% with tc=dept.teachers.count %}
+          {% if tc %}
+          <div style="font-size:.78rem;color:var(--text3);border-top:1px solid var(--border);padding-top:12px;margin-top:4px">
+            👨‍🏫 {{ tc }} oʻqituvchi
+          </div>
+          {% endif %}
+          {% endwith %}
+        </div>
+      </div>
+      {% empty %}
+      <p style="color:var(--text2);grid-column:1/-1;text-align:center;padding:60px 0">Kafedralar hali qoʻshilmagan.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

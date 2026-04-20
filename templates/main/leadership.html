@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Rahbariyat — {{ settings.site_name }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="container">
+    <div class="breadcrumb"><a href="{% url 'index' %}">Bosh sahifa</a><span>/</span><span>Rahbariyat</span></div>
+    <h1 class="page-title">Universitet <span>rahbariyati</span></h1>
+    <p class="page-sub">Toshkent ijtimoiy innovatsiya universitetining boshqaruv jamoasi.</p>
+  </div>
+</div>
+
+<section style="padding:80px 0;background:var(--bg)">
+  <div class="container">
+    <div class="leader-grid">
+      {% for l in leaders %}
+      <div class="leader-card reveal">
+        <div class="leader-card-top">
+          {% if l.photo %}
+            <img class="leader-photo" src="{{ l.photo.url }}" alt="{{ l.full_name }}" loading="lazy"
+                 onerror="this.outerHTML='<div class=leader-photo-placeholder>👤</div>'"/>
+          {% else %}
+            <div class="leader-photo-placeholder">👤</div>
+          {% endif %}
+          <div class="leader-top-info">
+            <div class="leader-rank">{{ l.rank|default:l.position }}</div>
+            <h2 class="leader-name">{{ l.full_name }}</h2>
+            {% if l.rank and l.position %}<p class="leader-position">{{ l.position }}</p>{% endif %}
+            {% if l.qualification %}<span class="leader-qual">{{ l.qualification }}</span>{% endif %}
+          </div>
+        </div>
+        {% if l.phone or l.email or l.reception_days %}
+        <div class="leader-body">
+          {% if l.phone or l.email %}
+          <div class="leader-contact-row">
+            {% if l.phone %}
+            <div class="leader-contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.82a19.79 19.79 0 01-3.02-8.63A2 2 0 012.03 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7a16 16 0 006.06 6.06l.72-.72a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+              <span>{{ l.phone }}</span>
+            </div>
+            {% endif %}
+            {% if l.email %}
+            <div class="leader-contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <a href="mailto:{{ l.email }}">{{ l.email }}</a>
+            </div>
+            {% endif %}
+          </div>
+          {% endif %}
+          {% if l.reception_days %}
+          <div class="leader-schedule">
+            <div class="leader-schedule-title">Qabul kunlari</div>
+            <div class="leader-schedule-days">{{ l.reception_days }}</div>
+            {% if l.reception_time %}<div class="leader-schedule-time">{{ l.reception_time }}</div>{% endif %}
+          </div>
+          {% endif %}
+        </div>
+        {% endif %}
+      </div>
+      {% empty %}
+      <p style="color:var(--text2);grid-column:1/-1;text-align:center;padding:60px 0">Rahbariyat hali qoʻshilmagan.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

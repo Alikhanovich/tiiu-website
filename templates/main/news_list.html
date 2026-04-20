@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Yangiliklar — {{ settings.site_name }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="container">
+    <div class="breadcrumb"><a href="{% url 'index' %}">Bosh sahifa</a><span>/</span><span>Yangiliklar</span></div>
+    <h1 class="page-title">Soʻnggi <span>yangiliklar</span></h1>
+    <p class="page-sub">TIIU hayotidagi eng soʻnggi yutuqlar, tadbirlar va muhim xabarlar.</p>
+  </div>
+</div>
+
+<section style="padding:80px 0;background:var(--bg)">
+  <div class="container">
+
+    {% if categories %}
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:44px;justify-content:center">
+      <a href="{% url 'news_list' %}"
+         style="padding:8px 20px;border-radius:50px;font-size:.82rem;font-weight:700;border:1px solid {% if not active_cat %}var(--blue){% else %}var(--border){% endif %};background:{% if not active_cat %}rgba(59,130,246,.15){% else %}transparent{% endif %};color:{% if not active_cat %}var(--blue){% else %}var(--text2){% endif %};transition:.2s">
+        Barchasi
+      </a>
+      {% for cat in categories %}
+      <a href="{% url 'news_list' %}?cat={{ cat.slug }}"
+         style="padding:8px 20px;border-radius:50px;font-size:.82rem;font-weight:700;border:1px solid {% if active_cat == cat.slug %}var(--blue){% else %}var(--border){% endif %};background:{% if active_cat == cat.slug %}rgba(59,130,246,.15){% else %}transparent{% endif %};color:{% if active_cat == cat.slug %}var(--blue){% else %}var(--text2){% endif %};transition:.2s">
+        {{ cat.name }}
+      </a>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="news-grid" style="grid-template-columns:repeat(3,1fr)">
+      {% for article in news_list %}
+      <div class="news-card">
+        <div class="nc-img">
+          {% if article.image %}
+            <img src="{{ article.image.url }}" alt="{{ article.title }}"
+                 onerror="this.parentElement.innerHTML='<div class=nc-img-placeholder>📰</div>'"/>
+          {% else %}
+            <div class="nc-img-placeholder">📰</div>
+          {% endif %}
+          {% if article.category %}
+            <span class="nc-cat">{{ article.category.name }}</span>
+          {% endif %}
+        </div>
+        <div class="nc-body">
+          <div class="nc-date">{{ article.created_at|date:"d-B Y" }}</div>
+          <div class="nc-title">{{ article.title }}</div>
+          <p style="font-size:.82rem;color:var(--text2);margin-bottom:12px;line-height:1.6">{{ article.short_text|truncatewords:18 }}</p>
+          <a href="{% url 'news_detail' article.slug %}" class="nc-more">Oʻqish <span>→</span></a>
+        </div>
+      </div>
+      {% empty %}
+      <p style="color:var(--text2);grid-column:1/-1;text-align:center;padding:60px 0">Yangiliklar hali qoʻshilmagan.</p>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+{% endblock %}

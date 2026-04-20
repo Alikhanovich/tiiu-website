@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ faculty.name }} — {{ settings.site_name }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="{% url 'index' %}">Bosh sahifa</a><span>/</span>
+      <a href="{% url 'faculties' %}">Yoʻnalishlar</a><span>/</span>
+      <span>{{ faculty.name }}</span>
+    </div>
+    <h1 class="page-title">{{ faculty.icon }} <span>{{ faculty.name }}</span></h1>
+    <p class="page-sub">{{ faculty.get_degree_display }} · {{ faculty.duration }} yil · {{ faculty.study_forms }}</p>
+  </div>
+</div>
+
+<section style="padding:90px 0;background:var(--bg)">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-vis reveal-l">
+        <div class="about-img">
+          {% if faculty.image %}
+            <img src="{{ faculty.image.url }}" alt="{{ faculty.name }}"
+                 onerror="this.parentElement.style.background='linear-gradient(135deg,#0d1f4a,#1a3a7a)';this.style.display='none'"/>
+          {% else %}
+            <div style="width:100%;height:100%;background:linear-gradient(135deg,#0d1f4a,#1a3a7a);display:flex;align-items:center;justify-content:center;font-size:5rem;border-radius:var(--rl)">{{ faculty.icon }}</div>
+          {% endif %}
+        </div>
+        <div class="ab-badge glass ab1"><div class="abi">📅</div><div class="abv">{{ faculty.duration }} yil</div><div class="abl">Oʻqish muddati</div></div>
+        <div class="ab-badge glass ab2"><div class="abi">🎓</div><div class="abv">{{ faculty.get_degree_display }}</div><div class="abl">Daraja</div></div>
+      </div>
+      <div class="reveal-r">
+        <div class="tag"><span class="dot"></span>{{ faculty.get_degree_display }}</div>
+        <h2 class="sec-title"><span>{{ faculty.name }}</span></h2>
+        <p class="sec-sub">{{ faculty.description }}</p>
+        <div class="about-features" style="margin-top:24px">
+          <div class="af">
+            <div class="af-ic" style="background:rgba(59,130,246,.15)">📋</div>
+            <div><div class="af-title">Oʻqish shakllari</div><div class="af-sub">{{ faculty.study_forms }}</div></div>
+          </div>
+          <div class="af">
+            <div class="af-ic" style="background:rgba(6,182,212,.15)">⏱</div>
+            <div><div class="af-title">Muddati</div><div class="af-sub">{{ faculty.duration }} yil</div></div>
+          </div>
+          <div class="af">
+            <div class="af-ic" style="background:rgba(139,92,246,.15)">🏆</div>
+            <div><div class="af-title">Daraja</div><div class="af-sub">{{ faculty.get_degree_display }}</div></div>
+          </div>
+          <div class="af">
+            <div class="af-ic" style="background:rgba(245,158,11,.15)">💳</div>
+            <div><div class="af-title">Tizim</div><div class="af-sub">Kredit-modul</div></div>
+          </div>
+        </div>
+        <div class="about-btns">
+          <a href="{% url 'contact' %}" class="btn-primary">🎓 Hujjat topshirish</a>
+          <a href="{% url 'faculties' %}" class="btn-outline">← Barcha yoʻnalishlar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% if teachers %}
+<section style="padding:80px 0;background:var(--bg2)">
+  <div class="container">
+    <div class="sec-header reveal">
+      <div class="tag"><span class="dot"></span>Oʻqituvchilar</div>
+      <h2 class="sec-title">Bu <span>yoʻnalish</span> oʻqituvchilari</h2>
+    </div>
+    <div class="teachers-grid">
+      {% for t in teachers %}
+      <div class="teacher-card">
+        <div class="tc-photo">
+          {% if t.photo %}<img src="{{ t.photo.url }}" alt="{{ t.full_name }}" onerror="this.parentElement.innerHTML='<div class=tc-placeholder>👤</div>'"/>
+          {% else %}<div class="tc-placeholder">👤</div>{% endif %}
+        </div>
+        <div class="tc-body">
+          <div class="tc-name">{{ t.full_name }}</div>
+          <div class="tc-pos">{{ t.get_position_display }}</div>
+          {% if t.experience %}<div class="tc-dept">{{ t.experience }} yil tajriba</div>{% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

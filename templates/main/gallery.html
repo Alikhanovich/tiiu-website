@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Galereya — {{ settings.site_name }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="container">
+    <div class="breadcrumb"><a href="{% url 'index' %}">Bosh sahifa</a><span>/</span><span>Galereya</span></div>
+    <h1 class="page-title">Foto <span>galereya</span></h1>
+    <p class="page-sub">Universitetdagi hayot, tadbirlar va arxiv suratlari.</p>
+  </div>
+</div>
+
+<section style="padding:80px 0;background:var(--bg)">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px">
+      {% for album in galleries %}
+      <a href="{% url 'gallery_detail' album.slug %}"
+         style="border-radius:var(--r);overflow:hidden;border:1px solid var(--border);background:rgba(10,22,48,.6);transition:all .35s ease;display:block;cursor:pointer"
+         class="news-card">
+        <div style="height:220px;overflow:hidden;position:relative">
+          {% if album.cover %}
+            <img src="{{ album.cover.url }}" alt="{{ album.title }}"
+                 style="width:100%;height:100%;object-fit:cover;transition:transform .6s ease"
+                 onerror="this.parentElement.innerHTML='<div class=nc-img-placeholder>🖼</div>'"/>
+          {% else %}
+            <div class="nc-img-placeholder" style="height:100%">🖼</div>
+          {% endif %}
+          <div style="position:absolute;bottom:12px;right:12px;background:rgba(59,130,246,.25);backdrop-filter:blur(10px);border:1px solid var(--border);padding:4px 12px;border-radius:50px;font-size:.72rem;font-weight:700;color:var(--blue)">
+            {{ album.images.count }} rasm
+          </div>
+        </div>
+        <div style="padding:18px 20px">
+          <div style="font-family:'Space Grotesk',sans-serif;font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:6px">{{ album.title }}</div>
+          {% if album.description %}
+          <p style="font-size:.8rem;color:var(--text3);line-height:1.6">{{ album.description|truncatewords:12 }}</p>
+          {% endif %}
+          <div style="font-size:.72rem;color:var(--text3);margin-top:10px">{{ album.created_at|date:"d.m.Y" }}</div>
+        </div>
+      </a>
+      {% empty %}
+      <p style="color:var(--text2);grid-column:1/-1;text-align:center;padding:60px 0">Galereya hali qoʻshilmagan.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

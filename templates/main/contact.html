@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Aloqa — {{ settings.site_name }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="container">
+    <div class="breadcrumb"><a href="{% url 'index' %}">Bosh sahifa</a><span>/</span><span>Aloqa</span></div>
+    <h1 class="page-title">Biz bilan <span>bogʻlaning</span></h1>
+    <p class="page-sub">Savolingiz bormi? Qoʻngʻiroq qiling yoki shaklni toʻldiring — 24 soat ichida javob beramiz.</p>
+  </div>
+</div>
+
+<section id="contact" style="padding:80px 0">
+  <div class="container">
+    <div class="contact-grid">
+
+      <!-- Left: Info + FAQ -->
+      <div class="reveal-l">
+        <div class="ci-item">
+          <div class="ci-icon">📍</div>
+          <div>
+            <div class="ci-label">Manzil</div>
+            <div class="ci-value">{{ settings.address }}</div>
+          </div>
+        </div>
+        <div class="ci-item">
+          <div class="ci-icon">📞</div>
+          <div>
+            <div class="ci-label">Telefon</div>
+            <div class="ci-value">
+              {% if settings.phone1 %}<a href="tel:{{ settings.phone1 }}">{{ settings.phone1 }}</a><br>{% endif %}
+              {% if settings.phone2 %}<a href="tel:{{ settings.phone2 }}">{{ settings.phone2 }}</a>{% endif %}
+            </div>
+          </div>
+        </div>
+        <div class="ci-item">
+          <div class="ci-icon">✉️</div>
+          <div>
+            <div class="ci-label">Elektron pochta</div>
+            <div class="ci-value"><a href="mailto:{{ settings.email }}">{{ settings.email }}</a></div>
+          </div>
+        </div>
+        <div class="ci-item">
+          <div class="ci-icon">🕐</div>
+          <div>
+            <div class="ci-label">Ish vaqti</div>
+            <div class="ci-value">{{ settings.work_hours }}</div>
+          </div>
+        </div>
+
+        <div class="socials">
+          {% if settings.facebook %}<a href="{{ settings.facebook }}" class="soc-btn" target="_blank"><b>f</b></a>{% endif %}
+          {% if settings.instagram %}<a href="{{ settings.instagram }}" class="soc-btn" target="_blank">📷</a>{% endif %}
+          {% if settings.telegram %}<a href="{{ settings.telegram }}" class="soc-btn" target="_blank">✈</a>{% endif %}
+          {% if settings.youtube %}<a href="{{ settings.youtube }}" class="soc-btn" target="_blank">▶</a>{% endif %}
+        </div>
+
+        <!-- Map placeholder -->
+        <div style="margin-top:30px;border-radius:var(--r);overflow:hidden;border:1px solid var(--border);height:220px;background:var(--bg3);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px">
+          <div style="font-size:2.5rem">📍</div>
+          <p style="font-size:.82rem;color:var(--text3);text-align:center;padding:0 20px">{{ settings.address }}</p>
+        </div>
+
+        {% if faqs %}
+        <div class="faq-wrap">
+          <div class="faq-h">Tez-tez beriladigan savollar</div>
+          {% for faq in faqs %}
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">
+              {{ faq.question }}<span class="arr">▾</span>
+            </button>
+            <div class="faq-a">{{ faq.answer }}</div>
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+
+      <!-- Right: Form -->
+      <div class="cf-wrap glass reveal-r">
+        <div class="cf-title">Ariza qoldiring</div>
+        <div class="cf-sub">Shaklni toʻldiring, 24 soat ichida javob beramiz.</div>
+        <form id="contact-form" action="{% url 'contact_submit' %}" method="post">
+          {% csrf_token %}
+          <div class="form-row">
+            <div class="form-group">
+              <label>Ism *</label>
+              <input type="text" name="first_name" placeholder="Ismingiz" required/>
+            </div>
+            <div class="form-group">
+              <label>Familiya *</label>
+              <input type="text" name="last_name" placeholder="Familiyangiz" required/>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Telefon</label>
+              <input type="tel" name="phone" placeholder="+998 90 000 00 00"/>
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" name="email" placeholder="email@example.com"/>
+            </div>
+          </div>
+          <div class="form-group full">
+            <label>Qiziqtirgan yoʻnalish</label>
+            <select name="direction">
+              <option value="">Yoʻnalishni tanlang...</option>
+              {% for f in nav_faculties %}
+              <option>{{ f.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="form-group full">
+            <label>Xabar (ixtiyoriy)</label>
+            <textarea name="message" placeholder="Savolingizni yozing..."></textarea>
+          </div>
+          <button type="submit" class="form-submit">Yuborish →</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endblock %}

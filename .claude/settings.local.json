@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip --version)",
+      "Bash(django-admin --version)",
+      "Bash(pip install:*)",
+      "Bash(python manage.py makemigrations)",
+      "Bash(python manage.py shell -c ':*)",
+      "Bash(python manage.py runserver 8000)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://127.0.0.1:8000/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://127.0.0.1:8000/admin/)",
+      "Bash(python manage.py collectstatic --noinput)",
+      "Bash(python manage.py migrate)",
+      "Bash(curl -s -o three.min.js \"https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js\")",
+      "Bash(curl -s -o gsap.min.js \"https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js\")",
+      "Bash(curl -s -o ScrollTrigger.min.js \"https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js\")",
+      "Bash(python manage.py check)",
+      "Bash(python -c ':*)",
+      "Bash(python manage.py shell -c \"from main.models import Faculty; print\\('Faculties count:', Faculty.objects.count\\(\\)\\); print\\('Active faculties:', Faculty.objects.filter\\(is_active=True\\).count\\(\\)\\); [print\\(f.id, f.name, f.is_active, f.slug\\) for f in Faculty.objects.all\\(\\)]\")"
+    ]
+  }
+}

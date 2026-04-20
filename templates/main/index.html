@@ -1,0 +1,384 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ settings.site_name_full }} — Bosh sahifa{% endblock %}
+
+{% block content %}
+
+<!-- ── HERO ──────────────────────────────────────────────────── -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-overlay"></div>
+  <div class="hero-grid-bg"></div>
+
+  <div class="hero-content">
+    <div>
+      <div class="hero-badge"><span class="dot"></span>Oʻzbekistondagi innovatsion universitet</div>
+      <h1 class="hero-title">
+        <span class="grad">{{ settings.hero_title|default:"Kelajakni" }}</span><br>
+        bugun<br>shakllantir
+      </h1>
+      <p class="hero-sub">{{ settings.hero_subtitle|default:"Toshkent ijtimoiy innovatsiya universiteti — ilgʻor ta'lim texnologiyalari asosida zamonaviy mutaxassislar tayyorlaydigan nodavlat oliy ta'lim muassasasi." }}</p>
+      <div class="hero-btns">
+        <a href="{% url 'contact' %}" class="btn-primary">🎓 Hujjat topshirish</a>
+        <a href="#faculties" class="btn-outline">🔬 Ta'lim yoʻnalishlari</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat">
+          <div class="num" data-count="{{ settings.founded_year|default:2015 }}" data-suffix="">0</div>
+          <div class="lab">Tashkil yili</div>
+        </div>
+        <div class="hdiv"></div>
+        <div class="hstat">
+          <div class="num" data-count="{{ settings.direction_count|default:9 }}" data-suffix="">0</div>
+          <div class="lab">Ta'lim yoʻnalishi</div>
+        </div>
+        <div class="hdiv"></div>
+        <div class="hstat">
+          <div class="num" data-count="{{ settings.teacher_count|default:50 }}" data-suffix="+">0</div>
+          <div class="lab">Oʻqituvchilar</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating info cards -->
+    <div class="hero-3d">
+      <div class="hfc hfc-a">
+        <div class="hi" style="background:linear-gradient(135deg,rgba(59,130,246,.2),rgba(6,182,212,.15))">🏆</div>
+        <div><div class="ht">Akkreditatsiyalangan</div><div class="hs">Davlat tomonidan tasdiqlangan</div></div>
+      </div>
+      <div class="hfc hfc-b">
+        <div class="hi" style="background:linear-gradient(135deg,rgba(139,92,246,.2),rgba(236,72,153,.15))">📚</div>
+        <div><div class="ht">{{ settings.direction_count|default:9 }} yoʻnalish</div><div class="hs">Bakalavr darajasi</div></div>
+      </div>
+      
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <div class="scroll-mouse"></div>
+    <span>Pastga aylantiring</span>
+  </div>
+</section>
+
+<!-- ── STATS BAR ──────────────────────────────────────────────── -->
+<section id="stats-bar">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-card reveal d1">
+        <div class="stat-icon">🎓</div>
+        <div class="stat-num"><span data-target="{{ settings.direction_count|default:9 }}" data-suffix="">0</span></div>
+        <div class="stat-label">Ta'lim yoʻnalishi</div>
+      </div>
+      <div class="stat-card reveal d2">
+        <div class="stat-icon">👨‍🏫</div>
+        <div class="stat-num"><span data-target="{{ settings.teacher_count|default:50 }}" data-suffix="+">0</span></div>
+        <div class="stat-label">Tajribali oʻqituvchilar</div>
+      </div>
+      <div class="stat-card reveal d3">
+        <div class="stat-icon">👥</div>
+        <div class="stat-num"><span data-target="{{ settings.student_count|default:1200 }}" data-suffix="+">0</span></div>
+        <div class="stat-label">Talabalar</div>
+      </div>
+      <div class="stat-card reveal d4">
+        <div class="stat-icon">🏢</div>
+        <div class="stat-num"><span data-target="{{ settings.founded_year|default:2015 }}" data-suffix="">0</span></div>
+        <div class="stat-label">Tashkil etilgan yil</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ──────────────────────────────────────────────────── -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-vis reveal-l">
+        <div class="about-img">
+          <img src="{% static 'img/campus.jpgʻ %}" alt="{{ settings.site_name }} Kampus"
+               onerror="this.parentElement.style.background='linear-gradient(135deg,#0d1f4a,#1a3a7a)';this.style.display='none'"/>
+        </div>
+        <div class="ab-badge glass ab1 reveal-s d2">
+          <div class="abi">🎓</div>
+          <div class="abv">{{ settings.founded_year|default:2015 }}</div>
+          <div class="abl">Tashkil etilgan yil</div>
+        </div>
+        <div class="ab-badge glass ab2 reveal-s d3">
+          <div class="abi">📜</div>
+          <div class="abv">Akkred.</div>
+          <div class="abl">Davlat tasdiqlagan</div>
+        </div>
+      </div>
+
+      <div class="reveal-r">
+        <div class="tag"><span class="dot"></span>Universitet haqida</div>
+        <h2 class="sec-title">Ilgʻor ta'lim bilan <span>kelajakni</span> yarating</h2>
+        <p class="sec-sub">{{ settings.about_text|default:"Toshkent ijtimoiy innovatsiya universiteti ilgʻor ta'lim texnologiyalariga asoslangan holda ijtimoiy soha va iqtisodiyot tarmoqlari uchun zamonaviy bilim va koʻnikmalarga ega, mustaqil fikrlaydigan malakali kadrlarni yetishtirib beruvchi nodavlat oliy ta'lim tashkiloti hisoblanadi." }}</p>
+        <p class="sec-sub" style="margin-top:10px">TIIU talaba-yoshlarga yuqori sifatli ta'lim xizmatlarini taklif etadi. Universitet mamlakatimizning yetakchi oliy ta'lim tashkiloti sifatida ijtimoiy-iqtisodiy sohadagi oʻzgarishlarga innovatsion yechimlar bilan hissa qoʻshishni maqsad qilib qoʻygan.</p>
+        <div class="about-features">
+          <div class="af reveal d1">
+            <div class="af-ic" style="background:rgba(59,130,246,.15)">🔬</div>
+            <div><div class="af-title">Ilmiy tadqiqot</div><div class="af-sub">Ilmiy jurnal va konferensiyalar</div></div>
+          </div>
+          <div class="af reveal d2">
+            <div class="af-ic" style="background:rgba(139,92,246,.15)">💻</div>
+            <div><div class="af-title">Raqamli kutubxona</div><div class="af-sub">Elektron resurslar va darsliklar</div></div>
+          </div>
+          
+          <div class="af reveal d4">
+            <div class="af-ic" style="background:rgba(6,182,212,.15)">🏢</div>
+            <div><div class="af-title">Hamkorlik</div><div class="af-sub">Yirik kompaniyalar bilan</div></div>
+          </div>
+        </div>
+        <div class="about-btns">
+          <a href="{% url 'about' %}" class="btn-primary">Batafsil ma'lumot →</a>
+          <a href="{% url 'contact' %}" class="btn-outline">Bogʻlanish</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FACULTIES ──────────────────────────────────────────────── -->
+<section id="faculties">
+  <div class="container">
+    <div class="sec-header reveal">
+      <div class="tag"><span class="dot"></span>Ta'lim yoʻnalishlari</div>
+      <h2 class="sec-title">Barcha <span>yoʻnalishlar</span></h2>
+      <p class="sec-sub">Kredit-modul tizimi asosida tashkil etilgan kunduzgi, kechki va sirtqi ta'lim shakllarida oʻqishingiz mumkin. Kartani aylantiring!</p>
+    </div>
+    <div class="fac-grid">
+      {% for f in faculties %}
+      <div class="fac-card reveal-s d{{ forloop.counter|add:0 }}">
+        <div class="fac-inner">
+          <div class="fac-front" {% if f.image %}style="background-image:url('{{ f.image.url }}')"{% endif %}>
+            {% if f.short_name %}<div class="fac-badge">{{ f.short_name }}</div>{% endif %}
+            <div class="fac-front-c">
+              <div class="fac-num">0{{ forloop.counter }} — {{ f.get_degree_display }}</div>
+              <div class="fac-title">{{ f.name }}</div>
+            </div>
+          </div>
+          <div class="fac-back">
+            <div class="fac-back-icon">{{ f.icon }}</div>
+            <h3>{{ f.name }}</h3>
+            <p>{{ f.description|truncatewords:18 }}</p>
+            <a href="{% url 'faculty_detail' f.slug %}" class="fac-back-btn">Batafsil →</a>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <p style="color:var(--text2);grid-column:1/-1;text-align:center;padding:40px">Yoʻnalishlar hali qoʻshilmagan.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ── WHY TIIU ───────────────────────────────────────────────── -->
+<section id="why">
+  <div class="container">
+    <div class="sec-header reveal">
+      <div class="tag"><span class="dot"></span>Afzalliklar</div>
+      <h2 class="sec-title">Nega <span>TIIU</span>ni tanlash kerak?</h2>
+      <p class="sec-sub">Talabalarimizga nafaqat bilim berish, balki amaliy koʻnikmalar va shaxsiy rivojlanishga koʻmaklashamiz.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">🏢</div>
+        <div class="why-title">Yirik kompaniyalar bilan hamkorlik</div>
+        <p class="why-text">Oʻz bizneslarini tashkil etishlari uchun amaliy koʻnikmalarni rivojlantirishga hamda oʻz sohasining yetuk mutaxassisi sifatida shakllanishiga koʻmaklashamiz.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🚀</div>
+        <div class="why-title">Shaxsiy rivojlanish</div>
+        <p class="why-text">TIIU ta'lim berish bilan birgalikda, muloqot qilish, qaror qabul qilish, ijodkorlik va tizimli muammolarni hal etish koʻnikmalarini rivojlantiradi.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">👨‍🏫</div>
+        <div class="why-title">Tajribali oʻqituvchilar</div>
+        <p class="why-text">Koʻp yillik ilmiy va amaliy tajribaga ega professor-oʻqituvchilar hamda amaliyotchi mutaxassislar dars olib boradi.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">💻</div>
+        <div class="why-title">Kredit-modul tizimi</div>
+        <p class="why-text">Barcha ta'lim shakllari kredit-modul tizimi asosida tashkil etiladi — zamonaviy xalqaro standartlarga mos.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">📚</div>
+        <div class="why-title">Raqamli kutubxona</div>
+        <p class="why-text">Talabalar elektron resurslar, darsliklar va ilmiy maqolalarga istalgan vaqt, istalgan joydan onlayn kirish imkoniyatiga ega.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🎉</div>
+        <div class="why-title">Faol talaba hayoti</div>
+        <p class="why-text">Sport, madaniy tadbirlar, olimpiadalar va tanlovlar orqali talabalar hayoti toʻla mazmunli va qiziqarli boʻladi.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── NEWS ───────────────────────────────────────────────────── -->
+<section id="news">
+  <div class="container">
+    <div class="sec-header reveal">
+      <div class="tag"><span class="dot"></span>Yangiliklar</div>
+      <h2 class="sec-title">Soʻnggi <span>voqealar</span></h2>
+      <p class="sec-sub">TIIU hayotidagi eng soʻnggi yutuqlar, tadbirlar va muhim xabarlar.</p>
+    </div>
+    <div class="news-grid">
+      {% for article in news %}
+      <div class="news-card {% if forloop.first %}big{% endif %} reveal{% if forloop.first %}-l{% endif %}">
+        <div class="nc-img">
+          {% if article.image %}
+            <img src="{{ article.image.url }}" alt="{{ article.title }}"
+                 onerror="this.parentElement.innerHTML='<div class=nc-img-placeholder>📰</div>'"/>
+          {% else %}
+            <div class="nc-img-placeholder">📰</div>
+          {% endif %}
+          {% if article.category %}
+            <span class="nc-cat">{{ article.category.name }}</span>
+          {% endif %}
+        </div>
+        <div class="nc-body">
+          <div class="nc-date">{{ article.created_at|date:"d-B Y" }}</div>
+          <div class="nc-title">{{ article.title|truncatewords:14 }}</div>
+          <a href="{% url 'news_detail' article.slug %}" class="nc-more">Batafsil oʻqish <span>→</span></a>
+        </div>
+      </div>
+      {% empty %}
+      <p style="color:var(--text2);grid-column:1/-1;text-align:center;padding:40px">Yangiliklar hali qoʻshilmagan.</p>
+      {% endfor %}
+    </div>
+    <div class="news-all reveal">
+      <a href="{% url 'news_list' %}" class="btn-outline">Barcha yangiliklar →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── EVENTS ─────────────────────────────────────────────────── -->
+{% if events %}
+<section style="padding:80px 0;background:var(--bg2)">
+  <div class="container">
+    <div class="sec-header reveal">
+      <div class="tag"><span class="dot"></span>Tadbirlar</div>
+      <h2 class="sec-title">Yaqinlashayotgan <span>tadbirlar</span></h2>
+    </div>
+    <div class="news-grid">
+      {% for ev in events %}
+      <div class="news-card reveal d{{ forloop.counter }}">
+        <div class="nc-img">
+          {% if ev.image %}
+            <img src="{{ ev.image.url }}" alt="{{ ev.title }}"
+                 onerror="this.parentElement.innerHTML='<div class=nc-img-placeholder>📅</div>'"/>
+          {% else %}
+            <div class="nc-img-placeholder">📅</div>
+          {% endif %}
+          <span class="nc-cat">Tadbir</span>
+        </div>
+        <div class="nc-body">
+          <div class="nc-date">{{ ev.event_date|date:"d-B Y, H:i" }}</div>
+          <div class="nc-title">{{ ev.title }}</div>
+          {% if ev.location %}<p style="font-size:.78rem;color:var(--text3);margin-bottom:10px">📍 {{ ev.location }}</p>{% endif %}
+          <a href="{% url 'events' %}" class="nc-more">Batafsil <span>→</span></a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- ── CONTACT SECTION ────────────────────────────────────────── -->
+<section id="contact">
+  <div class="container">
+    <div class="sec-header reveal">
+      <div class="tag"><span class="dot"></span>Aloqa</div>
+      <h2 class="sec-title">Biz bilan <span>bogʻlaning</span></h2>
+      <p class="sec-sub">Agar sizda savol boʻlsa, qoʻngʻiroq qiling yoki shaklni toʻldiring. Tez javob beramiz.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="reveal-l">
+        <div class="ci-item">
+          <div class="ci-icon">📍</div>
+          <div>
+            <div class="ci-label">Manzil</div>
+            <div class="ci-value">{{ settings.address }}</div>
+          </div>
+        </div>
+        <div class="ci-item">
+          <div class="ci-icon">📞</div>
+          <div>
+            <div class="ci-label">Telefon</div>
+            <div class="ci-value">
+              {% if settings.phone1 %}<a href="tel:{{ settings.phone1 }}">{{ settings.phone1 }}</a><br>{% endif %}
+              {% if settings.phone2 %}<a href="tel:{{ settings.phone2 }}">{{ settings.phone2 }}</a>{% endif %}
+            </div>
+          </div>
+        </div>
+        <div class="ci-item">
+          <div class="ci-icon">✉️</div>
+          <div>
+            <div class="ci-label">Elektron pochta</div>
+            <div class="ci-value"><a href="mailto:{{ settings.email }}">{{ settings.email }}</a></div>
+          </div>
+        </div>
+        <div class="ci-item">
+          <div class="ci-icon">🕐</div>
+          <div>
+            <div class="ci-label">Ish vaqti</div>
+            <div class="ci-value">{{ settings.work_hours }}</div>
+          </div>
+        </div>
+        <div class="socials">
+          {% if settings.facebook %}<a href="{{ settings.facebook }}" class="soc-btn" target="_blank"><b>f</b></a>{% endif %}
+          {% if settings.instagram %}<a href="{{ settings.instagram }}" class="soc-btn" target="_blank">📷</a>{% endif %}
+          {% if settings.telegram %}<a href="{{ settings.telegram }}" class="soc-btn" target="_blank">✈</a>{% endif %}
+          {% if settings.youtube %}<a href="{{ settings.youtube }}" class="soc-btn" target="_blank">▶</a>{% endif %}
+        </div>
+
+        {% if faqs %}
+        <div class="faq-wrap">
+          <div class="faq-h">Tez-tez beriladigan savollar</div>
+          {% for faq in faqs %}
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">{{ faq.question }}<span class="arr">▾</span></button>
+            <div class="faq-a">{{ faq.answer }}</div>
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+
+      <div class="cf-wrap glass reveal-r">
+        <div class="cf-title">Ariza qoldiring</div>
+        <div class="cf-sub">Shaklni toʻldiring, 24 soat ichida javob beramiz.</div>
+        <form id="contact-form" action="{% url 'contact_submit' %}" method="post">
+          {% csrf_token %}
+          <div class="form-row">
+            <div class="form-group"><label>Ism</label><input type="text" name="first_name" placeholder="Ismingiz" required/></div>
+            <div class="form-group"><label>Familiya</label><input type="text" name="last_name" placeholder="Familiyangiz" required/></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>Telefon</label><input type="tel" name="phone" placeholder="+998 90 000 00 00"/></div>
+            <div class="form-group"><label>Email</label><input type="email" name="email" placeholder="email@example.com"/></div>
+          </div>
+          <div class="form-group full">
+            <label>Ta'lim yoʻnalishi</label>
+            <select name="direction">
+              <option value="">Yoʻnalishni tanlang...</option>
+              {% for f in faculties %}
+              <option>{{ f.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="form-group full">
+            <label>Xabar (ixtiyoriy)</label>
+            <textarea name="message" placeholder="Savolingizni yozing..."></textarea>
+          </div>
+          <button type="submit" class="form-submit">Yuborish →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

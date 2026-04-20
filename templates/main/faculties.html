@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Yoʻnalishlar — {{ settings.site_name }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="container">
+    <div class="breadcrumb"><a href="{% url 'index' %}">Bosh sahifa</a><span>/</span><span>Yoʻnalishlar</span></div>
+    <h1 class="page-title">Ta'lim <span>yoʻnalishlari</span></h1>
+    <p class="page-sub">Kredit-modul tizimi asosida kunduzgi, kechki va sirtqi shakllarida oʻqish imkoni. Kartani aylantiring!</p>
+  </div>
+</div>
+
+<section style="padding:90px 0;background:var(--bg)">
+  <div class="container">
+    <div class="fac-grid">
+      {% for f in faculties %}
+      <div class="fac-card">
+        <div class="fac-inner">
+          <div class="fac-front" {% if f.image %}style="background-image:url('{{ f.image.url }}')"{% endif %}>
+            {% if f.short_name %}<div class="fac-badge">{{ f.short_name }}</div>{% endif %}
+            <div class="fac-front-c">
+              <div class="fac-num">0{{ forloop.counter }} — {{ f.get_degree_display }}</div>
+              <div class="fac-title">{{ f.name }}</div>
+            </div>
+          </div>
+          <div class="fac-back">
+            <div class="fac-back-icon">{{ f.icon }}</div>
+            <h3>{{ f.name }}</h3>
+            <p>{{ f.description|truncatewords:18 }}</p>
+            <a href="{% url 'faculty_detail' f.slug %}" class="fac-back-btn">Batafsil →</a>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <p style="color:var(--text2);grid-column:1/-1;text-align:center;padding:60px 0">Yoʻnalishlar hali qoʻshilmagan.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}
