@@ -19,4 +19,5 @@ urlpatterns = [
     path("departments/",          views.departments,     name="departments"),
     path("centers/",              views.centers,         name="centers"),
     path("pages/<slug:slug>/",    views.static_page,     name="static_page"),
+    path("sitemap.xml",           views.sitemap,          name="sitemap"),
 ]

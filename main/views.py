@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.views.decorators.http import require_POST
 from .models import (
     SiteSettings, Slider, Faculty, Teacher,
@@ -132,3 +132,33 @@ def centers(request):
 def static_page(request, slug):
     page = get_object_or_404(StaticPage, slug=slug, is_active=True)
     return render(request, "main/static_page.html", {"page": page})
+
+
+def sitemap(request):
+    base = f"{request.scheme}://{request.get_host()}"
+    urls = [
+        ("", "daily",   "1.0"),
+        ("about/",      "weekly", "0.8"),
+        ("faculties/",  "weekly", "0.8"),
+        ("news/",       "daily",  "0.9"),
+        ("events/",     "weekly", "0.8"),
+        ("gallery/",    "weekly", "0.7"),
+        ("teachers/",   "monthly","0.6"),
+        ("departments/","monthly","0.6"),
+        ("centers/",    "monthly","0.6"),
+        ("contact/",    "monthly","0.5"),
+    ]
+    items = "\n".join(
+        f"  <url><loc>{base}/{u}</loc><changefreq>{cf}</changefreq><priority>{p}</priority></url>"
+        for u, cf, p in urls
+    )
+    for n in News.objects.filter(is_active=True).values_list("slug", flat=True):
+        items += f"\n  <url><loc>{base}/news/{n}/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>"
+    for n in Event.objects.filter(is_active=True).values_list("slug", flat=True):
+        items += f"\n  <url><loc>{base}/events/{n}/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>"
+    for n in Faculty.objects.filter(is_active=True).values_list("slug", flat=True):
+        items += f"\n  <url><loc>{base}/faculties/{n}/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>"
+    for n in StaticPage.objects.filter(is_active=True).values_list("slug", flat=True):
+        items += f"\n  <url><loc>{base}/pages/{n}/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>"
+    xml = f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{items}\n</urlset>'
+    return HttpResponse(xml, content_type="application/xml")

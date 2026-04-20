@@ -15,8 +15,7 @@
     <div>
       <div class="hero-badge"><span class="dot"></span>Oʻzbekistondagi innovatsion universitet</div>
       <h1 class="hero-title">
-        <span class="grad">{{ settings.hero_title|default:"Kelajakni" }}</span><br>
-        bugun<br>shakllantir
+        <span class="grad">{{ settings.hero_title|default:"Kelajakni bugun shakllantir" }}</span>
       </h1>
       <p class="hero-sub">{{ settings.hero_subtitle|default:"Toshkent ijtimoiy innovatsiya universiteti — ilgʻor ta'lim texnologiyalari asosida zamonaviy mutaxassislar tayyorlaydigan nodavlat oliy ta'lim muassasasi." }}</p>
       <div class="hero-btns">
@@ -25,17 +24,17 @@
       </div>
       <div class="hero-stats">
         <div class="hstat">
-          <div class="num" data-count="{{ settings.founded_year|default:2015 }}" data-suffix="">0</div>
+          <div class="num"><span data-target="{{ settings.founded_year|default:2015 }}" data-suffix="">0</span></div>
           <div class="lab">Tashkil yili</div>
         </div>
         <div class="hdiv"></div>
         <div class="hstat">
-          <div class="num" data-count="{{ settings.direction_count|default:9 }}" data-suffix="">0</div>
+          <div class="num"><span data-target="{{ settings.direction_count|default:9 }}" data-suffix="">0</span></div>
           <div class="lab">Ta'lim yoʻnalishi</div>
         </div>
         <div class="hdiv"></div>
         <div class="hstat">
-          <div class="num" data-count="{{ settings.teacher_count|default:50 }}" data-suffix="+">0</div>
+          <div class="num"><span data-target="{{ settings.teacher_count|default:50 }}" data-suffix="+">0</span></div>
           <div class="lab">Oʻqituvchilar</div>
         </div>
       </div>
@@ -278,7 +277,7 @@
           <div class="nc-date">{{ ev.event_date|date:"d-B Y, H:i" }}</div>
           <div class="nc-title">{{ ev.title }}</div>
           {% if ev.location %}<p style="font-size:.78rem;color:var(--text3);margin-bottom:10px">📍 {{ ev.location }}</p>{% endif %}
-          <a href="{% url 'events' %}" class="nc-more">Batafsil <span>→</span></a>
+          <a href="{% url 'event_detail' ev.slug %}" class="nc-more">Batafsil <span>→</span></a>
         </div>
       </div>
       {% endfor %}
