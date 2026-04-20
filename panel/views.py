@@ -8,7 +8,7 @@ from django.views.decorators.http import require_http_methods
 from main.models import (
     SiteSettings, Slider, Faculty, Teacher, NewsCategory, News, NewsImage,
     Event, EventImage, Gallery, GalleryImage, FAQ, Partner, ContactMessage,
-    Leadership, Department, Center,
+    Leadership, Department, Center, StaticPage,
 )
 
 
@@ -72,6 +72,7 @@ def api_stats(request):
         'leadership': Leadership.objects.count(),
         'departments':Department.objects.count(),
         'centers':    Center.objects.count(),
+        'pages':      StaticPage.objects.count(),
     }})
 
 
@@ -612,6 +613,43 @@ def api_message_detail(request, pk):
         'id':o.pk,'first_name':o.first_name,'last_name':o.last_name,
         'phone':o.phone,'email':o.email,'direction':o.direction,
         'message':o.message,'status':o.status,'created_at':dt(o,'created_at')}})
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  StaticPage
+# ══════════════════════════════════════════════════════════════════════════════
+def serialize_page(o):
+    return {'id':o.pk,'title':o.title,'slug':o.slug,'body':o.body,
+            'is_active':o.is_active,'updated_at':dt(o,'updated_at')}
+
+
+@staff_only
+def api_pages(request):
+    if request.method == 'POST':
+        d = request.POST
+        slug = d.get('slug','').strip() or d.get('title','page').lower().replace(' ','-')
+        o = StaticPage(title=d.get('title',''), slug=slug,
+                       body=d.get('body',''), is_active=d.get('is_active')=='true')
+        o.save()
+        return JsonResponse({'success':True,'data':serialize_page(o)})
+    items, total, page, pages = paginate(StaticPage.objects.all(), request)
+    return JsonResponse({'success':True,'data':[serialize_page(o) for o in items],'total':total,'pages':pages})
+
+
+@staff_only
+def api_page_detail(request, pk):
+    try: o = StaticPage.objects.get(pk=pk)
+    except StaticPage.DoesNotExist: return JsonResponse({'success':False,'error':'Topilmadi'},status=404)
+    if request.method == 'DELETE':
+        o.delete(); return JsonResponse({'success':True})
+    if request.method == 'POST':
+        d = request.POST
+        for f in ['title','slug','body']:
+            if f in d: setattr(o,f,d[f])
+        if 'is_active' in d: o.is_active = d['is_active']=='true'
+        o.save()
+        return JsonResponse({'success':True,'data':serialize_page(o)})
+    return JsonResponse({'success':True,'data':serialize_page(o)})
 
 
 # ══════════════════════════════════════════════════════════════════════════════

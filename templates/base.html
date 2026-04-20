@@ -77,11 +77,11 @@
       <li class="has-drop">
         <a href="#">Ilm-fan <span class="caret">▾</span></a>
         <div class="dropdown">
-          <a href="#">Ilmiy faoliyat</a>
-          <a href="#">Ilmiy maqolalar</a>
-          <a href="#">Dissertatsiyalar</a>
-          <a href="#">Ilmiy jurnal</a>
-          <a href="#">Konferensiyalar</a>
+          <a href="{% url 'static_page' 'ilmiy-faoliyat' %}">Ilmiy faoliyat</a>
+          <a href="{% url 'static_page' 'ilmiy-maqolalar' %}">Ilmiy maqolalar</a>
+          <a href="{% url 'static_page' 'dissertatsiyalar' %}">Dissertatsiyalar</a>
+          <a href="{% url 'static_page' 'ilmiy-jurnal' %}">Ilmiy jurnal</a>
+          <a href="{% url 'static_page' 'konferensiyalar' %}">Konferensiyalar</a>
         </div>
       </li>
 
@@ -89,13 +89,13 @@
       <li class="has-drop">
         <a href="#">Talabalarga <span class="caret">▾</span></a>
         <div class="dropdown">
-          <a href="#">Elektron Ta'lim Tizimi</a>
-          <a href="#">Dars Jadvali</a>
-          <a href="#">Iqtidorli Talabalar</a>
-          <a href="#">Tanlovlar</a>
-          <a href="#">Elektron Kutubxona</a>
-          <a href="#">Talabalar Oʻrtasida Soʻrovnoma</a>
-          <a href="#">Video Darslar</a>
+          <a href="{% url 'static_page' 'elektron-talim-tizimi' %}">Elektron Taʼlim Tizimi</a>
+          <a href="{% url 'static_page' 'dars-jadvali' %}">Dars Jadvali</a>
+          <a href="{% url 'static_page' 'iqtidorli-talabalar' %}">Iqtidorli Talabalar</a>
+          <a href="{% url 'static_page' 'tanlovlar' %}">Tanlovlar</a>
+          <a href="{% url 'static_page' 'elektron-kutubxona' %}">Elektron Kutubxona</a>
+          <a href="{% url 'static_page' 'sorovnoma' %}">Talabalar Oʻrtasida Soʻrovnoma</a>
+          <a href="{% url 'static_page' 'video-darslar' %}">Video Darslar</a>
         </div>
       </li>
 

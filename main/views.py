@@ -5,7 +5,7 @@ from .models import (
     SiteSettings, Slider, Faculty, Teacher,
     NewsCategory, News, Event,
     Gallery, GalleryImage, FAQ, Partner, ContactMessage,
-    Leadership, Department, Center,
+    Leadership, Department, Center, StaticPage,
 )
 
 
@@ -127,3 +127,8 @@ def departments(request):
 def centers(request):
     ctx = {"centers": Center.objects.filter(is_active=True)}
     return render(request, "main/centers.html", ctx)
+
+
+def static_page(request, slug):
+    page = get_object_or_404(StaticPage, slug=slug, is_active=True)
+    return render(request, "main/static_page.html", {"page": page})

@@ -49,4 +49,7 @@ urlpatterns = [
     # Messages
     path('api/messages/',          views.api_messages,       name='api_messages'),
     path('api/messages/<int:pk>/', views.api_message_detail, name='api_message_detail'),
+    # Static Pages
+    path('api/pages/',          views.api_pages,       name='api_pages'),
+    path('api/pages/<int:pk>/', views.api_page_detail, name='api_page_detail'),
 ]

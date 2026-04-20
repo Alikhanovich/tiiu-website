@@ -18,4 +18,5 @@ urlpatterns = [
     path("leadership/",           views.leadership,      name="leadership"),
     path("departments/",          views.departments,     name="departments"),
     path("centers/",              views.centers,         name="centers"),
+    path("pages/<slug:slug>/",    views.static_page,     name="static_page"),
 ]

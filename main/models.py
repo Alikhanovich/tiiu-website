@@ -416,6 +416,23 @@ class Center(models.Model):
         super().save(*args, **kwargs)
 
 
+# ─── Static Page ─────────────────────────────────────────────────────────────
+class StaticPage(models.Model):
+    title      = models.CharField("Sarlavha", max_length=300)
+    slug       = models.SlugField("Slug", unique=True)
+    body       = models.TextField("Mazmun (HTML)", blank=True)
+    is_active  = models.BooleanField("Faol", default=True)
+    updated_at = models.DateTimeField("Yangilangan", auto_now=True)
+
+    class Meta:
+        verbose_name = "Statik sahifa"
+        verbose_name_plural = "Statik sahifalar"
+        ordering = ["slug"]
+
+    def __str__(self):
+        return self.title
+
+
 # ─── Contact Message ──────────────────────────────────────────────────────────
 class ContactMessage(models.Model):
     STATUS_CHOICES = [

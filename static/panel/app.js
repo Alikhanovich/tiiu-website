@@ -215,7 +215,7 @@ const PAGES = {
 
   /* ── News & Events use full detail pages ─── */
   news: {
-    title: 'Yangiliklar', endpoint: '/panel/api/news/', hasDetail: true,
+    title: 'Yangiliklar', endpoint: '/panel/api/news/', hasDetail: true, hasImages: true,
     cols: [
       { key: 'image',         label: 'Rasm',       img: true },
       { key: 'title',         label: 'Sarlavha' },
@@ -236,7 +236,7 @@ const PAGES = {
   },
 
   events: {
-    title: 'Tadbirlar', endpoint: '/panel/api/events/', hasDetail: true,
+    title: 'Tadbirlar', endpoint: '/panel/api/events/', hasDetail: true, hasImages: true,
     cols: [
       { key: 'image',      label: 'Rasm', img: true },
       { key: 'title',      label: 'Sarlavha' },
@@ -284,6 +284,17 @@ const PAGES = {
       { n: 'is_active', l: 'Faol',     t: 'toggle', def: true },
       { n: 'logo',      l: 'Logo',     t: 'image' },
     ],
+  },
+
+  pages: {
+    title: 'Statik Sahifalar', endpoint: '/panel/api/pages/', hasDetail: true,
+    cols: [
+      { key: 'title',      label: 'Sarlavha' },
+      { key: 'slug',       label: 'URL Slug' },
+      { key: 'updated_at', label: 'Yangilangan' },
+      { key: 'is_active',  label: 'Holat', bool: true },
+    ],
+    fields: [],
   },
 
   messages: {
@@ -347,6 +358,7 @@ async function renderDashboard(el) {
       ${sc('Rahbariyat', d.leadership, '#leadership', '👤')}
       ${sc('Kafedralar', d.departments, '#departments', '🏫')}
       ${sc('Markazlar', d.centers, '#centers', '🏢')}
+      ${sc('Sahifalar', d.pages, '#pages', '📄')}
     </div>`;
 }
 
@@ -555,6 +567,7 @@ async function renderDetailPage(el, page, cfg, id) {
   el.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
   const isNew   = id === 'new';
   const isNews  = page === 'news';
+  const isPage  = page === 'pages';
 
   const remote = {};
   for (const f of cfg.fields || []) {
@@ -563,13 +576,12 @@ async function renderDetailPage(el, page, cfg, id) {
 
   let item = null, images = [];
   if (!isNew) {
-    const [itemR, imgR] = await Promise.all([
-      api(`${cfg.endpoint}${id}/`),
-      api(`/panel/api/${page}/${id}/images/`),
-    ]);
+    const reqs = [api(`${cfg.endpoint}${id}/`)];
+    if (cfg.hasImages) reqs.push(api(`/panel/api/${page}/${id}/images/`));
+    const [itemR, imgR] = await Promise.all(reqs);
     if (!itemR.success) { el.innerHTML = '<p style="padding:24px;color:var(--text2)">Topilmadi</p>'; return; }
     item   = itemR.data;
-    images = imgR.success ? imgR.data : [];
+    images = (imgR && imgR.success) ? imgR.data : [];
   }
 
   const bodyRaw  = item?.body || item?.description || '';
@@ -624,7 +636,7 @@ async function renderDetailPage(el, page, cfg, id) {
               <button type="button" data-cmd="removeFormat" class="tb-btn" title="Formatlashni tozalash">✕</button>
             </div>
             <div class="editor-body" id="body-editor" contenteditable="true"
-                 data-ph="${isNews ? 'Yangilik matnini yozing...' : 'Tadbir tavsifini yozing...'}">${bodyHtml}</div>
+                 data-ph="${isNews ? 'Yangilik matnini yozing...' : isPage ? 'Sahifa mazmunini yozing...' : 'Tadbir tavsifini yozing...'}">${bodyHtml}</div>
           </div>
 
           ${isNews ? `
@@ -669,7 +681,7 @@ async function renderDetailPage(el, page, cfg, id) {
 
           <!-- Organization / Details card -->
           <div class="ed-card">
-            <h4 class="ed-card-title">${isNews ? 'Tashkilot' : 'Tafsilotlar'}</h4>
+            <h4 class="ed-card-title">${isNews ? 'Tashkilot' : isPage ? 'Manzil' : 'Tafsilotlar'}</h4>
             ${isNews ? `
             <div class="field">
               <label>Kategoriya</label>
@@ -680,6 +692,10 @@ async function renderDetailPage(el, page, cfg, id) {
             <div class="field" style="margin-top:10px">
               <label>Muallif</label>
               <input type="text" name="author" value="${esc(item?.author || '')}">
+            </div>` : isPage ? `
+            <div class="field">
+              <label>URL Slug</label>
+              <input type="text" name="slug" value="${esc(item?.slug || '')}" placeholder="masalan: ilmiy-faoliyat">
             </div>` : `
             <div class="field">
               <label>Joy</label>
@@ -691,7 +707,7 @@ async function renderDetailPage(el, page, cfg, id) {
             </div>`}
           </div>
 
-          <!-- Featured image card -->
+          ${!isPage ? `<!-- Featured image card -->
           <div class="ed-card">
             <h4 class="ed-card-title">Muqova rasmi</h4>
             <div class="featured-area" id="feat-area">
@@ -705,14 +721,14 @@ async function renderDetailPage(el, page, cfg, id) {
             </div>
             <input type="file" name="image" id="feat-file" accept="image/*" style="display:none">
             ${item?.image ? `<button type="button" class="feat-change-btn" id="feat-change">Rasmni o'zgartirish</button>` : ''}
-          </div>
+          </div>` : ''}
 
         </div>
       </div>
     </form>
 
     <!-- Gallery section (edit mode) -->
-    ${!isNew ? `
+    ${(!isNew && cfg.hasImages) ? `
     <div class="gallery-section">
       <div class="gallery-section-head">
         <h3>Galereya rasmlari <span class="gallery-count">${images.length} ta rasm</span></h3>
@@ -763,6 +779,7 @@ async function renderDetailPage(el, page, cfg, id) {
   });
 
   // Featured image
+  if (!isPage) {
   const featArea = document.getElementById('feat-area');
   const featFile = document.getElementById('feat-file');
   featArea.addEventListener('click', () => featFile.click());
@@ -785,6 +802,7 @@ async function renderDetailPage(el, page, cfg, id) {
     };
     reader.readAsDataURL(file);
   });
+  } // end if (!isPage)
 
   // Form submit
   document.getElementById('detail-form').addEventListener('submit', async e => {
@@ -809,7 +827,7 @@ async function renderDetailPage(el, page, cfg, id) {
   });
 
   // Gallery
-  if (!isNew) {
+  if (!isNew && cfg.hasImages) {
     document.getElementById('gal-file').addEventListener('change', function () {
       const file = this.files[0];
       if (!file) return;
