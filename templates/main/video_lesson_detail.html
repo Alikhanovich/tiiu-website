@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ obj.title }} — {{ settings.site_name }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="{% url 'index' %}">Bosh sahifa</a><span>/</span>
+      <a href="{% url 'video_lessons_list' %}">Video darslar</a><span>/</span>
+      <span>{{ obj.title|truncatewords:5 }}</span>
+    </div>
+    <h1 class="page-title" style="max-width:800px">{{ obj.title }}</h1>
+    <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:14px;font-size:.82rem;color:var(--text3)">
+      {% if obj.faculty %}<span>🎓 {{ obj.faculty.name }}</span>{% endif %}
+      {% if obj.duration %}<span>⏱ {{ obj.duration }}</span>{% endif %}
+      <span>👁 {{ obj.views }} koʻrish</span>
+    </div>
+  </div>
+</div>
+<section style="padding:70px 0;background:var(--bg)">
+  <div class="container" style="max-width:900px">
+    {% if obj.youtube_url %}
+    <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:var(--r);border:1px solid var(--border);margin-bottom:36px">
+      <iframe src="{{ obj.youtube_url|replace:'watch?v=':'embed/'|replace:'youtu.be/':'www.youtube.com/embed/' }}"
+              style="position:absolute;top:0;left:0;width:100%;height:100%"
+              frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+    </div>
+    {% elif obj.cover_image %}
+    <div style="border-radius:var(--r);overflow:hidden;margin-bottom:36px;border:1px solid var(--border)">
+      <img src="{{ obj.cover_image.url }}" alt="{{ obj.title }}" style="width:100%;max-height:420px;object-fit:cover"/>
+    </div>
+    {% endif %}
+
+    {% if obj.description %}
+    <div style="font-size:.97rem;color:var(--text2);line-height:1.9;background:rgba(10,22,48,.4);border:1px solid var(--border);border-radius:var(--r);padding:32px;margin-bottom:28px">
+      {{ obj.description|safe }}
+    </div>
+    {% endif %}
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <a href="{% url 'video_lessons_list' %}" class="btn-outline">← Barcha video darslar</a>
+      {% if obj.youtube_url %}<a href="{{ obj.youtube_url }}" target="_blank" rel="noopener" class="btn-primary">▶ YouTube'da koʻrish</a>{% endif %}
+    </div>
+
+    {% if related %}
+    <div style="margin-top:48px">
+      <h3 style="font-family:'Space Grotesk',sans-serif;font-size:1rem;margin-bottom:20px">Boshqa video darslar</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px">
+        {% for r in related %}
+        <a href="{% url 'video_lesson_detail' r.slug %}" style="display:block;text-decoration:none;background:var(--bg2);border:1px solid var(--border);border-radius:var(--rs);overflow:hidden">
+          <div style="aspect-ratio:16/9;background:var(--bg3);display:flex;align-items:center;justify-content:center">
+            {% if r.cover_image %}<img src="{{ r.cover_image.url }}" alt="{{ r.title }}" style="width:100%;height:100%;object-fit:cover"/>
+            {% else %}<span style="font-size:2rem">▶</span>{% endif %}
+          </div>
+          <div style="padding:10px;font-size:.8rem;color:var(--text);line-height:1.4">{{ r.title|truncatewords:8 }}</div>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

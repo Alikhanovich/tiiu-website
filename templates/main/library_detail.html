@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ obj.title }} — {{ settings.site_name }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="{% url 'index' %}">Bosh sahifa</a><span>/</span>
+      <a href="{% url 'library_list' %}">Elektron kutubxona</a><span>/</span>
+      <span>{{ obj.title|truncatewords:5 }}</span>
+    </div>
+    <div class="tag" style="margin-bottom:12px"><span class="dot"></span>{{ obj.get_resource_type_display }}</div>
+    <h1 class="page-title" style="max-width:800px">{{ obj.title }}</h1>
+    {% if obj.authors %}<p class="page-sub">{{ obj.authors }}</p>{% endif %}
+  </div>
+</div>
+<section style="padding:70px 0;background:var(--bg)">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:240px 1fr;gap:48px;align-items:start">
+      <div>
+        {% if obj.cover_image %}
+        <div style="border-radius:var(--r);overflow:hidden;border:1px solid var(--border);margin-bottom:20px">
+          <img src="{{ obj.cover_image.url }}" alt="{{ obj.title }}" style="width:100%;object-fit:cover"/>
+        </div>
+        {% else %}
+        <div style="background:var(--bg3);border-radius:var(--r);aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;font-size:4rem;margin-bottom:20px">📚</div>
+        {% endif %}
+        {% if obj.file %}
+        <a href="{{ obj.file.url }}" target="_blank" class="btn-primary" download style="width:100%;justify-content:center;display:flex;margin-bottom:10px">⬇ Yuklab olish</a>
+        {% endif %}
+        {% if obj.external_url %}
+        <a href="{{ obj.external_url }}" target="_blank" rel="noopener" class="btn-outline" style="width:100%;justify-content:center;display:flex">🔗 Tashqi havola</a>
+        {% endif %}
+      </div>
+      <div>
+        {% if obj.description %}
+        <div style="font-size:.97rem;color:var(--text2);line-height:1.9;background:rgba(10,22,48,.4);border:1px solid var(--border);border-radius:var(--r);padding:32px;margin-bottom:28px">
+          {{ obj.description|safe }}
+        </div>
+        {% endif %}
+        <a href="{% url 'library_list' %}" class="btn-outline">← Barcha resurslar</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Dars jadvali — {{ settings.site_name }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="container">
+    <div class="breadcrumb"><a href="{% url 'index' %}">Bosh sahifa</a><span>/</span><span>Dars jadvali</span></div>
+    <h1 class="page-title">Dars <span>jadvali</span></h1>
+    <p class="page-sub">Oʻquv yili va semestrlar boʻyicha dars jadvallari.</p>
+  </div>
+</div>
+<section style="padding:60px 0;background:var(--bg)">
+  <div class="container">
+    <form method="get" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:32px">
+      <select name="year" style="padding:9px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--rs);color:var(--text);font-size:.88rem">
+        <option value="">Barcha oʻquv yillari</option>
+        {% for y in years %}<option value="{{ y }}" {% if active_year == y %}selected{% endif %}>{{ y }}</option>{% endfor %}
+      </select>
+      <select name="faculty" style="padding:9px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--rs);color:var(--text);font-size:.88rem">
+        <option value="">Barcha yoʻnalishlar</option>
+        {% for f in faculties %}<option value="{{ f.slug }}" {% if active_fac == f.slug %}selected{% endif %}>{{ f.short_name|default:f.name }}</option>{% endfor %}
+      </select>
+      <button type="submit" class="btn-primary">Filtr</button>
+      {% if active_year or active_fac %}<a href="{% url 'schedule_list' %}" class="btn-outline">Tozalash</a>{% endif %}
+    </form>
+
+    <div style="display:flex;flex-direction:column;gap:12px">
+      {% for s in items %}
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--rs);padding:18px 24px">
+        <div>
+          <div style="font-size:.92rem;font-weight:600;color:var(--text);margin-bottom:4px">{{ s.title }}</div>
+          <div style="font-size:.78rem;color:var(--text3)">
+            {{ s.academic_year }} · {{ s.get_semester_display }}
+            {% if s.faculty %} · {{ s.faculty.short_name|default:s.faculty.name }}{% endif %}
+          </div>
+        </div>
+        <a href="{{ s.file.url }}" target="_blank" class="btn-primary" style="white-space:nowrap;padding:9px 18px;font-size:.83rem" download>⬇ Yuklab olish</a>
+      </div>
+      {% empty %}
+      <div style="text-align:center;padding:60px 0;color:var(--text2)">
+        <div style="font-size:3rem;margin-bottom:12px">📅</div>
+        <p>Jadvallar hali qoʻshilmagan.</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

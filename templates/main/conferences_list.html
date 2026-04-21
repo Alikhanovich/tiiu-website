@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Konferensiyalar — {{ settings.site_name }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="container">
+    <div class="breadcrumb"><a href="{% url 'index' %}">Bosh sahifa</a><span>/</span><span>Konferensiyalar</span></div>
+    <h1 class="page-title">Ilmiy <span>konferensiyalar</span></h1>
+    <p class="page-sub">Universitetdagi ilmiy-amaliy konferensiyalar va tadbirlar.</p>
+  </div>
+</div>
+
+<section style="padding:60px 0;background:var(--bg)">
+  <div class="container">
+    <div style="display:flex;gap:8px;margin-bottom:36px">
+      <a href="?tab=upcoming" class="btn-primary{% if tab != 'past' %}" {% else %} btn-outline"{% endif %} style="padding:9px 20px">Rejalashtirilgan</a>
+      <a href="?tab=past" class="btn-{% if tab == 'past' %}primary{% else %}outline{% endif %}" style="padding:9px 20px">Oʻtgan</a>
+    </div>
+
+    <div class="news-grid" style="grid-template-columns:repeat(auto-fill,minmax(320px,1fr))">
+      {% for c in items %}
+      <a href="{% url 'conference_detail' c.slug %}" class="news-card" style="display:block;text-decoration:none">
+        <div class="nc-img">
+          {% if c.poster_image %}<img src="{{ c.poster_image.url }}" alt="{{ c.title }}" onerror="this.parentElement.innerHTML='<div class=nc-img-placeholder>🎤</div>'"/>
+          {% elif c.cover_image %}<img src="{{ c.cover_image.url }}" alt="{{ c.title }}" onerror="this.parentElement.innerHTML='<div class=nc-img-placeholder>🎤</div>'"/>
+          {% else %}<div class="nc-img-placeholder">🎤</div>{% endif %}
+          <span class="nc-cat">Konferensiya</span>
+        </div>
+        <div class="nc-body">
+          <div class="nc-date">📅 {{ c.start_date|date:"d-B Y" }}{% if c.location %} · 📍 {{ c.location }}{% endif %}</div>
+          <div class="nc-title">{{ c.title|truncatewords:10 }}</div>
+          {% if c.description %}<p style="font-size:.82rem;color:var(--text2);line-height:1.6;margin-bottom:10px">{{ c.description|truncatewords:16 }}</p>{% endif %}
+          <span class="nc-more">Batafsil →</span>
+        </div>
+      </a>
+      {% empty %}
+      <p style="color:var(--text2);grid-column:1/-1;text-align:center;padding:60px 0">Konferensiyalar topilmadi.</p>
+      {% endfor %}
+    </div>
+
+    {% if items.has_other_pages %}
+    <div class="pagination" style="margin-top:40px">
+      {% if items.has_previous %}<a href="?tab={{ tab }}&page={{ items.previous_page_number }}" class="pg-btn">‹</a>{% endif %}
+      {% for n in items.paginator.page_range %}<a href="?tab={{ tab }}&page={{ n }}" class="pg-btn {% if items.number == n %}active{% endif %}">{{ n }}</a>{% endfor %}
+      {% if items.has_next %}<a href="?tab={{ tab }}&page={{ items.next_page_number }}" class="pg-btn">›</a>{% endif %}
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

@@ -9,6 +9,8 @@ from main.models import (
     SiteSettings, Slider, Faculty, Teacher, NewsCategory, News, NewsImage,
     Event, EventImage, Gallery, GalleryImage, FAQ, Partner, ContactMessage,
     Leadership, Department, Center, StaticPage,
+    ArticleCategory, ScientificArticle, Dissertation, Conference, Contest,
+    VideoLesson, TalentedStudent, JournalIssue, ScheduleFile, LibraryResource,
 )
 
 
@@ -658,3 +660,474 @@ def api_page_detail(request, pk):
 @staff_only
 def api_departments_select(request):
     return JsonResponse({'success':True,'data':[{'id':o.pk,'name':o.name} for o in Department.objects.all()]})
+
+
+@staff_only
+def api_faculty_select(request):
+    return JsonResponse({'success':True,'data':[{'id':o.pk,'name':o.name} for o in Faculty.objects.filter(is_active=True)]})
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  ArticleCategory
+# ══════════════════════════════════════════════════════════════════════════════
+def serialize_article_category(o):
+    return {'id':o.pk,'name':o.name,'slug':o.slug,'is_active':o.is_active}
+
+
+@staff_only
+def api_article_categories(request):
+    if request.method == 'POST':
+        d = json.loads(request.body)
+        from main.models import _unique_slug
+        o = ArticleCategory(name=d['name'], is_active=d.get('is_active', True))
+        o.slug = _unique_slug(ArticleCategory, d['name'])
+        o.save()
+        return JsonResponse({'success':True,'data':serialize_article_category(o)})
+    items = [serialize_article_category(o) for o in ArticleCategory.objects.all()]
+    return JsonResponse({'success':True,'data':items,'total':len(items)})
+
+
+@staff_only
+def api_article_categories_select(request):
+    return JsonResponse({'success':True,'data':[{'id':o.pk,'name':o.name} for o in ArticleCategory.objects.all()]})
+
+
+@staff_only
+def api_article_category_detail(request, pk):
+    try: o = ArticleCategory.objects.get(pk=pk)
+    except ArticleCategory.DoesNotExist: return JsonResponse({'success':False,'error':'Topilmadi'},status=404)
+    if request.method == 'DELETE':
+        o.delete(); return JsonResponse({'success':True})
+    if request.method == 'POST':
+        d = json.loads(request.body)
+        if 'name' in d: o.name = d['name']
+        if 'is_active' in d: o.is_active = bool(d['is_active'])
+        o.save()
+    return JsonResponse({'success':True,'data':serialize_article_category(o)})
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  ScientificArticle
+# ══════════════════════════════════════════════════════════════════════════════
+def serialize_article(o):
+    return {'id':o.pk,'title':o.title,'slug':o.slug,'authors':o.authors,
+            'journal_name':o.journal_name,
+            'published_date':str(o.published_date) if o.published_date else None,
+            'category_id':o.category_id,
+            'category_name':o.category.name if o.category else None,
+            'abstract':o.abstract,'doi_url':o.doi_url,'language':o.language,
+            'pdf_file':img(o,'pdf_file'),'cover_image':img(o,'cover_image'),
+            'is_active':o.is_active,'views':o.views,'created_at':dt(o,'created_at')}
+
+
+@staff_only
+def api_articles(request):
+    if request.method == 'POST':
+        from django.utils.dateparse import parse_date
+        d = request.POST
+        o = ScientificArticle(title=d['title'], authors=d.get('authors',''),
+            journal_name=d.get('journal_name',''), abstract=d.get('abstract',''),
+            doi_url=d.get('doi_url',''), language=d.get('language','uz'),
+            is_active=d.get('is_active')=='true')
+        if d.get('category_id'): o.category_id = int(d['category_id'])
+        if d.get('published_date'): o.published_date = parse_date(d['published_date'])
+        if 'pdf_file' in request.FILES: o.pdf_file = request.FILES['pdf_file']
+        if 'cover_image' in request.FILES: o.cover_image = request.FILES['cover_image']
+        o.save()
+        return JsonResponse({'success':True,'data':serialize_article(o)})
+    items, total, page, pages = paginate(ScientificArticle.objects.select_related('category').all(), request)
+    return JsonResponse({'success':True,'data':[serialize_article(o) for o in items],'total':total,'pages':pages})
+
+
+@staff_only
+def api_article_detail(request, pk):
+    try: o = ScientificArticle.objects.get(pk=pk)
+    except ScientificArticle.DoesNotExist: return JsonResponse({'success':False,'error':'Topilmadi'},status=404)
+    if request.method == 'DELETE':
+        o.delete(); return JsonResponse({'success':True})
+    if request.method == 'POST':
+        from django.utils.dateparse import parse_date
+        d = request.POST
+        for f in ['title','authors','journal_name','abstract','doi_url','language']:
+            if f in d: setattr(o,f,d[f])
+        if 'category_id' in d: o.category_id = int(d['category_id']) if d['category_id'] else None
+        if 'published_date' in d and d['published_date']: o.published_date = parse_date(d['published_date'])
+        if 'is_active' in d: o.is_active = d['is_active']=='true'
+        if 'pdf_file' in request.FILES: o.pdf_file = request.FILES['pdf_file']
+        if 'cover_image' in request.FILES: o.cover_image = request.FILES['cover_image']
+        o.save()
+        return JsonResponse({'success':True,'data':serialize_article(o)})
+    return JsonResponse({'success':True,'data':serialize_article(o)})
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  Dissertation
+# ══════════════════════════════════════════════════════════════════════════════
+def serialize_dissertation(o):
+    return {'id':o.pk,'title':o.title,'slug':o.slug,'author':o.author,'supervisor':o.supervisor,
+            'specialty':o.specialty,'degree':o.degree,
+            'defense_date':str(o.defense_date) if o.defense_date else None,
+            'abstract':o.abstract,'faculty_id':o.faculty_id,
+            'faculty_name':o.faculty.name if o.faculty else None,
+            'pdf_file':img(o,'pdf_file'),'cover_image':img(o,'cover_image'),
+            'is_active':o.is_active,'views':o.views,'created_at':dt(o,'created_at')}
+
+
+@staff_only
+def api_dissertations(request):
+    if request.method == 'POST':
+        from django.utils.dateparse import parse_date
+        d = request.POST
+        o = Dissertation(title=d['title'], author=d.get('author',''),
+            supervisor=d.get('supervisor',''), specialty=d.get('specialty',''),
+            degree=d.get('degree','phd'), abstract=d.get('abstract',''),
+            is_active=d.get('is_active')=='true')
+        if d.get('faculty_id'): o.faculty_id = int(d['faculty_id'])
+        if d.get('defense_date'): o.defense_date = parse_date(d['defense_date'])
+        if 'pdf_file' in request.FILES: o.pdf_file = request.FILES['pdf_file']
+        if 'cover_image' in request.FILES: o.cover_image = request.FILES['cover_image']
+        o.save()
+        return JsonResponse({'success':True,'data':serialize_dissertation(o)})
+    items, total, page, pages = paginate(Dissertation.objects.select_related('faculty').all(), request)
+    return JsonResponse({'success':True,'data':[serialize_dissertation(o) for o in items],'total':total,'pages':pages})
+
+
+@staff_only
+def api_dissertation_detail(request, pk):
+    try: o = Dissertation.objects.get(pk=pk)
+    except Dissertation.DoesNotExist: return JsonResponse({'success':False,'error':'Topilmadi'},status=404)
+    if request.method == 'DELETE':
+        o.delete(); return JsonResponse({'success':True})
+    if request.method == 'POST':
+        from django.utils.dateparse import parse_date
+        d = request.POST
+        for f in ['title','author','supervisor','specialty','degree','abstract']:
+            if f in d: setattr(o,f,d[f])
+        if 'faculty_id' in d: o.faculty_id = int(d['faculty_id']) if d['faculty_id'] else None
+        if 'defense_date' in d and d['defense_date']: o.defense_date = parse_date(d['defense_date'])
+        if 'is_active' in d: o.is_active = d['is_active']=='true'
+        if 'pdf_file' in request.FILES: o.pdf_file = request.FILES['pdf_file']
+        if 'cover_image' in request.FILES: o.cover_image = request.FILES['cover_image']
+        o.save()
+        return JsonResponse({'success':True,'data':serialize_dissertation(o)})
+    return JsonResponse({'success':True,'data':serialize_dissertation(o)})
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  Conference
+# ══════════════════════════════════════════════════════════════════════════════
+def serialize_conference(o):
+    return {'id':o.pk,'title':o.title,'slug':o.slug,'description':o.description,
+            'start_date':str(o.start_date) if o.start_date else None,
+            'end_date':str(o.end_date) if o.end_date else None,
+            'location':o.location,'registration_url':o.registration_url,
+            'poster_image':img(o,'poster_image'),'cover_image':img(o,'cover_image'),
+            'pdf_file':img(o,'pdf_file'),
+            'is_active':o.is_active,'views':o.views,'created_at':dt(o,'created_at')}
+
+
+@staff_only
+def api_conferences(request):
+    if request.method == 'POST':
+        from django.utils.dateparse import parse_date
+        d = request.POST
+        o = Conference(title=d['title'], description=d.get('description',''),
+            location=d.get('location',''), registration_url=d.get('registration_url',''),
+            is_active=d.get('is_active')=='true')
+        if d.get('start_date'): o.start_date = parse_date(d['start_date'])
+        if d.get('end_date'): o.end_date = parse_date(d['end_date'])
+        if 'poster_image' in request.FILES: o.poster_image = request.FILES['poster_image']
+        if 'cover_image' in request.FILES: o.cover_image = request.FILES['cover_image']
+        if 'pdf_file' in request.FILES: o.pdf_file = request.FILES['pdf_file']
+        o.save()
+        return JsonResponse({'success':True,'data':serialize_conference(o)})
+    items, total, page, pages = paginate(Conference.objects.all(), request)
+    return JsonResponse({'success':True,'data':[serialize_conference(o) for o in items],'total':total,'pages':pages})
+
+
+@staff_only
+def api_conference_detail(request, pk):
+    try: o = Conference.objects.get(pk=pk)
+    except Conference.DoesNotExist: return JsonResponse({'success':False,'error':'Topilmadi'},status=404)
+    if request.method == 'DELETE':
+        o.delete(); return JsonResponse({'success':True})
+    if request.method == 'POST':
+        from django.utils.dateparse import parse_date
+        d = request.POST
+        for f in ['title','description','location','registration_url']:
+            if f in d: setattr(o,f,d[f])
+        if 'start_date' in d and d['start_date']: o.start_date = parse_date(d['start_date'])
+        if 'end_date' in d and d['end_date']: o.end_date = parse_date(d['end_date'])
+        if 'is_active' in d: o.is_active = d['is_active']=='true'
+        if 'poster_image' in request.FILES: o.poster_image = request.FILES['poster_image']
+        if 'cover_image' in request.FILES: o.cover_image = request.FILES['cover_image']
+        if 'pdf_file' in request.FILES: o.pdf_file = request.FILES['pdf_file']
+        o.save()
+        return JsonResponse({'success':True,'data':serialize_conference(o)})
+    return JsonResponse({'success':True,'data':serialize_conference(o)})
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  Contest
+# ══════════════════════════════════════════════════════════════════════════════
+def serialize_contest(o):
+    return {'id':o.pk,'title':o.title,'slug':o.slug,'description':o.description,
+            'deadline':str(o.deadline) if o.deadline else None,
+            'cover_image':img(o,'cover_image'),'pdf_file':img(o,'pdf_file'),
+            'is_active':o.is_active,'views':o.views,'created_at':dt(o,'created_at')}
+
+
+@staff_only
+def api_contests(request):
+    if request.method == 'POST':
+        from django.utils.dateparse import parse_date
+        d = request.POST
+        o = Contest(title=d['title'], description=d.get('description',''),
+            is_active=d.get('is_active')=='true')
+        if d.get('deadline'): o.deadline = parse_date(d['deadline'])
+        if 'cover_image' in request.FILES: o.cover_image = request.FILES['cover_image']
+        if 'pdf_file' in request.FILES: o.pdf_file = request.FILES['pdf_file']
+        o.save()
+        return JsonResponse({'success':True,'data':serialize_contest(o)})
+    items, total, page, pages = paginate(Contest.objects.all(), request)
+    return JsonResponse({'success':True,'data':[serialize_contest(o) for o in items],'total':total,'pages':pages})
+
+
+@staff_only
+def api_contest_detail(request, pk):
+    try: o = Contest.objects.get(pk=pk)
+    except Contest.DoesNotExist: return JsonResponse({'success':False,'error':'Topilmadi'},status=404)
+    if request.method == 'DELETE':
+        o.delete(); return JsonResponse({'success':True})
+    if request.method == 'POST':
+        from django.utils.dateparse import parse_date
+        d = request.POST
+        for f in ['title','description']:
+            if f in d: setattr(o,f,d[f])
+        if 'deadline' in d and d['deadline']: o.deadline = parse_date(d['deadline'])
+        if 'is_active' in d: o.is_active = d['is_active']=='true'
+        if 'cover_image' in request.FILES: o.cover_image = request.FILES['cover_image']
+        if 'pdf_file' in request.FILES: o.pdf_file = request.FILES['pdf_file']
+        o.save()
+        return JsonResponse({'success':True,'data':serialize_contest(o)})
+    return JsonResponse({'success':True,'data':serialize_contest(o)})
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  VideoLesson
+# ══════════════════════════════════════════════════════════════════════════════
+def serialize_video(o):
+    return {'id':o.pk,'title':o.title,'slug':o.slug,'description':o.description,
+            'youtube_url':o.youtube_url,'duration':o.duration,
+            'faculty_id':o.faculty_id,'faculty_name':o.faculty.name if o.faculty else None,
+            'cover_image':img(o,'cover_image'),
+            'is_active':o.is_active,'views':o.views,'created_at':dt(o,'created_at')}
+
+
+@staff_only
+def api_videos(request):
+    if request.method == 'POST':
+        d = request.POST
+        o = VideoLesson(title=d['title'], description=d.get('description',''),
+            youtube_url=d.get('youtube_url',''), duration=d.get('duration',''),
+            is_active=d.get('is_active')=='true')
+        if d.get('faculty_id'): o.faculty_id = int(d['faculty_id'])
+        if 'cover_image' in request.FILES: o.cover_image = request.FILES['cover_image']
+        o.save()
+        return JsonResponse({'success':True,'data':serialize_video(o)})
+    items, total, page, pages = paginate(VideoLesson.objects.select_related('faculty').all(), request)
+    return JsonResponse({'success':True,'data':[serialize_video(o) for o in items],'total':total,'pages':pages})
+
+
+@staff_only
+def api_video_detail(request, pk):
+    try: o = VideoLesson.objects.get(pk=pk)
+    except VideoLesson.DoesNotExist: return JsonResponse({'success':False,'error':'Topilmadi'},status=404)
+    if request.method == 'DELETE':
+        o.delete(); return JsonResponse({'success':True})
+    if request.method == 'POST':
+        d = request.POST
+        for f in ['title','description','youtube_url','duration']:
+            if f in d: setattr(o,f,d[f])
+        if 'faculty_id' in d: o.faculty_id = int(d['faculty_id']) if d['faculty_id'] else None
+        if 'is_active' in d: o.is_active = d['is_active']=='true'
+        if 'cover_image' in request.FILES: o.cover_image = request.FILES['cover_image']
+        o.save()
+        return JsonResponse({'success':True,'data':serialize_video(o)})
+    return JsonResponse({'success':True,'data':serialize_video(o)})
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  TalentedStudent
+# ══════════════════════════════════════════════════════════════════════════════
+def serialize_talent(o):
+    return {'id':o.pk,'full_name':o.full_name,'slug':o.slug,'achievement':o.achievement,
+            'year':o.year,'description':o.description,
+            'faculty_id':o.faculty_id,'faculty_name':o.faculty.name if o.faculty else None,
+            'photo':img(o,'photo'),
+            'is_active':o.is_active,'created_at':dt(o,'created_at')}
+
+
+@staff_only
+def api_talented(request):
+    if request.method == 'POST':
+        d = request.POST
+        o = TalentedStudent(full_name=d['full_name'], achievement=d.get('achievement',''),
+            year=int(d.get('year', 2024)), description=d.get('description',''),
+            is_active=d.get('is_active')=='true')
+        if d.get('faculty_id'): o.faculty_id = int(d['faculty_id'])
+        if 'photo' in request.FILES: o.photo = request.FILES['photo']
+        o.save()
+        return JsonResponse({'success':True,'data':serialize_talent(o)})
+    items, total, page, pages = paginate(TalentedStudent.objects.select_related('faculty').all(), request)
+    return JsonResponse({'success':True,'data':[serialize_talent(o) for o in items],'total':total,'pages':pages})
+
+
+@staff_only
+def api_talent_detail(request, pk):
+    try: o = TalentedStudent.objects.get(pk=pk)
+    except TalentedStudent.DoesNotExist: return JsonResponse({'success':False,'error':'Topilmadi'},status=404)
+    if request.method == 'DELETE':
+        o.delete(); return JsonResponse({'success':True})
+    if request.method == 'POST':
+        d = request.POST
+        for f in ['full_name','achievement','description']:
+            if f in d: setattr(o,f,d[f])
+        if 'year' in d: o.year = int(d['year'])
+        if 'faculty_id' in d: o.faculty_id = int(d['faculty_id']) if d['faculty_id'] else None
+        if 'is_active' in d: o.is_active = d['is_active']=='true'
+        if 'photo' in request.FILES: o.photo = request.FILES['photo']
+        o.save()
+        return JsonResponse({'success':True,'data':serialize_talent(o)})
+    return JsonResponse({'success':True,'data':serialize_talent(o)})
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  JournalIssue
+# ══════════════════════════════════════════════════════════════════════════════
+def serialize_journal(o):
+    return {'id':o.pk,'title':o.title,'slug':o.slug,'year':o.year,'issue_number':o.issue_number,
+            'description':o.description,'cover_image':img(o,'cover_image'),'pdf_file':img(o,'pdf_file'),
+            'is_active':o.is_active,'created_at':dt(o,'created_at')}
+
+
+@staff_only
+def api_journals(request):
+    if request.method == 'POST':
+        d = request.POST
+        o = JournalIssue(title=d['title'], year=int(d.get('year',2024)),
+            issue_number=int(d.get('issue_number',1)), description=d.get('description',''),
+            is_active=d.get('is_active')=='true')
+        if 'cover_image' in request.FILES: o.cover_image = request.FILES['cover_image']
+        if 'pdf_file' in request.FILES: o.pdf_file = request.FILES['pdf_file']
+        o.save()
+        return JsonResponse({'success':True,'data':serialize_journal(o)})
+    items, total, page, pages = paginate(JournalIssue.objects.all(), request)
+    return JsonResponse({'success':True,'data':[serialize_journal(o) for o in items],'total':total,'pages':pages})
+
+
+@staff_only
+def api_journal_detail(request, pk):
+    try: o = JournalIssue.objects.get(pk=pk)
+    except JournalIssue.DoesNotExist: return JsonResponse({'success':False,'error':'Topilmadi'},status=404)
+    if request.method == 'DELETE':
+        o.delete(); return JsonResponse({'success':True})
+    if request.method == 'POST':
+        d = request.POST
+        for f in ['title','description']:
+            if f in d: setattr(o,f,d[f])
+        if 'year' in d: o.year = int(d['year'])
+        if 'issue_number' in d: o.issue_number = int(d['issue_number'])
+        if 'is_active' in d: o.is_active = d['is_active']=='true'
+        if 'cover_image' in request.FILES: o.cover_image = request.FILES['cover_image']
+        if 'pdf_file' in request.FILES: o.pdf_file = request.FILES['pdf_file']
+        o.save()
+        return JsonResponse({'success':True,'data':serialize_journal(o)})
+    return JsonResponse({'success':True,'data':serialize_journal(o)})
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  ScheduleFile
+# ══════════════════════════════════════════════════════════════════════════════
+def serialize_schedule(o):
+    return {'id':o.pk,'title':o.title,'slug':o.slug,'academic_year':o.academic_year,
+            'semester':o.semester,'faculty_id':o.faculty_id,
+            'faculty_name':o.faculty.name if o.faculty else None,
+            'file':img(o,'file'),'is_active':o.is_active,'created_at':dt(o,'created_at')}
+
+
+@staff_only
+def api_schedules(request):
+    if request.method == 'POST':
+        d = request.POST
+        o = ScheduleFile(title=d['title'], academic_year=d.get('academic_year',''),
+            semester=int(d.get('semester',1)), is_active=d.get('is_active')=='true')
+        if d.get('faculty_id'): o.faculty_id = int(d['faculty_id'])
+        if 'file' in request.FILES: o.file = request.FILES['file']
+        o.save()
+        return JsonResponse({'success':True,'data':serialize_schedule(o)})
+    items, total, page, pages = paginate(ScheduleFile.objects.select_related('faculty').all(), request)
+    return JsonResponse({'success':True,'data':[serialize_schedule(o) for o in items],'total':total,'pages':pages})
+
+
+@staff_only
+def api_schedule_detail(request, pk):
+    try: o = ScheduleFile.objects.get(pk=pk)
+    except ScheduleFile.DoesNotExist: return JsonResponse({'success':False,'error':'Topilmadi'},status=404)
+    if request.method == 'DELETE':
+        o.delete(); return JsonResponse({'success':True})
+    if request.method == 'POST':
+        d = request.POST
+        for f in ['title','academic_year']:
+            if f in d: setattr(o,f,d[f])
+        if 'semester' in d: o.semester = int(d['semester'])
+        if 'faculty_id' in d: o.faculty_id = int(d['faculty_id']) if d['faculty_id'] else None
+        if 'is_active' in d: o.is_active = d['is_active']=='true'
+        if 'file' in request.FILES: o.file = request.FILES['file']
+        o.save()
+        return JsonResponse({'success':True,'data':serialize_schedule(o)})
+    return JsonResponse({'success':True,'data':serialize_schedule(o)})
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  LibraryResource
+# ══════════════════════════════════════════════════════════════════════════════
+def serialize_library(o):
+    return {'id':o.pk,'title':o.title,'slug':o.slug,'authors':o.authors,
+            'description':o.description,'resource_type':o.resource_type,
+            'cover_image':img(o,'cover_image'),'file':img(o,'file'),
+            'external_url':o.external_url,
+            'is_active':o.is_active,'views':o.views,'created_at':dt(o,'created_at')}
+
+
+@staff_only
+def api_library(request):
+    if request.method == 'POST':
+        d = request.POST
+        o = LibraryResource(title=d['title'], authors=d.get('authors',''),
+            description=d.get('description',''), resource_type=d.get('resource_type','book'),
+            external_url=d.get('external_url',''), is_active=d.get('is_active')=='true')
+        if 'cover_image' in request.FILES: o.cover_image = request.FILES['cover_image']
+        if 'file' in request.FILES: o.file = request.FILES['file']
+        o.save()
+        return JsonResponse({'success':True,'data':serialize_library(o)})
+    items, total, page, pages = paginate(LibraryResource.objects.all(), request)
+    return JsonResponse({'success':True,'data':[serialize_library(o) for o in items],'total':total,'pages':pages})
+
+
+@staff_only
+def api_library_detail(request, pk):
+    try: o = LibraryResource.objects.get(pk=pk)
+    except LibraryResource.DoesNotExist: return JsonResponse({'success':False,'error':'Topilmadi'},status=404)
+    if request.method == 'DELETE':
+        o.delete(); return JsonResponse({'success':True})
+    if request.method == 'POST':
+        d = request.POST
+        for f in ['title','authors','description','resource_type','external_url']:
+            if f in d: setattr(o,f,d[f])
+        if 'is_active' in d: o.is_active = d['is_active']=='true'
+        if 'cover_image' in request.FILES: o.cover_image = request.FILES['cover_image']
+        if 'file' in request.FILES: o.file = request.FILES['file']
+        o.save()
+        return JsonResponse({'success':True,'data':serialize_library(o)})
+    return JsonResponse({'success':True,'data':serialize_library(o)})

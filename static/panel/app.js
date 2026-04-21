@@ -307,6 +307,221 @@ const PAGES = {
       { key: 'created_at', label: 'Sana' },
     ],
   },
+
+  /* ── NEW CONTENT MODELS ─────────────────────────────────────────────── */
+  article_categories: {
+    title: 'Maqola kategoriyalari', endpoint: '/panel/api/article-categories/', useJSON: true,
+    cols: [
+      { key: 'name',      label: 'Nomi' },
+      { key: 'slug',      label: 'Slug' },
+      { key: 'is_active', label: 'Holat', bool: true },
+    ],
+    fields: [
+      { n: 'name',      l: 'Nomi', t: 'text', req: true },
+      { n: 'is_active', l: 'Faol', t: 'toggle', def: true },
+    ],
+  },
+
+  articles: {
+    title: 'Ilmiy maqolalar', endpoint: '/panel/api/articles/',
+    cols: [
+      { key: 'title',         label: 'Sarlavha' },
+      { key: 'authors',       label: 'Mualliflar' },
+      { key: 'category_name', label: 'Kategoriya' },
+      { key: 'published_date',label: 'Sana' },
+      { key: 'is_active',     label: 'Holat', bool: true },
+    ],
+    fields: [
+      { n: 'title',          l: 'Sarlavha',      t: 'text', req: true },
+      { n: 'authors',        l: 'Mualliflar',    t: 'text' },
+      { n: 'journal_name',   l: 'Jurnal nomi',   t: 'text' },
+      { n: 'category_id',    l: 'Kategoriya',    t: 'select', loadFrom: '/panel/api/article-categories-select/' },
+      { n: 'language', l: 'Til', t: 'select', opts: [
+        { v: 'uz', lbl: "O'zbek" }, { v: 'ru', lbl: 'Rus' }, { v: 'en', lbl: 'Ingliz' },
+      ]},
+      { n: 'published_date', l: 'Chiqarilgan sana', t: 'date' },
+      { n: 'doi_url',        l: 'DOI URL',        t: 'text' },
+      { n: 'abstract',       l: 'Annotatsiya',    t: 'textarea', rows: 5 },
+      { n: 'is_active',      l: 'Faol',           t: 'toggle', def: true },
+      { n: 'cover_image',    l: 'Muqova rasmi',   t: 'image' },
+      { n: 'pdf_file',       l: 'PDF fayl',       t: 'file' },
+    ],
+  },
+
+  dissertations: {
+    title: 'Dissertatsiyalar', endpoint: '/panel/api/dissertations/',
+    cols: [
+      { key: 'title',        label: 'Mavzu' },
+      { key: 'author',       label: 'Muallif' },
+      { key: 'degree',       label: 'Daraja' },
+      { key: 'defense_date', label: 'Himoya sana' },
+      { key: 'is_active',    label: 'Holat', bool: true },
+    ],
+    fields: [
+      { n: 'title',       l: 'Mavzu',         t: 'text', req: true },
+      { n: 'author',      l: 'Muallif',       t: 'text', req: true },
+      { n: 'supervisor',  l: 'Ilmiy rahbar',  t: 'text' },
+      { n: 'specialty',   l: 'Mutaxassislik', t: 'text' },
+      { n: 'degree', l: 'Daraja', t: 'select', opts: [
+        { v: 'phd',       lbl: 'PhD' },
+        { v: 'dsc',       lbl: 'DSc (Doctor of Science)' },
+        { v: 'candidate', lbl: 'Fan nomzodi' },
+      ]},
+      { n: 'faculty_id',   l: "Yo'nalish",    t: 'select', loadFrom: '/panel/api/faculty-select/' },
+      { n: 'defense_date', l: 'Himoya sanasi',t: 'date' },
+      { n: 'abstract',     l: 'Annotatsiya',  t: 'textarea', rows: 5 },
+      { n: 'is_active',    l: 'Faol',         t: 'toggle', def: true },
+      { n: 'cover_image',  l: 'Muqova rasmi', t: 'image' },
+      { n: 'pdf_file',     l: 'PDF fayl',     t: 'file' },
+    ],
+  },
+
+  conferences: {
+    title: 'Konferensiyalar', endpoint: '/panel/api/conferences/',
+    cols: [
+      { key: 'title',      label: 'Sarlavha' },
+      { key: 'location',   label: 'Joy' },
+      { key: 'start_date', label: 'Boshlanish' },
+      { key: 'is_active',  label: 'Holat', bool: true },
+    ],
+    fields: [
+      { n: 'title',            l: 'Sarlavha',          t: 'text', req: true },
+      { n: 'location',         l: 'Joy',               t: 'text' },
+      { n: 'start_date',       l: 'Boshlanish sanasi', t: 'date' },
+      { n: 'end_date',         l: 'Tugash sanasi',     t: 'date' },
+      { n: 'registration_url', l: "Ro'yxatdan o'tish URL", t: 'text' },
+      { n: 'description',      l: 'Tavsif',            t: 'textarea', rows: 5 },
+      { n: 'is_active',        l: 'Faol',              t: 'toggle', def: true },
+      { n: 'poster_image',     l: 'Poster rasmi',      t: 'image' },
+      { n: 'cover_image',      l: 'Muqova rasmi',      t: 'image' },
+      { n: 'pdf_file',         l: 'PDF dastur',        t: 'file' },
+    ],
+  },
+
+  contests: {
+    title: 'Tanlovlar', endpoint: '/panel/api/contests/',
+    cols: [
+      { key: 'title',     label: 'Sarlavha' },
+      { key: 'deadline',  label: 'Muddat' },
+      { key: 'is_active', label: 'Holat', bool: true },
+    ],
+    fields: [
+      { n: 'title',       l: 'Sarlavha',  t: 'text', req: true },
+      { n: 'deadline',    l: 'Muddat',    t: 'date' },
+      { n: 'description', l: 'Tavsif',   t: 'textarea', rows: 5 },
+      { n: 'is_active',   l: 'Faol',     t: 'toggle', def: true },
+      { n: 'cover_image', l: 'Rasm',     t: 'image' },
+      { n: 'pdf_file',    l: 'Shartlar (PDF)', t: 'file' },
+    ],
+  },
+
+  videos: {
+    title: 'Video darslar', endpoint: '/panel/api/videos/',
+    cols: [
+      { key: 'cover_image',  label: 'Rasm', img: true },
+      { key: 'title',        label: 'Sarlavha' },
+      { key: 'faculty_name', label: "Yo'nalish" },
+      { key: 'duration',     label: 'Davomiyligi' },
+      { key: 'is_active',    label: 'Holat', bool: true },
+    ],
+    fields: [
+      { n: 'title',       l: 'Sarlavha',     t: 'text', req: true },
+      { n: 'youtube_url', l: 'YouTube URL',  t: 'text' },
+      { n: 'duration',    l: 'Davomiyligi (masalan: 12:34)', t: 'text' },
+      { n: 'faculty_id',  l: "Yo'nalish",    t: 'select', loadFrom: '/panel/api/faculty-select/' },
+      { n: 'description', l: 'Tavsif',       t: 'textarea', rows: 4 },
+      { n: 'is_active',   l: 'Faol',         t: 'toggle', def: true },
+      { n: 'cover_image', l: 'Muqova rasmi', t: 'image' },
+    ],
+  },
+
+  talented: {
+    title: 'Iqtidorli talabalar', endpoint: '/panel/api/talented/',
+    cols: [
+      { key: 'photo',        label: 'Foto', img: true },
+      { key: 'full_name',    label: 'F.I.O.' },
+      { key: 'achievement',  label: 'Yutuq' },
+      { key: 'year',         label: 'Yil' },
+      { key: 'is_active',    label: 'Holat', bool: true },
+    ],
+    fields: [
+      { n: 'full_name',   l: 'F.I.O.',       t: 'text', req: true },
+      { n: 'achievement', l: 'Yutuq/unvon',  t: 'text', req: true },
+      { n: 'year',        l: 'Yil',          t: 'number' },
+      { n: 'faculty_id',  l: "Yo'nalish",    t: 'select', loadFrom: '/panel/api/faculty-select/' },
+      { n: 'description', l: "Qo'shimcha ma'lumot", t: 'textarea', rows: 3 },
+      { n: 'is_active',   l: 'Faol',         t: 'toggle', def: true },
+      { n: 'photo',       l: 'Foto',         t: 'image' },
+    ],
+  },
+
+  journals: {
+    title: 'Ilmiy jurnal sonlari', endpoint: '/panel/api/journals/',
+    cols: [
+      { key: 'cover_image',  label: 'Muqova', img: true },
+      { key: 'title',        label: 'Sarlavha' },
+      { key: 'year',         label: 'Yil' },
+      { key: 'issue_number', label: 'Son raqami' },
+      { key: 'is_active',    label: 'Holat', bool: true },
+    ],
+    fields: [
+      { n: 'title',        l: 'Sarlavha',    t: 'text', req: true },
+      { n: 'year',         l: 'Yil',         t: 'number', req: true },
+      { n: 'issue_number', l: 'Son raqami',  t: 'number', req: true },
+      { n: 'description',  l: 'Tavsif',      t: 'textarea', rows: 4 },
+      { n: 'is_active',    l: 'Faol',        t: 'toggle', def: true },
+      { n: 'cover_image',  l: 'Muqova rasmi',t: 'image' },
+      { n: 'pdf_file',     l: 'PDF fayl',    t: 'file' },
+    ],
+  },
+
+  schedules: {
+    title: 'Dars jadvallari', endpoint: '/panel/api/schedules/',
+    cols: [
+      { key: 'title',         label: 'Sarlavha' },
+      { key: 'faculty_name',  label: "Yo'nalish" },
+      { key: 'academic_year', label: "O'quv yili" },
+      { key: 'semester',      label: 'Semestr' },
+      { key: 'is_active',     label: 'Holat', bool: true },
+    ],
+    fields: [
+      { n: 'title',         l: 'Sarlavha',    t: 'text', req: true },
+      { n: 'academic_year', l: "O'quv yili (masalan: 2024-2025)", t: 'text', req: true },
+      { n: 'semester', l: 'Semestr', t: 'select', opts: [
+        { v: '1', lbl: '1-semestr' }, { v: '2', lbl: '2-semestr' },
+      ]},
+      { n: 'faculty_id',    l: "Yo'nalish",   t: 'select', loadFrom: '/panel/api/faculty-select/' },
+      { n: 'is_active',     l: 'Faol',        t: 'toggle', def: true },
+      { n: 'file',          l: 'Jadval fayli',t: 'file', req: true },
+    ],
+  },
+
+  library: {
+    title: 'Elektron kutubxona', endpoint: '/panel/api/library/',
+    cols: [
+      { key: 'cover_image',    label: 'Muqova', img: true },
+      { key: 'title',          label: 'Sarlavha' },
+      { key: 'authors',        label: 'Mualliflar' },
+      { key: 'resource_type',  label: 'Turi' },
+      { key: 'is_active',      label: 'Holat', bool: true },
+    ],
+    fields: [
+      { n: 'title',         l: 'Sarlavha',   t: 'text', req: true },
+      { n: 'authors',       l: 'Mualliflar', t: 'text' },
+      { n: 'resource_type', l: 'Tur', t: 'select', opts: [
+        { v: 'book',    lbl: 'Kitob' },
+        { v: 'manual',  lbl: "Qo'llanma" },
+        { v: 'article', lbl: 'Maqola' },
+        { v: 'thesis',  lbl: 'Dissertatsiya' },
+        { v: 'other',   lbl: 'Boshqa' },
+      ]},
+      { n: 'external_url',  l: 'Tashqi havola', t: 'text' },
+      { n: 'description',   l: 'Tavsif',        t: 'textarea', rows: 4 },
+      { n: 'is_active',     l: 'Faol',          t: 'toggle', def: true },
+      { n: 'cover_image',   l: 'Muqova rasmi',  t: 'image' },
+      { n: 'file',          l: 'Fayl (PDF/DOC)',t: 'file' },
+    ],
+  },
 };
 
 /* ═══ State ════════════════════════════════════════════════════════════ */
@@ -1000,6 +1215,15 @@ function buildField(f, item, remote) {
       <label>${esc(f.l)}</label>
       ${src ? `<img src="${src}" class="img-thumb-preview" id="${pid}" style="margin-bottom:6px">` : `<div id="${pid}" class="img-empty-preview">Rasm yo'q</div>`}
       <input type="file" name="${f.n}" accept="image/*" data-prev="${pid}">
+    </div>`;
+  }
+
+  if (f.t === 'file') {
+    const existing = item ? item[f.n] : null;
+    return `<div class="field field-full">
+      <label>${esc(f.l)}${f.req ? ' <span style="color:var(--red)">*</span>' : ''}</label>
+      ${existing ? `<div style="margin-bottom:6px;font-size:.82rem;color:var(--accent)">📎 <a href="${existing}" target="_blank" style="color:var(--accent)">Mavjud fayl</a></div>` : ''}
+      <input type="file" name="${f.n}" ${f.req && !existing ? 'required' : ''}>
     </div>`;
   }
 

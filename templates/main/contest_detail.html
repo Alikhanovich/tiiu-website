@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ obj.title }} — {{ settings.site_name }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="{% url 'index' %}">Bosh sahifa</a><span>/</span>
+      <a href="{% url 'contests_list' %}">Tanlovlar</a><span>/</span>
+      <span>{{ obj.title|truncatewords:5 }}</span>
+    </div>
+    <div class="tag" style="margin-bottom:12px"><span class="dot"></span>Tanlov</div>
+    <h1 class="page-title" style="max-width:800px">{{ obj.title }}</h1>
+    <div style="display:flex;flex-wrap:wrap;gap:16px;margin-top:16px;font-size:.82rem;color:var(--text3)">
+      {% if obj.deadline %}<span>⏰ Muddat: {{ obj.deadline|date:"d-B Y, H:i" }}</span>{% endif %}
+      <span>👁 {{ obj.views }} koʻrish</span>
+    </div>
+  </div>
+</div>
+<section style="padding:70px 0;background:var(--bg)">
+  <div class="container" style="max-width:900px">
+    {% if obj.cover_image %}
+    <div style="border-radius:var(--r);overflow:hidden;margin-bottom:36px;border:1px solid var(--border)">
+      <img src="{{ obj.cover_image.url }}" alt="{{ obj.title }}" style="width:100%;max-height:420px;object-fit:cover"/>
+    </div>
+    {% endif %}
+    {% if obj.description %}
+    <div style="font-size:.97rem;color:var(--text2);line-height:1.9;background:rgba(10,22,48,.4);border:1px solid var(--border);border-radius:var(--r);padding:32px;margin-bottom:28px">
+      {{ obj.description|safe }}
+    </div>
+    {% endif %}
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <a href="{% url 'contests_list' %}" class="btn-outline">← Barcha tanlovlar</a>
+      {% if obj.pdf_file %}<a href="{{ obj.pdf_file.url }}" target="_blank" class="btn-primary" download>⬇ Shartlar (PDF)</a>{% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}

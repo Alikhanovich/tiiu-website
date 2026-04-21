@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ obj }} — {{ settings.site_name }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="{% url 'index' %}">Bosh sahifa</a><span>/</span>
+      <a href="{% url 'journal_list' %}">Ilmiy jurnal</a><span>/</span>
+      <span>{{ obj.year }}-yil {{ obj.issue_number }}-son</span>
+    </div>
+    <div class="tag" style="margin-bottom:12px"><span class="dot"></span>{{ obj.year }}-yil · {{ obj.issue_number }}-son</div>
+    <h1 class="page-title">{{ obj.title }}</h1>
+  </div>
+</div>
+<section style="padding:70px 0;background:var(--bg)">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:260px 1fr;gap:48px;align-items:start">
+      <div>
+        {% if obj.cover_image %}
+        <div style="border-radius:var(--r);overflow:hidden;border:1px solid var(--border);margin-bottom:20px">
+          <img src="{{ obj.cover_image.url }}" alt="{{ obj }}" style="width:100%;object-fit:cover"/>
+        </div>
+        {% else %}
+        <div style="background:var(--bg3);border-radius:var(--r);aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;font-size:4rem;margin-bottom:20px">📰</div>
+        {% endif %}
+        {% if obj.pdf_file %}
+        <a href="{{ obj.pdf_file.url }}" target="_blank" class="btn-primary" download style="width:100%;justify-content:center;display:flex">⬇ PDF yuklab olish</a>
+        {% endif %}
+      </div>
+      <div>
+        {% if obj.description %}
+        <div style="font-size:.97rem;color:var(--text2);line-height:1.9;background:rgba(10,22,48,.4);border:1px solid var(--border);border-radius:var(--r);padding:32px;margin-bottom:28px">
+          {{ obj.description|safe }}
+        </div>
+        {% endif %}
+        <a href="{% url 'journal_list' %}" class="btn-outline">← Barcha sonlar</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

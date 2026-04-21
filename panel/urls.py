@@ -52,4 +52,37 @@ urlpatterns = [
     # Static Pages
     path('api/pages/',          views.api_pages,       name='api_pages'),
     path('api/pages/<int:pk>/', views.api_page_detail, name='api_page_detail'),
+    # Select helpers
+    path('api/faculty-select/',            views.api_faculty_select,            name='api_faculty_select'),
+    path('api/article-categories-select/', views.api_article_categories_select, name='api_article_categories_select'),
+    # Article Categories
+    path('api/article-categories/',          views.api_article_categories,        name='api_article_categories'),
+    path('api/article-categories/<int:pk>/', views.api_article_category_detail,   name='api_article_category_detail'),
+    # Scientific Articles
+    path('api/articles/',          views.api_articles,       name='api_articles'),
+    path('api/articles/<int:pk>/', views.api_article_detail, name='api_article_detail'),
+    # Dissertations
+    path('api/dissertations/',          views.api_dissertations,       name='api_dissertations'),
+    path('api/dissertations/<int:pk>/', views.api_dissertation_detail, name='api_dissertation_detail'),
+    # Conferences
+    path('api/conferences/',          views.api_conferences,       name='api_conferences'),
+    path('api/conferences/<int:pk>/', views.api_conference_detail, name='api_conference_detail'),
+    # Contests
+    path('api/contests/',          views.api_contests,       name='api_contests'),
+    path('api/contests/<int:pk>/', views.api_contest_detail, name='api_contest_detail'),
+    # Video Lessons
+    path('api/videos/',          views.api_videos,       name='api_videos'),
+    path('api/videos/<int:pk>/', views.api_video_detail, name='api_video_detail'),
+    # Talented Students
+    path('api/talented/',          views.api_talented,       name='api_talented'),
+    path('api/talented/<int:pk>/', views.api_talent_detail,  name='api_talent_detail'),
+    # Journal Issues
+    path('api/journals/',          views.api_journals,       name='api_journals'),
+    path('api/journals/<int:pk>/', views.api_journal_detail, name='api_journal_detail'),
+    # Schedule Files
+    path('api/schedules/',          views.api_schedules,       name='api_schedules'),
+    path('api/schedules/<int:pk>/', views.api_schedule_detail, name='api_schedule_detail'),
+    # Library Resources
+    path('api/library/',          views.api_library,        name='api_library'),
+    path('api/library/<int:pk>/', views.api_library_detail, name='api_library_detail'),
 ]

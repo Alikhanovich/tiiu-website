@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Tanlovlar — {{ settings.site_name }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="container">
+    <div class="breadcrumb"><a href="{% url 'index' %}">Bosh sahifa</a><span>/</span><span>Tanlovlar</span></div>
+    <h1 class="page-title">Talaba <span>tanlovlari</span></h1>
+    <p class="page-sub">Universitetdagi olimpiadalar, tanlovlar va musobaqalar.</p>
+  </div>
+</div>
+<section style="padding:60px 0;background:var(--bg)">
+  <div class="container">
+    <div class="news-grid" style="grid-template-columns:repeat(auto-fill,minmax(300px,1fr))">
+      {% for c in items %}
+      <a href="{% url 'contest_detail' c.slug %}" class="news-card" style="display:block;text-decoration:none">
+        <div class="nc-img">
+          {% if c.cover_image %}<img src="{{ c.cover_image.url }}" alt="{{ c.title }}" onerror="this.parentElement.innerHTML='<div class=nc-img-placeholder>🏆</div>'"/>
+          {% else %}<div class="nc-img-placeholder">🏆</div>{% endif %}
+          <span class="nc-cat">Tanlov</span>
+        </div>
+        <div class="nc-body">
+          {% if c.deadline %}<div class="nc-date">⏰ Muddat: {{ c.deadline|date:"d-B Y" }}</div>{% endif %}
+          <div class="nc-title">{{ c.title|truncatewords:10 }}</div>
+          {% if c.description %}<p style="font-size:.82rem;color:var(--text2);line-height:1.6;margin-bottom:10px">{{ c.description|truncatewords:16 }}</p>{% endif %}
+          <span class="nc-more">Batafsil →</span>
+        </div>
+      </a>
+      {% empty %}
+      <p style="color:var(--text2);grid-column:1/-1;text-align:center;padding:60px 0">Tanlovlar hali qoʻshilmagan.</p>
+      {% endfor %}
+    </div>
+    {% if items.has_other_pages %}
+    <div class="pagination" style="margin-top:40px">
+      {% if items.has_previous %}<a href="?page={{ items.previous_page_number }}" class="pg-btn">‹</a>{% endif %}
+      {% for n in items.paginator.page_range %}<a href="?page={{ n }}" class="pg-btn {% if items.number == n %}active{% endif %}">{{ n }}</a>{% endfor %}
+      {% if items.has_next %}<a href="?page={{ items.next_page_number }}" class="pg-btn">›</a>{% endif %}
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

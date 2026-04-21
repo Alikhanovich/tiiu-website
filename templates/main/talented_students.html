@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Iqtidorli talabalar — {{ settings.site_name }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="container">
+    <div class="breadcrumb"><a href="{% url 'index' %}">Bosh sahifa</a><span>/</span><span>Iqtidorli talabalar</span></div>
+    <h1 class="page-title">Iqtidorli <span>talabalar</span></h1>
+    <p class="page-sub">TIIUning gʻururi — olimpiada gʻoliblari va yutuqli talabalar.</p>
+  </div>
+</div>
+<section style="padding:60px 0;background:var(--bg)">
+  <div class="container">
+    <form method="get" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:32px">
+      <select name="year" style="padding:9px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--rs);color:var(--text);font-size:.88rem">
+        <option value="">Barcha yillar</option>
+        {% for y in years %}<option value="{{ y }}" {% if active_year == y|stringformat:'s' %}selected{% endif %}>{{ y }}-yil</option>{% endfor %}
+      </select>
+      <select name="faculty" style="padding:9px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--rs);color:var(--text);font-size:.88rem">
+        <option value="">Barcha yoʻnalishlar</option>
+        {% for f in faculties %}<option value="{{ f.slug }}" {% if active_fac == f.slug %}selected{% endif %}>{{ f.short_name|default:f.name }}</option>{% endfor %}
+      </select>
+      <button type="submit" class="btn-primary">Filtr</button>
+      {% if active_year or active_fac %}<a href="{% url 'talented_students' %}" class="btn-outline">Tozalash</a>{% endif %}
+    </form>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:24px">
+      {% for s in items %}
+      <div class="glass" style="padding:28px;text-align:center">
+        {% if s.photo %}
+        <img src="{{ s.photo.url }}" alt="{{ s.full_name }}" style="width:90px;height:90px;border-radius:50%;object-fit:cover;margin:0 auto 16px;border:3px solid var(--accent)"/>
+        {% else %}
+        <div style="width:90px;height:90px;border-radius:50%;background:var(--bg3);margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:2.4rem">🎓</div>
+        {% endif %}
+        <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1rem;margin-bottom:6px">{{ s.full_name }}</div>
+        <div style="font-size:.8rem;color:var(--accent);margin-bottom:8px">🏆 {{ s.achievement }}</div>
+        {% if s.faculty %}<div style="font-size:.75rem;color:var(--text3);margin-bottom:4px">{{ s.faculty.short_name|default:s.faculty.name }}</div>{% endif %}
+        <div style="font-size:.75rem;color:var(--text3)">{{ s.year }}-yil</div>
+        {% if s.description %}<p style="font-size:.78rem;color:var(--text2);margin-top:10px;line-height:1.5">{{ s.description|truncatewords:16 }}</p>{% endif %}
+      </div>
+      {% empty %}
+      <p style="color:var(--text2);grid-column:1/-1;text-align:center;padding:60px 0">Hali qoʻshilmagan.</p>
+      {% endfor %}
+    </div>
+
+    {% if items.has_other_pages %}
+    <div class="pagination" style="margin-top:40px">
+      {% if items.has_previous %}<a href="?page={{ items.previous_page_number }}" class="pg-btn">‹</a>{% endif %}
+      {% for n in items.paginator.page_range %}<a href="?page={{ n }}" class="pg-btn {% if items.number == n %}active{% endif %}">{{ n }}</a>{% endfor %}
+      {% if items.has_next %}<a href="?page={{ items.next_page_number }}" class="pg-btn">›</a>{% endif %}
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

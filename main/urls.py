@@ -20,4 +20,22 @@ urlpatterns = [
     path("centers/",              views.centers,         name="centers"),
     path("pages/<slug:slug>/",    views.static_page,     name="static_page"),
     path("sitemap.xml",           views.sitemap,          name="sitemap"),
+    # Ilm-fan
+    path("articles/",                   views.articles_list,       name="articles_list"),
+    path("articles/<slug:slug>/",        views.article_detail,      name="article_detail"),
+    path("dissertations/",               views.dissertations_list,   name="dissertations_list"),
+    path("dissertations/<slug:slug>/",   views.dissertation_detail,  name="dissertation_detail"),
+    path("conferences/",                 views.conferences_list,    name="conferences_list"),
+    path("conferences/<slug:slug>/",     views.conference_detail,   name="conference_detail"),
+    path("journal/",                     views.journal_list,        name="journal_list"),
+    path("journal/<slug:slug>/",         views.journal_detail,      name="journal_detail"),
+    # Talabalarga
+    path("video-lessons/",               views.video_lessons_list,  name="video_lessons_list"),
+    path("video-lessons/<slug:slug>/",   views.video_lesson_detail, name="video_lesson_detail"),
+    path("talented-students/",           views.talented_students,   name="talented_students"),
+    path("contests/",                    views.contests_list,       name="contests_list"),
+    path("contests/<slug:slug>/",        views.contest_detail,      name="contest_detail"),
+    path("schedule/",                    views.schedule_list,       name="schedule_list"),
+    path("library/",                     views.library_list,        name="library_list"),
+    path("library/<slug:slug>/",         views.library_detail,      name="library_detail"),
 ]

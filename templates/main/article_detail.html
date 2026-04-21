@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ obj.title }} — {{ settings.site_name }}{% endblock %}
+{% block og_title %}{{ obj.title }}{% endblock %}
+{% block og_desc %}{{ obj.abstract|truncatewords:25 }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="{% url 'index' %}">Bosh sahifa</a><span>/</span>
+      <a href="{% url 'articles_list' %}">Ilmiy maqolalar</a><span>/</span>
+      <span>{{ obj.title|truncatewords:6 }}</span>
+    </div>
+    {% if obj.category %}<div class="tag" style="margin-bottom:12px"><span class="dot"></span>{{ obj.category.name }}</div>{% endif %}
+    <h1 class="page-title" style="max-width:800px">{{ obj.title }}</h1>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:16px;font-size:.82rem;color:var(--text3)">
+      <span>✍️ {{ obj.authors }}</span>
+      {% if obj.published_date %}<span>📅 {{ obj.published_date|date:"d-B Y" }}</span>{% endif %}
+      {% if obj.journal_name %}<span>📚 {{ obj.journal_name }}</span>{% endif %}
+      <span>👁 {{ obj.views }} koʻrish</span>
+    </div>
+  </div>
+</div>
+
+<section style="padding:70px 0;background:var(--bg)">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 300px;gap:48px;align-items:start">
+      <div>
+        {% if obj.cover_image %}
+        <div style="border-radius:var(--r);overflow:hidden;margin-bottom:36px;border:1px solid var(--border)">
+          <img src="{{ obj.cover_image.url }}" alt="{{ obj.title }}" style="width:100%;max-height:420px;object-fit:cover"/>
+        </div>
+        {% endif %}
+
+        {% if obj.abstract %}
+        <div style="font-size:.97rem;color:var(--text2);line-height:1.9;background:rgba(10,22,48,.4);border:1px solid var(--border);border-radius:var(--r);padding:32px">
+          <h3 style="font-family:'Space Grotesk',sans-serif;font-size:1rem;margin-bottom:14px;color:var(--text)">Annotatsiya</h3>
+          {{ obj.abstract }}
+        </div>
+        {% endif %}
+
+        <div style="margin-top:28px;display:flex;gap:12px;flex-wrap:wrap">
+          <a href="{% url 'articles_list' %}" class="btn-outline">← Barcha maqolalar</a>
+          {% if obj.pdf_file %}<a href="{{ obj.pdf_file.url }}" target="_blank" class="btn-primary" download>⬇ PDF yuklab olish</a>{% endif %}
+          {% if obj.doi_url %}<a href="{{ obj.doi_url }}" target="_blank" rel="noopener" class="btn-outline">🔗 DOI / Manba</a>{% endif %}
+        </div>
+
+        {% if settings.telegram or settings.facebook %}
+        <div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap">
+          <span style="font-size:.82rem;color:var(--text3)">Ulashish:</span>
+          {% if settings.telegram %}<a href="https://t.me/share/url?url={{ request.build_absolute_uri }}&text={{ obj.title|urlencode }}" target="_blank" class="btn-outline" style="font-size:.8rem;padding:7px 14px">✈ Telegram</a>{% endif %}
+          {% if settings.facebook %}<a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank" class="btn-outline" style="font-size:.8rem;padding:7px 14px">f Facebook</a>{% endif %}
+        </div>
+        {% endif %}
+      </div>
+
+      <div style="position:sticky;top:90px">
+        <div class="glass" style="padding:24px;margin-bottom:20px">
+          <div style="font-family:'Space Grotesk',sans-serif;font-size:.9rem;font-weight:700;margin-bottom:16px;color:#fff">📄 Maqola ma'lumotlari</div>
+          <div style="font-size:.83rem;color:var(--text2);display:flex;flex-direction:column;gap:10px">
+            <div><span style="color:var(--text3)">Mualliflar:</span><br>{{ obj.authors }}</div>
+            {% if obj.published_date %}<div><span style="color:var(--text3)">Nashr sanasi:</span><br>{{ obj.published_date|date:"d-B Y" }}</div>{% endif %}
+            {% if obj.journal_name %}<div><span style="color:var(--text3)">Jurnal:</span><br>{{ obj.journal_name }}</div>{% endif %}
+            <div><span style="color:var(--text3)">Til:</span><br>{{ obj.get_language_display }}</div>
+          </div>
+        </div>
+
+        {% if related %}
+        <div class="glass" style="padding:20px">
+          <div style="font-family:'Space Grotesk',sans-serif;font-size:.9rem;font-weight:700;margin-bottom:14px;color:#fff">📑 Boshqa maqolalar</div>
+          {% for r in related %}
+          <a href="{% url 'article_detail' r.slug %}" style="display:block;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--border);text-decoration:none">
+            <div style="font-size:.78rem;font-weight:600;color:var(--text);line-height:1.4;margin-bottom:3px">{{ r.title|truncatewords:8 }}</div>
+            <div style="font-size:.72rem;color:var(--text3)">{{ r.authors|truncatechars:30 }}</div>
+          </a>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

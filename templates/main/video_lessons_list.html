@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Video darslar — {{ settings.site_name }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="container">
+    <div class="breadcrumb"><a href="{% url 'index' %}">Bosh sahifa</a><span>/</span><span>Video darslar</span></div>
+    <h1 class="page-title">Video <span>darslar</span></h1>
+    <p class="page-sub">Oʻqituvchilar tayyorlagan video darslar va maʼruzalar.</p>
+  </div>
+</div>
+<section style="padding:60px 0;background:var(--bg)">
+  <div class="container">
+    {% if faculties %}
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px">
+      <a href="{% url 'video_lessons_list' %}" class="btn-{% if not active_fac %}primary{% else %}outline{% endif %}" style="padding:8px 16px;font-size:.83rem">Barchasi</a>
+      {% for f in faculties %}<a href="?faculty={{ f.slug }}" class="btn-{% if active_fac == f.slug %}primary{% else %}outline{% endif %}" style="padding:8px 16px;font-size:.83rem">{{ f.short_name|default:f.name }}</a>{% endfor %}
+    </div>
+    {% endif %}
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px">
+      {% for v in items %}
+      <a href="{% url 'video_lesson_detail' v.slug %}" style="display:block;text-decoration:none;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:.25s">
+        <div style="position:relative;aspect-ratio:16/9;background:var(--bg3)">
+          {% if v.cover_image %}<img src="{{ v.cover_image.url }}" alt="{{ v.title }}" style="width:100%;height:100%;object-fit:cover"/>
+          {% else %}<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem">▶</div>{% endif %}
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center">
+            <div style="width:52px;height:52px;background:rgba(0,105,51,.85);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem">▶</div>
+          </div>
+          {% if v.duration %}<span style="position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,.75);color:#fff;padding:3px 8px;border-radius:4px;font-size:.72rem">{{ v.duration }}</span>{% endif %}
+        </div>
+        <div style="padding:16px">
+          <div style="font-size:.88rem;font-weight:600;color:var(--text);margin-bottom:6px;line-height:1.4">{{ v.title|truncatewords:12 }}</div>
+          {% if v.faculty %}<div style="font-size:.75rem;color:var(--text3)">{{ v.faculty.short_name|default:v.faculty.name }}</div>{% endif %}
+        </div>
+      </a>
+      {% empty %}
+      <p style="color:var(--text2);grid-column:1/-1;text-align:center;padding:60px 0">Video darslar hali qoʻshilmagan.</p>
+      {% endfor %}
+    </div>
+
+    {% if items.has_other_pages %}
+    <div class="pagination" style="margin-top:40px">
+      {% if items.has_previous %}<a href="?page={{ items.previous_page_number }}{% if active_fac %}&faculty={{ active_fac }}{% endif %}" class="pg-btn">‹</a>{% endif %}
+      {% for n in items.paginator.page_range %}<a href="?page={{ n }}{% if active_fac %}&faculty={{ active_fac }}{% endif %}" class="pg-btn {% if items.number == n %}active{% endif %}">{{ n }}</a>{% endfor %}
+      {% if items.has_next %}<a href="?page={{ items.next_page_number }}{% if active_fac %}&faculty={{ active_fac }}{% endif %}" class="pg-btn">›</a>{% endif %}
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

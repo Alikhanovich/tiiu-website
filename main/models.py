@@ -433,6 +433,281 @@ class StaticPage(models.Model):
         return self.title
 
 
+# ─── Scientific Articles ─────────────────────────────────────────────────────
+class ArticleCategory(models.Model):
+    name = models.CharField("Nomi", max_length=100)
+    slug = models.SlugField("Slug", unique=True, blank=True)
+
+    class Meta:
+        verbose_name = "Maqola kategoriyasi"
+        verbose_name_plural = "Maqola kategoriyalari"
+        ordering = ["name"]
+
+    def __str__(self): return self.name
+
+    def save(self, *args, **kwargs):
+        if not self.slug: self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+
+
+def _unique_slug(Model, base):
+    slug, n = base, 1
+    while Model.objects.filter(slug=slug).exists():
+        slug = f"{base}-{n}"; n += 1
+    return slug
+
+
+class ScientificArticle(models.Model):
+    LANG = [('uz', "O'zbek"), ('ru', 'Русский'), ('en', 'English')]
+    title          = models.CharField("Sarlavha", max_length=300)
+    slug           = models.SlugField("Slug", unique=True, blank=True)
+    authors        = models.CharField("Mualliflar", max_length=400)
+    journal_name   = models.CharField("Jurnal nomi", max_length=300, blank=True)
+    published_date = models.DateField("Nashr sanasi", null=True, blank=True)
+    abstract       = models.TextField("Annotatsiya", blank=True)
+    category       = models.ForeignKey(ArticleCategory, on_delete=models.SET_NULL,
+                                       null=True, blank=True, related_name="articles")
+    pdf_file       = models.FileField("PDF fayl", upload_to="articles/pdf/", blank=True, null=True)
+    cover_image    = models.ImageField("Muqova rasm", upload_to="articles/covers/", blank=True, null=True)
+    doi_url        = models.URLField("DOI/Havola", blank=True)
+    language       = models.CharField("Til", max_length=5, choices=LANG, default='uz')
+    is_active      = models.BooleanField("Faol", default=True)
+    views          = models.PositiveIntegerField("Ko'rishlar", default=0)
+    created_at     = models.DateTimeField("Yaratilgan", auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Ilmiy maqola"
+        verbose_name_plural = "Ilmiy maqolalar"
+        ordering = ["-published_date", "-created_at"]
+
+    def __str__(self): return self.title
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = _unique_slug(ScientificArticle, slugify(self.title) or "article")
+        super().save(*args, **kwargs)
+
+
+# ─── Dissertations ────────────────────────────────────────────────────────────
+class Dissertation(models.Model):
+    DEGREE = [('phd', 'PhD'), ('dsc', 'DSc'), ('candidate', 'Fan nomzodi')]
+    title        = models.CharField("Sarlavha", max_length=400)
+    slug         = models.SlugField("Slug", unique=True, blank=True)
+    author       = models.CharField("Muallif", max_length=200)
+    supervisor   = models.CharField("Ilmiy rahbar", max_length=200, blank=True)
+    specialty    = models.CharField("Mutaxassislik", max_length=300, blank=True)
+    degree       = models.CharField("Daraja", max_length=20, choices=DEGREE, default='phd')
+    defense_date = models.DateField("Himoya sanasi", null=True, blank=True)
+    abstract     = models.TextField("Annotatsiya", blank=True)
+    faculty      = models.ForeignKey(Faculty, on_delete=models.SET_NULL, null=True, blank=True,
+                                     related_name="dissertations")
+    pdf_file     = models.FileField("PDF fayl", upload_to="dissertations/", blank=True, null=True)
+    cover_image  = models.ImageField("Muqova rasm", upload_to="dissertations/covers/", blank=True, null=True)
+    is_active    = models.BooleanField("Faol", default=True)
+    views        = models.PositiveIntegerField("Ko'rishlar", default=0)
+    created_at   = models.DateTimeField("Yaratilgan", auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Dissertatsiya"
+        verbose_name_plural = "Dissertatsiyalar"
+        ordering = ["-defense_date", "-created_at"]
+
+    def __str__(self): return self.title
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            base = slugify(f"{self.author}-{self.title[:60]}") or "dissertation"
+            self.slug = _unique_slug(Dissertation, base)
+        super().save(*args, **kwargs)
+
+
+# ─── Conferences ──────────────────────────────────────────────────────────────
+class Conference(models.Model):
+    title            = models.CharField("Nomi", max_length=300)
+    slug             = models.SlugField("Slug", unique=True, blank=True)
+    description      = models.TextField("Tavsif", blank=True)
+    start_date       = models.DateTimeField("Boshlanish sanasi")
+    end_date         = models.DateTimeField("Tugash sanasi", null=True, blank=True)
+    location         = models.CharField("Joyi", max_length=200, blank=True)
+    poster_image     = models.ImageField("Poster rasm", upload_to="conferences/posters/", blank=True, null=True)
+    cover_image      = models.ImageField("Muqova rasm", upload_to="conferences/covers/", blank=True, null=True)
+    pdf_file         = models.FileField("Dastur (PDF)", upload_to="conferences/programs/", blank=True, null=True)
+    registration_url = models.URLField("Roʻyxatdan oʻtish havola", blank=True)
+    is_active        = models.BooleanField("Faol", default=True)
+    views            = models.PositiveIntegerField("Ko'rishlar", default=0)
+    created_at       = models.DateTimeField("Yaratilgan", auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Konferensiya"
+        verbose_name_plural = "Konferensiyalar"
+        ordering = ["-start_date"]
+
+    def __str__(self): return self.title
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = _unique_slug(Conference, slugify(self.title) or "conference")
+        super().save(*args, **kwargs)
+
+
+# ─── Contests ─────────────────────────────────────────────────────────────────
+class Contest(models.Model):
+    title       = models.CharField("Nomi", max_length=300)
+    slug        = models.SlugField("Slug", unique=True, blank=True)
+    description = models.TextField("Tavsif", blank=True)
+    deadline    = models.DateTimeField("Muddati", null=True, blank=True)
+    cover_image = models.ImageField("Muqova rasm", upload_to="contests/", blank=True, null=True)
+    pdf_file    = models.FileField("PDF (shartlar)", upload_to="contests/files/", blank=True, null=True)
+    is_active   = models.BooleanField("Faol", default=True)
+    views       = models.PositiveIntegerField("Ko'rishlar", default=0)
+    created_at  = models.DateTimeField("Yaratilgan", auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Tanlov"
+        verbose_name_plural = "Tanlovlar"
+        ordering = ["-deadline", "-created_at"]
+
+    def __str__(self): return self.title
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = _unique_slug(Contest, slugify(self.title) or "contest")
+        super().save(*args, **kwargs)
+
+
+# ─── Video Lessons ────────────────────────────────────────────────────────────
+class VideoLesson(models.Model):
+    title       = models.CharField("Nomi", max_length=300)
+    slug        = models.SlugField("Slug", unique=True, blank=True)
+    description = models.TextField("Tavsif", blank=True)
+    youtube_url = models.URLField("YouTube havola", blank=True)
+    cover_image = models.ImageField("Thumbnail", upload_to="videos/", blank=True, null=True)
+    faculty     = models.ForeignKey(Faculty, on_delete=models.SET_NULL, null=True, blank=True,
+                                    related_name="videos")
+    duration    = models.CharField("Davomiyligi", max_length=20, blank=True)
+    is_active   = models.BooleanField("Faol", default=True)
+    views       = models.PositiveIntegerField("Ko'rishlar", default=0)
+    created_at  = models.DateTimeField("Yaratilgan", auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Video dars"
+        verbose_name_plural = "Video darslar"
+        ordering = ["-created_at"]
+
+    def __str__(self): return self.title
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = _unique_slug(VideoLesson, slugify(self.title) or "video")
+        super().save(*args, **kwargs)
+
+
+# ─── Talented Students ────────────────────────────────────────────────────────
+class TalentedStudent(models.Model):
+    full_name   = models.CharField("F.I.O.", max_length=200)
+    slug        = models.SlugField("Slug", unique=True, blank=True)
+    faculty     = models.ForeignKey(Faculty, on_delete=models.SET_NULL, null=True, blank=True,
+                                    related_name="talented_students")
+    achievement = models.CharField("Yutuq/Unvon", max_length=300)
+    year        = models.PositiveIntegerField("Yil", default=2025)
+    photo       = models.ImageField("Foto", upload_to="talented/", blank=True, null=True)
+    description = models.TextField("Tavsif", blank=True)
+    is_active   = models.BooleanField("Faol", default=True)
+    created_at  = models.DateTimeField("Yaratilgan", auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Iqtidorli talaba"
+        verbose_name_plural = "Iqtidorli talabalar"
+        ordering = ["-year", "full_name"]
+
+    def __str__(self): return f"{self.full_name} — {self.achievement}"
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = _unique_slug(TalentedStudent, slugify(self.full_name) or "student")
+        super().save(*args, **kwargs)
+
+
+# ─── Journal Issues ───────────────────────────────────────────────────────────
+class JournalIssue(models.Model):
+    title       = models.CharField("Son nomi", max_length=300)
+    slug        = models.SlugField("Slug", unique=True, blank=True)
+    year        = models.PositiveIntegerField("Yil")
+    issue_number= models.PositiveIntegerField("Son raqami")
+    cover_image = models.ImageField("Muqova rasm", upload_to="journal/covers/", blank=True, null=True)
+    pdf_file    = models.FileField("PDF fayl", upload_to="journal/files/", blank=True, null=True)
+    description = models.TextField("Tavsif", blank=True)
+    is_active   = models.BooleanField("Faol", default=True)
+    created_at  = models.DateTimeField("Yaratilgan", auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Ilmiy jurnal soni"
+        verbose_name_plural = "Ilmiy jurnal sonlari"
+        ordering = ["-year", "-issue_number"]
+
+    def __str__(self): return f"{self.year}-yil, {self.issue_number}-son"
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = _unique_slug(JournalIssue, f"{self.year}-{self.issue_number}-son")
+        super().save(*args, **kwargs)
+
+
+# ─── Schedule Files ───────────────────────────────────────────────────────────
+class ScheduleFile(models.Model):
+    SEM = [(1, "1-semestr"), (2, "2-semestr")]
+    title         = models.CharField("Nomi", max_length=300)
+    slug          = models.SlugField("Slug", unique=True, blank=True)
+    faculty       = models.ForeignKey(Faculty, on_delete=models.SET_NULL, null=True, blank=True,
+                                      related_name="schedules")
+    academic_year = models.CharField("O'quv yili", max_length=20, default="2025-2026")
+    semester      = models.PositiveSmallIntegerField("Semestr", choices=SEM, default=1)
+    file          = models.FileField("Fayl (PDF/Excel)", upload_to="schedules/")
+    is_active     = models.BooleanField("Faol", default=True)
+    created_at    = models.DateTimeField("Yaratilgan", auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Dars jadvali"
+        verbose_name_plural = "Dars jadvallari"
+        ordering = ["-academic_year", "-semester"]
+
+    def __str__(self): return self.title
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = _unique_slug(ScheduleFile, slugify(self.title) or "schedule")
+        super().save(*args, **kwargs)
+
+
+# ─── Library Resources ────────────────────────────────────────────────────────
+class LibraryResource(models.Model):
+    RTYPE = [('book', 'Kitob'), ('article', 'Maqola'),
+             ('manual', "Qo'llanma"), ('dissertation', 'Dissertatsiya'), ('other', 'Boshqa')]
+    title         = models.CharField("Nomi", max_length=300)
+    slug          = models.SlugField("Slug", unique=True, blank=True)
+    authors       = models.CharField("Mualliflar", max_length=400, blank=True)
+    description   = models.TextField("Tavsif", blank=True)
+    cover_image   = models.ImageField("Muqova rasm", upload_to="library/covers/", blank=True, null=True)
+    file          = models.FileField("PDF fayl", upload_to="library/files/", blank=True, null=True)
+    external_url  = models.URLField("Tashqi havola", blank=True)
+    resource_type = models.CharField("Turi", max_length=20, choices=RTYPE, default='book')
+    is_active     = models.BooleanField("Faol", default=True)
+    views         = models.PositiveIntegerField("Ko'rishlar", default=0)
+    created_at    = models.DateTimeField("Yaratilgan", auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Kutubxona resursi"
+        verbose_name_plural = "Elektron kutubxona"
+        ordering = ["-created_at"]
+
+    def __str__(self): return self.title
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = _unique_slug(LibraryResource, slugify(self.title) or "resource")
+        super().save(*args, **kwargs)
+
+
 # ─── Contact Message ──────────────────────────────────────────────────────────
 class ContactMessage(models.Model):
     STATUS_CHOICES = [

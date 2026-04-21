@@ -91,10 +91,10 @@
         <a href="#">Ilm-fan <span class="caret">▾</span></a>
         <div class="dropdown">
           <a href="{% url 'static_page' 'ilmiy-faoliyat' %}">Ilmiy faoliyat</a>
-          <a href="{% url 'static_page' 'ilmiy-maqolalar' %}">Ilmiy maqolalar</a>
-          <a href="{% url 'static_page' 'dissertatsiyalar' %}">Dissertatsiyalar</a>
-          <a href="{% url 'static_page' 'ilmiy-jurnal' %}">Ilmiy jurnal</a>
-          <a href="{% url 'static_page' 'konferensiyalar' %}">Konferensiyalar</a>
+          <a href="{% url 'articles_list' %}">Ilmiy maqolalar</a>
+          <a href="{% url 'dissertations_list' %}">Dissertatsiyalar</a>
+          <a href="{% url 'journal_list' %}">Ilmiy jurnal</a>
+          <a href="{% url 'conferences_list' %}">Konferensiyalar</a>
         </div>
       </li>
 
@@ -103,12 +103,12 @@
         <a href="#">Talabalarga <span class="caret">▾</span></a>
         <div class="dropdown">
           <a href="https://hemis.iiiu.uz/" target="_blank" rel="noopener">Elektron Taʼlim Tizimi</a>
-          <a href="{% url 'static_page' 'dars-jadvali' %}">Dars Jadvali</a>
-          <a href="{% url 'static_page' 'iqtidorli-talabalar' %}">Iqtidorli Talabalar</a>
-          <a href="{% url 'static_page' 'tanlovlar' %}">Tanlovlar</a>
-          <a href="{% url 'static_page' 'elektron-kutubxona' %}">Elektron Kutubxona</a>
+          <a href="{% url 'schedule_list' %}">Dars Jadvali</a>
+          <a href="{% url 'talented_students' %}">Iqtidorli Talabalar</a>
+          <a href="{% url 'contests_list' %}">Tanlovlar</a>
+          <a href="{% url 'library_list' %}">Elektron Kutubxona</a>
           <a href="{% url 'static_page' 'sorovnoma' %}">Talabalar Oʻrtasida Soʻrovnoma</a>
-          <a href="{% url 'static_page' 'video-darslar' %}">Video Darslar</a>
+          <a href="{% url 'video_lessons_list' %}">Video Darslar</a>
         </div>
       </li>
 
