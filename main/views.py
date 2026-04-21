@@ -128,6 +128,13 @@ def departments(request):
     return render(request, "main/departments.html", ctx)
 
 
+def department_detail(request, slug):
+    department = get_object_or_404(Department, slug=slug, is_active=True)
+    teachers = department.teachers.filter(is_active=True)
+    ctx = {"department": department, "teachers": teachers}
+    return render(request, "main/department_detail.html", ctx)
+
+
 def centers(request):
     ctx = {"centers": Center.objects.filter(is_active=True)}
     return render(request, "main/centers.html", ctx)

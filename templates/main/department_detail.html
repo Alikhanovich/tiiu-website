@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ department.name }} — {{ settings.site_name }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="{% url 'index' %}">Bosh sahifa</a><span>/</span>
+      <a href="{% url 'departments' %}">Kafedralar</a><span>/</span>
+      <span>{{ department.name }}</span>
+    </div>
+    <h1 class="page-title"><span>{{ department.name }}</span></h1>
+    {% if department.head %}
+    <p class="page-sub">Mudiri: {{ department.head }}</p>
+    {% endif %}
+  </div>
+</div>
+
+<section style="padding:90px 0;background:var(--bg)">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-vis reveal-l">
+        <div class="about-img">
+          {% if department.image %}
+            <img src="{{ department.image.url }}" alt="{{ department.name }}"
+                 onerror="this.parentElement.style.background='linear-gradient(135deg,#0d1f4a,#1a3a7a)';this.style.display='none'"/>
+          {% else %}
+            <div style="width:100%;height:100%;background:linear-gradient(135deg,#0d1f4a,#1a3a7a);display:flex;align-items:center;justify-content:center;font-size:5rem;border-radius:var(--rl)">🎓</div>
+          {% endif %}
+        </div>
+        {% with tc=department.teachers.count %}
+        {% if tc %}
+        <div class="ab-badge glass ab1"><div class="abi">👨‍🏫</div><div class="abv">{{ tc }} ta</div><div class="abl">Oʻqituvchilar</div></div>
+        {% endif %}
+        {% endwith %}
+      </div>
+      <div class="reveal-r">
+        <div class="tag"><span class="dot"></span>Kafedra</div>
+        <h2 class="sec-title"><span>{{ department.name }}</span></h2>
+        <p class="sec-sub">{{ department.description }}</p>
+        <div class="about-features" style="margin-top:24px">
+          {% if department.head %}
+          <div class="af">
+            <div class="af-ic" style="background:rgba(59,130,246,.15)">👨‍💼</div>
+            <div><div class="af-title">Mudir</div><div class="af-sub">{{ department.head }}</div></div>
+          </div>
+          {% endif %}
+          {% if department.faculty %}
+          <div class="af">
+            <div class="af-ic" style="background:rgba(139,92,246,.15)">{{ department.faculty.icon }}</div>
+            <div><div class="af-title">Fakultet (Yo'nalish)</div><div class="af-sub">{{ department.faculty.name }}</div></div>
+          </div>
+          {% endif %}
+        </div>
+        <div class="about-btns">
+          <a href="{% url 'departments' %}" class="btn-outline">← Barcha kafedralar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% if teachers %}
+<section style="padding:80px 0;background:var(--bg2)">
+  <div class="container">
+    <div class="sec-header reveal">
+      <div class="tag"><span class="dot"></span>Oʻqituvchilar</div>
+      <h2 class="sec-title">Bu <span>kafedra</span> oʻqituvchilari</h2>
+    </div>
+    <div class="teachers-grid">
+      {% for t in teachers %}
+      <div class="teacher-card">
+        <div class="tc-photo">
+          {% if t.photo %}
+            <img src="{{ t.photo.url }}" alt="{{ t.full_name }}"
+                 onerror="this.parentElement.innerHTML='<div class=tc-placeholder>👤</div>'"/>
+          {% else %}
+            <div class="tc-placeholder">👤</div>
+          {% endif %}
+        </div>
+        <div class="tc-body">
+          <div class="tc-name">{{ t.full_name }}</div>
+          <div class="tc-pos">{{ t.position|default:"" }}</div>
+          {% if t.experience %}
+          <div style="margin-top:8px;font-size:.72rem;color:var(--text3)">
+            🏅 {{ t.experience }} yil tajriba
+          </div>
+          {% endif %}
+          {% if t.email or t.linkedin %}
+          <div style="display:flex;gap:8px;justify-content:center;margin-top:12px">
+            {% if t.email %}
+            <a href="mailto:{{ t.email }}" class="soc-btn" style="width:34px;height:34px;font-size:.75rem">✉</a>
+            {% endif %}
+            {% if t.linkedin %}
+            <a href="{{ t.linkedin }}" target="_blank" class="soc-btn" style="width:34px;height:34px;font-size:.75rem">in</a>
+            {% endif %}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endblock %}
