@@ -149,13 +149,22 @@ document.querySelectorAll('.drop-split').forEach(dropdown => {
 /* ── Mega dropdown side panel hover logic ─────────────────────── */
 document.querySelectorAll('.drop-mega').forEach(dropdown => {
   const headLink = dropdown.querySelector('.mega-head-link');
+  const sideLinks = dropdown.querySelectorAll('.mega-side a:not(.mega-head-link)');
   if (headLink) {
     headLink.addEventListener('mouseenter', function () {
       dropdown.classList.add('panel-open');
+      headLink.classList.add('sub-active');
     });
   }
+  sideLinks.forEach(link => {
+    link.addEventListener('mouseenter', function () {
+      dropdown.classList.remove('panel-open');
+      if (headLink) headLink.classList.remove('sub-active');
+    });
+  });
   dropdown.addEventListener('mouseleave', function () {
     this.classList.remove('panel-open');
+    if (headLink) headLink.classList.remove('sub-active');
   });
 });
 
@@ -351,14 +360,34 @@ document.querySelectorAll('.why-card, .news-card, .cf-wrap, .teacher-card').forE
 
   let mx=0,my=0;
   document.addEventListener('mousemove',e=>{mx=(e.clientX/innerWidth-.5)*2;my=(e.clientY/innerHeight-.5)*2;});
+  let scrollT = 0;
+  let scrollYNorm = 0;
+  function updateScrollProgress() {
+    const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    scrollYNorm = Math.min(1, Math.max(0, window.scrollY / max));
+  }
+  updateScrollProgress();
+  window.addEventListener('scroll', () => {
+    updateScrollProgress();
+  }, { passive: true });
 
   const clock=new THREE.Clock();
   const pts=scene.children.find(c=>c instanceof THREE.Points);
   (function loop(){
     requestAnimationFrame(loop);
     const t=clock.getElapsedTime();
+    // Scroll progress'ni smooth qilib modelga uzatamiz.
+    scrollT += (scrollYNorm - scrollT) * 0.06;
+    const scrollRot = scrollT * Math.PI * 1.25;
+    const scrollLift = scrollT * 1.6;
     G.rotation.y=Math.sin(t*.13)*.1+mx*.055;
+    G.rotation.y += scrollRot;
+    G.rotation.x = Math.sin(t * .09) * .03 + scrollT * .12;
+    G.position.y = -4.5 + scrollLift;
     r1.rotation.z=t*.17; r2.rotation.y=t*.12; r3.rotation.x=t*.08;
+    r1.position.y = 2 + scrollT * .7;
+    r2.position.y = 4.5 + scrollT * .55;
+    r3.position.y = scrollT * .4;
     orbs.forEach(o=>{
       const d=o.userData; d.a+=d.s*.01;
       o.position.set(Math.cos(d.a)*d.r,d.y+Math.sin(t+d.a)*.55,Math.sin(d.a)*d.r);
@@ -367,8 +396,8 @@ document.querySelectorAll('.why-card, .news-card, .cf-wrap, .teacher-card').forE
     if(pts){pts.rotation.y=t*.022;pts.rotation.x=t*.007;}
     bL.position.set(Math.cos(t*.42)*9,4,Math.sin(t*.42)*9);
     pL.position.set(Math.cos(t*.33+Math.PI)*8,3,Math.sin(t*.33+Math.PI)*8);
-    camera.position.y=4+Math.sin(t*.27)*.3-my*.28;
-    camera.position.x=mx*1.3;
+    camera.position.y=4+Math.sin(t*.27)*.3-my*.28 + scrollT * .5;
+    camera.position.x=mx*1.3 + scrollT * .35;
     camera.lookAt(0,1,0);
     renderer.render(scene,camera);
   })();
