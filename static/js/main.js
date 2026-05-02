@@ -127,6 +127,7 @@ document.querySelectorAll('.has-sub[data-panel]').forEach(link => {
     dropdown.querySelectorAll('.has-sub').forEach(l => l.classList.remove('sub-active'));
     const panel = document.getElementById(this.dataset.panel);
     if (panel) panel.classList.add('visible');
+    dropdown.classList.add('panel-open');
     this.classList.add('sub-active');
   });
 });
@@ -136,6 +137,25 @@ document.querySelectorAll('.split-col a:not(.has-sub)').forEach(link => {
     if (!dropdown) return;
     dropdown.querySelectorAll('.split-panel').forEach(p => p.classList.remove('visible'));
     dropdown.querySelectorAll('.has-sub').forEach(l => l.classList.remove('sub-active'));
+    dropdown.classList.remove('panel-open');
+  });
+});
+document.querySelectorAll('.drop-split').forEach(dropdown => {
+  dropdown.addEventListener('mouseleave', function () {
+    this.classList.remove('panel-open');
+  });
+});
+
+/* ── Mega dropdown side panel hover logic ─────────────────────── */
+document.querySelectorAll('.drop-mega').forEach(dropdown => {
+  const headLink = dropdown.querySelector('.mega-head-link');
+  if (headLink) {
+    headLink.addEventListener('mouseenter', function () {
+      dropdown.classList.add('panel-open');
+    });
+  }
+  dropdown.addEventListener('mouseleave', function () {
+    this.classList.remove('panel-open');
   });
 });
 
