@@ -625,14 +625,30 @@ async function renderSettings(el) {
         </div>
       </div>
       <div class="form-card">
-        <h3>Bosh sahifa</h3>
+        <h3>Universitet haqida (About)</h3>
+        <div class="form-grid">
+          ${si('about_badge', 'Haqida belgisi (tag)', d.about_badge)}
+          ${si('about_title', 'Haqida sarlavha',      d.about_title)}
+        </div>
+        <div class="field" style="margin-top:16px">
+          <label>Haqida matn (1-paragraf)</label>
+          <textarea name="about_text" rows="4">${esc(d.about_text || '')}</textarea>
+        </div>
+        <div class="field" style="margin-top:12px">
+          <label>Haqida matn (2-paragraf)</label>
+          <textarea name="about_text_2" rows="4">${esc(d.about_text_2 || '')}</textarea>
+        </div>
+        <div class="field" style="margin-top:12px">
+          <label>Haqida rasm</label>
+          ${d.about_image ? `<img src="${d.about_image}" class="img-thumb-preview" id="about-image-preview" style="max-height:120px;width:auto">` : `<div id="about-image-preview" class="img-empty-preview">Rasm yo'q</div>`}
+          <input type="file" name="about_image" accept="image/*" style="margin-top:6px" onchange="previewImg(this,'about-image-preview')">
+        </div>
+      </div>
+      <div class="form-card">
+        <h3>Bosh sahifa (Hero)</h3>
         <div class="form-grid">
           ${si('hero_title',    'Hero sarlavha',         d.hero_title)}
           ${si('hero_subtitle', 'Hero kichik sarlavha',  d.hero_subtitle)}
-        </div>
-        <div class="field" style="margin-top:16px">
-          <label>Haqida matn</label>
-          <textarea name="about_text" rows="5">${esc(d.about_text || '')}</textarea>
         </div>
       </div>
       <div class="form-card">

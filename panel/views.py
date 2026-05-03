@@ -99,7 +99,10 @@ def serialize_settings(o):
         'telegram': o.telegram, 'youtube': o.youtube,
         'founded_year': o.founded_year, 'student_count': o.student_count,
         'teacher_count': o.teacher_count, 'direction_count': o.direction_count,
-        'about_text': o.about_text, 'hero_title': o.hero_title, 'hero_subtitle': o.hero_subtitle,
+        'about_text': o.about_text, 'about_text_2': o.about_text_2,
+        'about_badge': o.about_badge, 'about_title': o.about_title,
+        'about_image': img(o, 'about_image'),
+        'hero_title': o.hero_title, 'hero_subtitle': o.hero_subtitle,
     }
 
 
@@ -111,10 +114,11 @@ def api_settings(request):
         fields = ['site_name','site_name_full','address','phone1','phone2','email',
                   'work_hours','facebook','instagram','telegram','youtube',
                   'founded_year','student_count','teacher_count','direction_count',
-                  'about_text','hero_title','hero_subtitle']
+                  'about_badge','about_title','about_text','about_text_2',
+                  'hero_title','hero_subtitle']
         for f in fields:
             if f in d: setattr(obj, f, d[f])
-        for imgf in ['logo', 'favicon']:
+        for imgf in ['logo', 'favicon', 'about_image']:
             if imgf in request.FILES: setattr(obj, imgf, request.FILES[imgf])
         obj.save()
         return JsonResponse({'success': True, 'data': serialize_settings(obj)})

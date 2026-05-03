@@ -26,7 +26,7 @@ class SiteSettingsAdmin(admin.ModelAdmin):
         ("Ijtimoiy tarmoqlar",{"fields": ("facebook", "instagram", "telegram", "youtube")}),
         ("Statistika",        {"fields": ("founded_year", "student_count", "teacher_count", "direction_count")}),
         ("Hero bo'limi",      {"fields": ("hero_title", "hero_subtitle")}),
-        ("Haqida",            {"fields": ("about_text",)}),
+        ("Haqida",            {"fields": ("about_badge", "about_title", "about_text", "about_text_2", "about_image")}),
     )
 
     def has_add_permission(self, request):

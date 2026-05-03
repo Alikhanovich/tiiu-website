@@ -24,7 +24,15 @@ class SiteSettings(models.Model):
     student_count   = models.PositiveIntegerField("Talabalar soni", default=1200)
     teacher_count   = models.PositiveIntegerField("O'qituvchilar soni", default=50)
     direction_count = models.PositiveIntegerField("Yo'nalishlar soni", default=9)
-    about_text      = models.TextField("Universitet haqida (qisqa)", blank=True)
+    
+    about_badge     = models.CharField("Haqida belgisi (tag)", max_length=100, default="Missiya va Maqsad")
+    about_title     = models.CharField("Haqida sarlavha", max_length=300, 
+                                       default="Bilim orqali kelajakni bunyod etamiz")
+    about_text      = models.TextField("Universitet haqida (1-paragraf)", blank=True,
+                                       default="Toshkent ijtimoiy innovatsiya universiteti ilgʻor ta'lim texnologiyalariga asoslangan holda ijtimoiy soha va iqtisodiyot tarmoqlari uchun zamonaviy bilim va koʻnikmalarga ega, mustaqil fikrlaydigani malakali kadrlarni yetishtirib beruvchi nodavlat oliy ta'lim tashkiloti hisoblanadi.")
+    about_text_2    = models.TextField("Universitet haqida (2-paragraf)", blank=True,
+                                       default="TIIU talaba-yoshlarga yuqori sifatli ta'lim xizmatlarini taklif etadi. Universitet mamlakatimizning yetakchi oliy ta'lim tashkiloti sifatida ijtimoiy-iqtisodiy sohadagi oʻzgarishlarga innovatsion yechimlar bilan hissa qoʻshishni maqsad qilib qoʻygan.")
+    about_image     = models.ImageField("Haqida rasm", upload_to="settings/", blank=True, null=True)
     hero_title      = models.CharField("Hero sarlavha", max_length=200,
                                        default="Kelajakni bugun shakllantir")
     hero_subtitle   = models.TextField("Hero izoh", blank=True,

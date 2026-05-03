@@ -3,6 +3,72 @@
 
 {% block title %}{{ settings.site_name_full }} — Bosh sahifa{% endblock %}
 
+{% block extra_css %}
+<style>
+  /* Asosiy sectionlar to'liq shaffof bo'ladi (Bosh joylarda 3D to'liq ko'rinishi uchun) */
+  #stats-bar, #about, #faculties, #why, #news, #contact {
+    background: transparent !important;
+    position: relative;
+    z-index: 1;
+    border: none !important;
+  }
+  
+  /* Faqat yozuv va rasmlar orqasiga Glassmorphism qo'shamiz */
+  
+  /* 1. Sarlavhalar orqasi (sec-header) */
+  .sec-header {
+    background: rgba(15, 15, 15, 0.55);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 25px 40px;
+    border-radius: 24px;
+    max-width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  /* 2. About qismidagi o'ng matn bloki */
+  #about .reveal-r {
+    background: rgba(15, 15, 15, 0.55);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 40px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  /* 3. Contact ma'lumotlar foni */
+  #contact .reveal-l {
+    background: rgba(15, 15, 15, 0.55);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 40px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  /* 4. Kartalar va kichik bloklar */
+  .why-card, .news-card, .stat-card, .cf-wrap, .about-features .af, .fac-card {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    background: rgba(20, 20, 20, 0.45) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  footer {
+    position: relative;
+    z-index: 1;
+    background: rgba(10, 10, 10, 0.85) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+  
+  /* Hero sectionni overflow qoidasini olib tashlaymiz */
+  #hero { overflow: visible !important; }
+</style>
+{% endblock %}
+
 {% block content %}
 
 <!-- ── HERO ──────────────────────────────────────────────────── -->
@@ -94,7 +160,7 @@
     <div class="about-grid">
       <div class="about-vis reveal-l">
         <div class="about-img">
-          <img src="{% static 'img/campus.jpg' %}" alt="{{ settings.site_name }} Kampus"
+          <img src="{% if settings.about_image %}{{ settings.about_image.url }}{% else %}{% static 'img/campus.jpg' %}{% endif %}" alt="{{ settings.site_name }} Kampus"
                onerror="this.parentElement.style.background='linear-gradient(135deg,#0d1f4a,#1a3a7a)';this.style.display='none'"/>
         </div>
         <div class="ab-badge glass ab1 reveal-s d2">
@@ -110,10 +176,10 @@
       </div>
 
       <div class="reveal-r">
-        <div class="tag"><span class="dot"></span>Universitet haqida</div>
-        <h2 class="sec-title">Ilgʻor ta'lim bilan <span>kelajakni</span> yarating</h2>
-        <p class="sec-sub">{{ settings.about_text|default:"Toshkent ijtimoiy innovatsiya universiteti ilgʻor ta'lim texnologiyalariga asoslangan holda ijtimoiy soha va iqtisodiyot tarmoqlari uchun zamonaviy bilim va koʻnikmalarga ega, mustaqil fikrlaydigan malakali kadrlarni yetishtirib beruvchi nodavlat oliy ta'lim tashkiloti hisoblanadi." }}</p>
-        <p class="sec-sub" style="margin-top:10px">TIIU talaba-yoshlarga yuqori sifatli ta'lim xizmatlarini taklif etadi. Universitet mamlakatimizning yetakchi oliy ta'lim tashkiloti sifatida ijtimoiy-iqtisodiy sohadagi oʻzgarishlarga innovatsion yechimlar bilan hissa qoʻshishni maqsad qilib qoʻygan.</p>
+        <div class="tag"><span class="dot"></span>{{ settings.about_badge|default:"Universitet haqida" }}</div>
+        <h2 class="sec-title">{{ settings.about_title|safe }}</h2>
+        <p class="sec-sub">{{ settings.about_text|linebreaksbr }}</p>
+        <p class="sec-sub" style="margin-top:10px">{{ settings.about_text_2|linebreaksbr }}</p>
         <div class="about-features">
           <div class="af reveal d1">
             <div class="af-ic" style="background:rgba(59,130,246,.15)">🔬</div>
