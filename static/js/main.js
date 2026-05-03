@@ -457,14 +457,16 @@ document.addEventListener('DOMContentLoaded', () => {
   // If autoplay blocked, try playing on the first user interaction
   const initAudioOnInteraction = () => {
     if (!isPlaying) playAudio();
-    document.removeEventListener('click', initAudioOnInteraction);
-    document.removeEventListener('scroll', initAudioOnInteraction);
-    document.removeEventListener('keydown', initAudioOnInteraction);
+    // Barcha eventlarni tozalash (faqat bir marta ishlashi uchun)
+    ['click', 'scroll', 'keydown', 'touchstart', 'touchend', 'mousemove', 'wheel'].forEach(evt => {
+      document.removeEventListener(evt, initAudioOnInteraction);
+    });
   };
   
-  document.addEventListener('click', initAudioOnInteraction);
-  document.addEventListener('scroll', initAudioOnInteraction, { passive: true });
-  document.addEventListener('keydown', initAudioOnInteraction);
+  // Barcha turdagi harakatlarni kuzatish
+  ['click', 'scroll', 'keydown', 'touchstart', 'touchend', 'mousemove', 'wheel'].forEach(evt => {
+    document.addEventListener(evt, initAudioOnInteraction, { passive: true });
+  });
 
   // Manual toggle button
   btn.addEventListener('click', (e) => {

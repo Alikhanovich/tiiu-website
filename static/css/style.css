@@ -775,6 +775,7 @@ footer::before {
 
 /* ── BGM Toggle Button ────────────────────────────────────────── */
 .bgm-btn {
+  display: none !important; /* User requested to remove the button and just use autoplay */
   position: fixed;
   bottom: 24px;
   right: 24px;
@@ -786,7 +787,6 @@ footer::before {
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(18, 88, 117, 0.5);
   color: #fff;
-  display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
