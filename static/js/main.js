@@ -402,3 +402,73 @@ document.querySelectorAll('.why-card, .news-card, .cf-wrap, .teacher-card').forE
     renderer.render(scene,camera);
   })();
 })();
+
+/* ════════════════════════════════════════════════════════════════
+   BACKGROUND MUSIC (BGM) LOGIC
+   ════════════════════════════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', () => {
+  const bgm = document.getElementById('bgm');
+  const btn = document.getElementById('bgm-toggle');
+  if (!bgm || !btn) return;
+
+  const iconPlay = btn.querySelector('.icon-play');
+  const iconPause = btn.querySelector('.icon-pause');
+  
+  let isPlaying = false;
+
+  function updateBtnState() {
+    if (isPlaying) {
+      btn.classList.add('playing');
+      iconPlay.style.display = 'none';
+      iconPause.style.display = 'block';
+    } else {
+      btn.classList.remove('playing');
+      iconPlay.style.display = 'block';
+      iconPause.style.display = 'none';
+    }
+  }
+
+  function playAudio() {
+    bgm.volume = 0.4; // So it's not too loud
+    const playPromise = bgm.play();
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
+        isPlaying = true;
+        updateBtnState();
+      }).catch(err => {
+        console.log('Autoplay prevented by browser:', err);
+      });
+    }
+  }
+
+  function toggleAudio() {
+    if (isPlaying) {
+      bgm.pause();
+      isPlaying = false;
+    } else {
+      playAudio();
+    }
+    updateBtnState();
+  }
+
+  // Attempt autoplay immediately
+  playAudio();
+
+  // If autoplay blocked, try playing on the first user interaction
+  const initAudioOnInteraction = () => {
+    if (!isPlaying) playAudio();
+    document.removeEventListener('click', initAudioOnInteraction);
+    document.removeEventListener('scroll', initAudioOnInteraction);
+    document.removeEventListener('keydown', initAudioOnInteraction);
+  };
+  
+  document.addEventListener('click', initAudioOnInteraction);
+  document.addEventListener('scroll', initAudioOnInteraction, { passive: true });
+  document.addEventListener('keydown', initAudioOnInteraction);
+
+  // Manual toggle button
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation(); // prevent triggering the interaction listener again
+    toggleAudio();
+  });
+});

@@ -216,6 +216,13 @@
   </div>
 </footer>
 
+<!-- BGM -->
+<audio id="bgm" src="{% static 'Ziyo_maskan.mp3' %}" loop preload="auto"></audio>
+<button id="bgm-toggle" class="bgm-btn" aria-label="Toggle Background Music">
+  <svg class="icon-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block; width:20px; height:20px;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+  <svg class="icon-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none; width:20px; height:20px;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+</button>
+
 <!-- Scripts -->
 <script src="{% static 'js/three.min.js' %}"></script>
 <script src="{% static 'js/gsap.min.js' %}"></script>

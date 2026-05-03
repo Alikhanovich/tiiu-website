@@ -772,3 +772,39 @@ footer::before {
 @media (max-width: 480px) {
   .teachers-grid { grid-template-columns: 1fr; }
 }
+
+/* ── BGM Toggle Button ────────────────────────────────────────── */
+.bgm-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(18, 88, 117, 0.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(18, 88, 117, 0.5);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+.bgm-btn:hover {
+  background: rgba(18, 88, 117, 0.5);
+  transform: scale(1.08);
+}
+.bgm-btn.playing {
+  background: rgba(0, 105, 51, 0.25);
+  border-color: rgba(0, 105, 51, 0.5);
+}
+.bgm-btn.playing:hover {
+  background: rgba(0, 105, 51, 0.5);
+}
+.bgm-btn .icon-play, .bgm-btn .icon-pause {
+  transition: opacity 0.2s;
+}
