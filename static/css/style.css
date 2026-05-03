@@ -148,8 +148,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 .nav-logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
 .nav-logo img { height: 48px; }
-.logo-t1 { font-family: 'Space Grotesk', sans-serif; font-size: .9rem; font-weight: 800; color: #fff; line-height: 1.2; max-width: 150px; }
-.logo-t2 { font-size: .57rem; color: var(--text3); letter-spacing: .04em; max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.logo-t1 { font-family: 'Space Grotesk', sans-serif; font-size: .9rem; font-weight: 800; color: #fff; line-height: 1.2; max-width: 300px; }
+.logo-t2 { font-size: .57rem; color: var(--text3); letter-spacing: .04em; max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 .nav-links { display: flex; align-items: center; list-style: none; }
 .nav-links > li { position: relative; }
