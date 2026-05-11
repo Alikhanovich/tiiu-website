@@ -718,6 +718,18 @@ section,
   z-index: 1;
 }
 
+/* ── Inner pages: glass only on content container, not full-width ─ */
+.page-header ~ section > .container {
+  background: rgba(10,12,10,0.62);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(0,105,51,.10);
+  border-radius: 20px;
+  padding: 40px 44px;
+  position: relative;
+  z-index: 1;
+}
+
 /* ── Page Header ──────────────────────────────────────────────── */
 .page-header {
   padding: calc(var(--nav-h) + 60px) 0 60px;
@@ -726,7 +738,7 @@ section,
 }
 .page-header .container {
   position: relative; z-index: 1;
-  background: rgba(12,14,12,0.60);
+  background: rgba(12,14,12,0.62);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   border: 1px solid rgba(0,105,51,.12);
@@ -788,6 +800,10 @@ section,
 }
 @media (max-width: 480px) {
   .teachers-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .page-header ~ section > .container { padding: 24px 20px; border-radius: 14px; }
+  .page-header .container { padding: 24px 20px; border-radius: 12px; }
 }
 
 
