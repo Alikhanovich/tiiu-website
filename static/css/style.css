@@ -721,20 +721,18 @@ section,
 /* ── Page Header ──────────────────────────────────────────────── */
 .page-header {
   padding: calc(var(--nav-h) + 60px) 0 60px;
-  background: rgba(12,14,12,0.60) !important;
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border-bottom: 1px solid rgba(0,105,51,.12);
+  background: transparent !important;
   position: relative; overflow: hidden; z-index: 1;
 }
-.page-header::after {
-  content: ''; position: absolute; inset: 0;
-  background-image: linear-gradient(rgba(0,105,51,.04) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(0,105,51,.04) 1px, transparent 1px);
-  background-size: 60px 60px;
-  pointer-events: none;
+.page-header .container {
+  position: relative; z-index: 1;
+  background: rgba(12,14,12,0.60);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(0,105,51,.12);
+  border-radius: 16px;
+  padding: 36px 40px;
 }
-.page-header .container { position: relative; z-index: 1; }
 .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: .78rem; color: var(--text3); margin-bottom: 16px; }
 .breadcrumb a { color: var(--blue); }
 .breadcrumb span { color: var(--text3); }
