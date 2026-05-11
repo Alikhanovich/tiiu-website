@@ -103,6 +103,8 @@ def serialize_settings(o):
         'about_badge': o.about_badge, 'about_title': o.about_title,
         'about_image': img(o, 'about_image'),
         'hero_title': o.hero_title, 'hero_subtitle': o.hero_subtitle,
+        'smtp_host': o.smtp_host, 'smtp_port': o.smtp_port,
+        'smtp_user': o.smtp_user, 'smtp_password': o.smtp_password,
     }
 
 
@@ -115,7 +117,8 @@ def api_settings(request):
                   'work_hours','facebook','instagram','telegram','youtube',
                   'founded_year','student_count','teacher_count','direction_count',
                   'about_badge','about_title','about_text','about_text_2',
-                  'hero_title','hero_subtitle']
+                  'hero_title','hero_subtitle',
+                  'smtp_host','smtp_port','smtp_user','smtp_password']
         for f in fields:
             if f in d: setattr(obj, f, d[f])
         for imgf in ['logo', 'favicon', 'about_image']:
@@ -633,17 +636,23 @@ def api_message_reply(request, pk):
     if not reply_text:
         return JsonResponse({'success':False,'error':'Javob matni bo\'sh'}, status=400)
     try:
-        from django.core.mail import send_mail
-        from django.conf import settings as cfg
-        if not cfg.EMAIL_HOST_USER:
-            return JsonResponse({'success':False,'error':'Email sozlanmagan (EMAIL_HOST_USER)'}, status=500)
-        send_mail(
-            subject='TIIU — Sizning murojatingizga javob',
-            message=f"Hurmatli {o.first_name} {o.last_name},\n\n{reply_text}\n\nHurmat bilan,\nTIIU - Toshkent Ijtimoiy Innovatsiya Universiteti",
-            from_email=cfg.DEFAULT_FROM_EMAIL,
-            recipient_list=[o.email],
-            fail_silently=False,
-        )
+        import smtplib
+        from email.mime.text import MIMEText
+        from email.mime.multipart import MIMEMultipart
+        s = SiteSettings.get()
+        if not s.smtp_user or not s.smtp_password:
+            return JsonResponse({'success':False,'error':'Email sozlanmagan. Panel → Sozlamalar → SMTP bo\'limini to\'ldiring'}, status=400)
+        msg = MIMEMultipart()
+        msg['From'] = s.smtp_user
+        msg['To'] = o.email
+        msg['Subject'] = 'TIIU — Sizning murojatingizga javob'
+        body = f"Hurmatli {o.first_name} {o.last_name},\n\n{reply_text}\n\nHurmat bilan,\nTIIU - Toshkent Ijtimoiy Innovatsiya Universiteti"
+        msg.attach(MIMEText(body, 'plain', 'utf-8'))
+        with smtplib.SMTP(s.smtp_host or 'smtp.gmail.com', int(s.smtp_port or 587)) as srv:
+            srv.ehlo()
+            srv.starttls()
+            srv.login(s.smtp_user, s.smtp_password)
+            srv.sendmail(s.smtp_user, [o.email], msg.as_string())
         o.status = 'answered'
         o.save()
         return JsonResponse({'success':True})

@@ -652,6 +652,16 @@ async function renderSettings(el) {
         </div>
       </div>
       <div class="form-card">
+        <h3>📧 Email (SMTP) sozlamalari</h3>
+        <p style="color:var(--text2);font-size:13px;margin-bottom:12px">Gmail ishlatilsa: <b>smtp.gmail.com</b>, port <b>587</b>. Parol uchun Gmail → App Password yarating.</p>
+        <div class="form-grid">
+          ${si('smtp_host', 'SMTP Host', d.smtp_host || 'smtp.gmail.com')}
+          ${si('smtp_port', 'SMTP Port', d.smtp_port || 587, 'number')}
+          ${si('smtp_user', 'SMTP Email (yuboruvchi)', d.smtp_user || '')}
+          ${si('smtp_password', 'SMTP Parol (App Password)', d.smtp_password || '', 'password')}
+        </div>
+      </div>
+      <div class="form-card">
         <h3>Logotip va Favicon</h3>
         <div class="form-grid">
           <div class="field">

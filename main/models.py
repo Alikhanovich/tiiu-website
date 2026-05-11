@@ -40,6 +40,12 @@ class SiteSettings(models.Model):
                                                "ilg'or ta'lim texnologiyalari asosida zamonaviy "
                                                "mutaxassislar tayyorlaydigan nodavlat oliy ta'lim muassasasi.")
 
+    # ── Email (SMTP) ──────────────────────────────────────────────
+    smtp_host     = models.CharField("SMTP Host", max_length=200, blank=True, default="smtp.gmail.com")
+    smtp_port     = models.PositiveIntegerField("SMTP Port", default=587)
+    smtp_user     = models.CharField("SMTP Email (yuboruvchi)", max_length=200, blank=True)
+    smtp_password = models.CharField("SMTP Parol (App Password)", max_length=200, blank=True)
+
     class Meta:
         verbose_name = "Sayt sozlamalari"
         verbose_name_plural = "Sayt sozlamalari"
