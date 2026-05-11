@@ -1339,7 +1339,7 @@ async function openMsgDetail(contentEl, id) {
   const modal = document.createElement('div');
   modal.className = 'modal-overlay';
   modal.innerHTML = `
-    <div class="modal-box modal-form" style="max-width:520px">
+    <div class="modal-box modal-form" style="max-width:560px">
       <div class="modal-hd">
         <span>Xabar #${m.id}</span>
         <button class="modal-x" id="md-x">✕</button>
@@ -1347,19 +1347,26 @@ async function openMsgDetail(contentEl, id) {
       <div style="padding:20px 22px">
         <div class="msg-meta">
           <span><b>Ism:</b> ${esc(m.first_name)} ${esc(m.last_name)}</span>
-          <span><b>Telefon:</b> ${esc(m.phone || '—')}</span>
-          <span><b>Email:</b> ${esc(m.email || '—')}</span>
+          <span><b>Telefon:</b> ${m.phone ? `<a href="tel:${m.phone}" style="color:var(--accent)">${esc(m.phone)}</a>` : '—'}</span>
+          <span><b>Email:</b> ${m.email ? `<a href="mailto:${m.email}" style="color:var(--accent)">${esc(m.email)}</a>` : '—'}</span>
           <span><b>Yo'nalish:</b> ${esc(m.direction || '—')}</span>
           <span><b>Sana:</b> ${esc(m.created_at || '—')}</span>
         </div>
-        <div class="msg-body">${esc(m.message || '')}</div>
+        ${m.message ? `<div class="msg-body">${esc(m.message)}</div>` : ''}
+        ${m.email ? `
+        <div style="margin-top:16px">
+          <label style="font-size:.78rem;font-weight:700;color:var(--text2);display:block;margin-bottom:6px">✏️ Javob matni</label>
+          <textarea id="md-reply" style="width:100%;padding:10px 12px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:inherit;font-size:.86rem;resize:vertical;min-height:90px;outline:none" placeholder="Javob yozing..."></textarea>
+        </div>` : ''}
       </div>
-      <div class="fm-actions">
+      <div class="fm-actions" style="flex-wrap:wrap;gap:8px">
         <select id="md-status">
           <option value="new" ${m.status==='new'?'selected':''}>Yangi</option>
           <option value="read" ${m.status==='read'?'selected':''}>O'qilgan</option>
           <option value="answered" ${m.status==='answered'?'selected':''}>Javob berilgan</option>
         </select>
+        ${m.email ? `<button class="btn-primary" id="md-email-btn" style="background:linear-gradient(135deg,#0369a1,#0284c7)">📧 Email yuborish</button>` : ''}
+        ${m.phone ? `<a href="tel:${m.phone}" class="btn-outline" id="md-call-btn">📞 Qo'ng'iroq</a>` : ''}
         <button class="btn-primary" id="md-save">Saqlash</button>
         <button class="btn-secondary" id="md-close">Yopish</button>
       </div>
@@ -1369,6 +1376,30 @@ async function openMsgDetail(contentEl, id) {
   document.getElementById('md-x').addEventListener('click', close);
   document.getElementById('md-close').addEventListener('click', close);
   modal.addEventListener('click', e => { if (e.target === modal) close(); });
+
+  if (m.email) {
+    document.getElementById('md-email-btn').addEventListener('click', async () => {
+      const reply = document.getElementById('md-reply')?.value.trim() || '';
+      const subject = encodeURIComponent('TIIU — Sizning murojatingizga javob');
+      const body = encodeURIComponent(reply
+        ? `Hurmatli ${m.first_name},\n\n${reply}\n\nHurmat bilan,\nTIIU`
+        : `Hurmatli ${m.first_name},\n\n`);
+      window.open(`mailto:${m.email}?subject=${subject}&body=${body}`, '_blank');
+      document.getElementById('md-status').value = 'answered';
+      await api(`/panel/api/messages/${id}/`, { method: 'POST', json: { status: 'answered' } });
+      updateMsgBadge();
+      toast('Email ilovasi ochildi');
+    });
+  }
+
+  if (m.phone) {
+    document.getElementById('md-call-btn').addEventListener('click', async () => {
+      document.getElementById('md-status').value = 'answered';
+      await api(`/panel/api/messages/${id}/`, { method: 'POST', json: { status: 'answered' } });
+      updateMsgBadge();
+    });
+  }
+
   document.getElementById('md-save').addEventListener('click', async () => {
     const status = document.getElementById('md-status').value;
     const r = await api(`/panel/api/messages/${id}/`, { method: 'POST', json: { status } });
