@@ -65,7 +65,42 @@
   }
   
   /* Hero sectionni overflow qoidasini olib tashlaymiz */
-  #hero { overflow: visible !important; }
+  #hero { overflow: hidden !important; position: relative; }
+
+  /* Slider */
+  .hs-bg {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+    opacity: 0; transition: opacity 1s ease; z-index: 0;
+  }
+  .hs-bg.active { opacity: 0.75; }
+  .hs-text { display: none; }
+  .hs-text.active { display: block; animation: hsFadeUp .6s ease both; }
+  @keyframes hsFadeUp {
+    from { opacity:0; transform:translateY(22px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+  .hs-controls {
+    position: absolute; bottom: 96px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; align-items: center; gap: 12px; z-index: 10;
+  }
+  .hs-btn {
+    width: 42px; height: 42px; border-radius: 50%;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.18);
+    color: #fff; font-size: 22px; line-height: 1;
+    cursor: pointer; backdrop-filter: blur(8px);
+    display: flex; align-items: center; justify-content: center;
+    transition: background .2s;
+  }
+  .hs-btn:hover { background: rgba(255,255,255,.22); }
+  .hs-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: rgba(255,255,255,.35);
+    cursor: pointer; transition: all .3s; display: inline-block;
+  }
+  .hs-dot.active { background: var(--accent, #00b050); width: 24px; border-radius: 4px; }
 </style>
 {% endblock %}
 
@@ -73,12 +108,34 @@
 
 <!-- ── HERO ──────────────────────────────────────────────────── -->
 <section id="hero">
+  {% for sl in sliders %}
+  <div class="hs-bg {% if forloop.first %}active{% endif %}"
+       {% if sl.image %}style="background-image:url('{{ sl.image.url }}')"{% endif %}></div>
+  {% endfor %}
+
   <div class="hero-overlay"></div>
   <div class="hero-grid-bg"></div>
 
   <div class="hero-content">
     <div>
       <div class="hero-badge"><span class="dot"></span>Oʻzbekistondagi innovatsion universitet</div>
+
+      {% if sliders %}
+        {% for sl in sliders %}
+        <div class="hs-text {% if forloop.first %}active{% endif %}">
+          <h1 class="hero-title"><span class="grad">{{ sl.title }}</span></h1>
+          {% if sl.subtitle %}<p class="hero-sub">{{ sl.subtitle }}</p>{% endif %}
+          <div class="hero-btns">
+            {% if sl.btn_text %}
+            <a href="{{ sl.btn_url }}" class="btn-primary">{{ sl.btn_text }}</a>
+            {% else %}
+            <a href="https://admission.tiiu.uz/" target="_blank" rel="noopener" class="btn-primary">🎓 Hujjat topshirish</a>
+            {% endif %}
+            <a href="#faculties" class="btn-outline">🔬 Ta'lim yoʻnalishlari</a>
+          </div>
+        </div>
+        {% endfor %}
+      {% else %}
       <h1 class="hero-title">
         <span class="grad">{{ settings.hero_title|default:"Kelajakni bugun shakllantir" }}</span>
       </h1>
@@ -87,6 +144,7 @@
         <a href="https://admission.tiiu.uz/" target="_blank" rel="noopener" class="btn-primary">🎓 Hujjat topshirish</a>
         <a href="#faculties" class="btn-outline">🔬 Ta'lim yoʻnalishlari</a>
       </div>
+      {% endif %}
       <div class="hero-stats">
         <div class="hstat">
           <div class="num"><span data-target="{{ settings.founded_year|default:2015 }}" data-suffix="">0</span></div>
@@ -119,11 +177,44 @@
     </div>
   </div>
 
+  {% if sliders|length > 1 %}
+  <div class="hs-controls">
+    <button class="hs-btn" id="hs-prev">&#8249;</button>
+    <div id="hs-dots">
+      {% for sl in sliders %}
+      <span class="hs-dot {% if forloop.first %}active{% endif %}"></span>
+      {% endfor %}
+    </div>
+    <button class="hs-btn" id="hs-next">&#8250;</button>
+  </div>
+  {% endif %}
+
   <div class="scroll-hint">
     <div class="scroll-mouse"></div>
     <span>Pastga aylantiring</span>
   </div>
 </section>
+
+{% if sliders|length > 1 %}
+<script>
+(function(){
+  const bgs   = document.querySelectorAll('.hs-bg');
+  const texts = document.querySelectorAll('.hs-text');
+  const dots  = document.querySelectorAll('.hs-dot');
+  let cur = 0, timer;
+  function goTo(idx) {
+    [bgs, texts, dots].forEach(list => list[cur] && list[cur].classList.remove('active'));
+    cur = (idx + bgs.length) % bgs.length;
+    [bgs, texts, dots].forEach(list => list[cur] && list[cur].classList.add('active'));
+  }
+  function start() { timer = setInterval(() => goTo(cur + 1), 5000); }
+  document.getElementById('hs-prev').onclick = () => { clearInterval(timer); goTo(cur - 1); start(); };
+  document.getElementById('hs-next').onclick = () => { clearInterval(timer); goTo(cur + 1); start(); };
+  dots.forEach((d, i) => d.onclick = () => { clearInterval(timer); goTo(i); start(); });
+  start();
+})();
+</script>
+{% endif %}
 
 <!-- ── STATS BAR ──────────────────────────────────────────────── -->
 <section id="stats-bar">
