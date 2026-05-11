@@ -8,7 +8,7 @@
 html { scroll-behavior: smooth; }
 body {
   font-family: 'Inter', sans-serif;
-  background: #121212;
+  background: transparent;
   color: #e2e8f0;
   overflow-x: hidden;
   line-height: 1.6;
@@ -285,7 +285,10 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   position: relative; height: 100vh; min-height: 640px;
   overflow: hidden; display: flex; align-items: center;
 }
-#hero-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
+#hero-canvas {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  z-index: 0; pointer-events: none; background: #0b0f0b;
+}
 .hero-overlay {
   position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background:
@@ -673,8 +676,11 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 /* ── Footer ───────────────────────────────────────────────────── */
 footer {
-  background: #0d0d0d; border-top: 1px solid rgba(0,105,51,.1);
-  padding: 70px 0 0; position: relative; overflow: hidden;
+  background: rgba(8,10,8,0.88) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(0,105,51,.1);
+  padding: 70px 0 0; position: relative; overflow: hidden; z-index: 1;
 }
 footer::before {
   content: ''; position: absolute; bottom: -200px; left: 50%;
@@ -703,17 +709,30 @@ footer::before {
 }
 .footer-bottom a { color: var(--blue); }
 
+/* ── Global: all sections transparent so canvas shows through ─── */
+section,
+#stats-bar, #about, #faculties, #why, #news, #contact,
+#leadership-sec, #teachers-sec, #partners {
+  background: transparent !important;
+  position: relative;
+  z-index: 1;
+}
+
 /* ── Page Header ──────────────────────────────────────────────── */
 .page-header {
   padding: calc(var(--nav-h) + 60px) 0 60px;
-  background: linear-gradient(180deg, var(--bg2), var(--bg));
-  position: relative; overflow: hidden;
+  background: rgba(12,14,12,0.60) !important;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(0,105,51,.12);
+  position: relative; overflow: hidden; z-index: 1;
 }
 .page-header::after {
   content: ''; position: absolute; inset: 0;
-  background-image: linear-gradient(rgba(0,105,51,.03) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(0,105,51,.03) 1px, transparent 1px);
+  background-image: linear-gradient(rgba(0,105,51,.04) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(0,105,51,.04) 1px, transparent 1px);
   background-size: 60px 60px;
+  pointer-events: none;
 }
 .page-header .container { position: relative; z-index: 1; }
 .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: .78rem; color: var(--text3); margin-bottom: 16px; }
@@ -773,38 +792,5 @@ footer::before {
   .teachers-grid { grid-template-columns: 1fr; }
 }
 
-/* ── BGM Toggle Button ────────────────────────────────────────── */
-.bgm-btn {
-  display: none !important; /* User requested to remove the button and just use autoplay */
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  background: rgba(18, 88, 117, 0.25);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(18, 88, 117, 0.5);
-  color: #fff;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-}
-.bgm-btn:hover {
-  background: rgba(18, 88, 117, 0.5);
-  transform: scale(1.08);
-}
-.bgm-btn.playing {
-  background: rgba(0, 105, 51, 0.25);
-  border-color: rgba(0, 105, 51, 0.5);
-}
-.bgm-btn.playing:hover {
-  background: rgba(0, 105, 51, 0.5);
-}
-.bgm-btn .icon-play, .bgm-btn .icon-pause {
-  transition: opacity 0.2s;
-}
+
+
