@@ -127,60 +127,6 @@
 
 {% block content %}
 
-<!-- ── HERO ──────────────────────────────────────────────────── -->
-<section id="hero">
-  <div class="hero-overlay"></div>
-  <div class="hero-grid-bg"></div>
-
-  <div class="hero-content">
-    <div>
-      <div class="hero-badge"><span class="dot"></span>Oʻzbekistondagi innovatsion universitet</div>
-      <h1 class="hero-title">
-        <span class="grad">{{ settings.hero_title|default:"Kelajakni bugun shakllantir" }}</span>
-      </h1>
-      <p class="hero-sub">{{ settings.hero_subtitle|default:"Toshkent ijtimoiy innovatsiya universiteti — ilgʻor ta'lim texnologiyalari asosida zamonaviy mutaxassislar tayyorlaydigan nodavlat oliy ta'lim muassasasi." }}</p>
-      <div class="hero-btns">
-        <a href="https://admission.tiiu.uz/" target="_blank" rel="noopener" class="btn-primary">🎓 Hujjat topshirish</a>
-        <a href="#faculties" class="btn-outline">🔬 Ta'lim yoʻnalishlari</a>
-      </div>
-      <div class="hero-stats">
-        <div class="hstat">
-          <div class="num"><span data-target="{{ settings.founded_year|default:2015 }}" data-suffix="">0</span></div>
-          <div class="lab">Tashkil yili</div>
-        </div>
-        <div class="hdiv"></div>
-        <div class="hstat">
-          <div class="num"><span data-target="{{ settings.direction_count|default:9 }}" data-suffix="">0</span></div>
-          <div class="lab">Ta'lim yoʻnalishi</div>
-        </div>
-        <div class="hdiv"></div>
-        <div class="hstat">
-          <div class="num"><span data-target="{{ settings.teacher_count|default:50 }}" data-suffix="+">0</span></div>
-          <div class="lab">Oʻqituvchilar</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Floating info cards -->
-    <div class="hero-3d">
-      <div class="hfc hfc-a">
-        <div class="hi" style="background:linear-gradient(135deg,rgba(59,130,246,.2),rgba(6,182,212,.15))">🏆</div>
-        <div><div class="ht">Akkreditatsiyalangan</div><div class="hs">Davlat tomonidan tasdiqlangan</div></div>
-      </div>
-      <div class="hfc hfc-b">
-        <div class="hi" style="background:linear-gradient(135deg,rgba(139,92,246,.2),rgba(236,72,153,.15))">📚</div>
-        <div><div class="ht">{{ settings.direction_count|default:9 }} yoʻnalish</div><div class="hs">Bakalavr darajasi</div></div>
-      </div>
-      
-    </div>
-  </div>
-
-  <div class="scroll-hint">
-    <div class="scroll-mouse"></div>
-    <span>Pastga aylantiring</span>
-  </div>
-</section>
-
 <!-- ── SLIDER ─────────────────────────────────────────────────── -->
 {% if sliders %}
 <section id="hero-slider">
@@ -235,6 +181,58 @@
 </script>
 {% endif %}
 {% endif %}
+
+<!-- ── HERO ──────────────────────────────────────────────────── -->
+<section id="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-grid-bg"></div>
+
+  <div class="hero-content">
+    <div>
+      <div class="hero-badge"><span class="dot"></span>Oʻzbekistondagi innovatsion universitet</div>
+      <h1 class="hero-title">
+        <span class="grad">{{ settings.hero_title|default:"Kelajakni bugun shakllantir" }}</span>
+      </h1>
+      <p class="hero-sub">{{ settings.hero_subtitle|default:"Toshkent ijtimoiy innovatsiya universiteti — ilgʻor ta'lim texnologiyalari asosida zamonaviy mutaxassislar tayyorlaydigan nodavlat oliy ta'lim muassasasi." }}</p>
+      <div class="hero-btns">
+        <a href="https://admission.tiiu.uz/" target="_blank" rel="noopener" class="btn-primary">🎓 Hujjat topshirish</a>
+        <a href="#faculties" class="btn-outline">🔬 Ta'lim yoʻnalishlari</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat">
+          <div class="num"><span data-target="{{ settings.founded_year|default:2015 }}" data-suffix="">0</span></div>
+          <div class="lab">Tashkil yili</div>
+        </div>
+        <div class="hdiv"></div>
+        <div class="hstat">
+          <div class="num"><span data-target="{{ settings.direction_count|default:9 }}" data-suffix="">0</span></div>
+          <div class="lab">Ta'lim yoʻnalishi</div>
+        </div>
+        <div class="hdiv"></div>
+        <div class="hstat">
+          <div class="num"><span data-target="{{ settings.teacher_count|default:50 }}" data-suffix="+">0</span></div>
+          <div class="lab">Oʻqituvchilar</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-3d">
+      <div class="hfc hfc-a">
+        <div class="hi" style="background:linear-gradient(135deg,rgba(59,130,246,.2),rgba(6,182,212,.15))">🏆</div>
+        <div><div class="ht">Akkreditatsiyalangan</div><div class="hs">Davlat tomonidan tasdiqlangan</div></div>
+      </div>
+      <div class="hfc hfc-b">
+        <div class="hi" style="background:linear-gradient(135deg,rgba(139,92,246,.2),rgba(236,72,153,.15))">📚</div>
+        <div><div class="ht">{{ settings.direction_count|default:9 }} yoʻnalish</div><div class="hs">Bakalavr darajasi</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <div class="scroll-mouse"></div>
+    <span>Pastga aylantiring</span>
+  </div>
+</section>
 
 <!-- ── STATS BAR ──────────────────────────────────────────────── -->
 <section id="stats-bar">
