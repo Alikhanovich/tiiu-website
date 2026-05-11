@@ -47,8 +47,9 @@ urlpatterns = [
     path('api/partners/',          views.api_partners,       name='api_partners'),
     path('api/partners/<int:pk>/', views.api_partner_detail, name='api_partner_detail'),
     # Messages
-    path('api/messages/',          views.api_messages,       name='api_messages'),
-    path('api/messages/<int:pk>/', views.api_message_detail, name='api_message_detail'),
+    path('api/messages/',                   views.api_messages,       name='api_messages'),
+    path('api/messages/<int:pk>/',          views.api_message_detail, name='api_message_detail'),
+    path('api/messages/<int:pk>/reply/',    views.api_message_reply,  name='api_message_reply'),
     # Static Pages
     path('api/pages/',          views.api_pages,       name='api_pages'),
     path('api/pages/<int:pk>/', views.api_page_detail, name='api_page_detail'),

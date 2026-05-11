@@ -621,6 +621,36 @@ def api_message_detail(request, pk):
         'message':o.message,'status':o.status,'created_at':dt(o,'created_at')}})
 
 
+@staff_only
+@require_http_methods(['POST'])
+def api_message_reply(request, pk):
+    try: o = ContactMessage.objects.get(pk=pk)
+    except ContactMessage.DoesNotExist: return JsonResponse({'success':False,'error':'Topilmadi'},status=404)
+    if not o.email:
+        return JsonResponse({'success':False,'error':'Bu xabarda email manzil yo\'q'}, status=400)
+    d = json.loads(request.body)
+    reply_text = d.get('reply','').strip()
+    if not reply_text:
+        return JsonResponse({'success':False,'error':'Javob matni bo\'sh'}, status=400)
+    try:
+        from django.core.mail import send_mail
+        from django.conf import settings as cfg
+        if not cfg.EMAIL_HOST_USER:
+            return JsonResponse({'success':False,'error':'Email sozlanmagan (EMAIL_HOST_USER)'}, status=500)
+        send_mail(
+            subject='TIIU — Sizning murojatingizga javob',
+            message=f"Hurmatli {o.first_name} {o.last_name},\n\n{reply_text}\n\nHurmat bilan,\nTIIU - Toshkent Ijtimoiy Innovatsiya Universiteti",
+            from_email=cfg.DEFAULT_FROM_EMAIL,
+            recipient_list=[o.email],
+            fail_silently=False,
+        )
+        o.status = 'answered'
+        o.save()
+        return JsonResponse({'success':True})
+    except Exception as e:
+        return JsonResponse({'success':False,'error':str(e)}, status=500)
+
+
 # ══════════════════════════════════════════════════════════════════════════════
 #  StaticPage
 # ══════════════════════════════════════════════════════════════════════════════

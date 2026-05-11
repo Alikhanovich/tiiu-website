@@ -1354,9 +1354,9 @@ async function openMsgDetail(contentEl, id) {
         </div>
         ${m.message ? `<div class="msg-body">${esc(m.message)}</div>` : ''}
         ${m.email ? `
-        <div style="margin-top:16px">
-          <label style="font-size:.78rem;font-weight:700;color:var(--text2);display:block;margin-bottom:6px">✏️ Javob matni</label>
-          <textarea id="md-reply" style="width:100%;padding:10px 12px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:inherit;font-size:.86rem;resize:vertical;min-height:90px;outline:none" placeholder="Javob yozing..."></textarea>
+        <div style="margin-top:16px;border-top:1px solid var(--border);padding-top:16px">
+          <label style="font-size:.78rem;font-weight:700;color:var(--text2);display:block;margin-bottom:8px">📧 Javob yuborish — ${esc(m.email)}</label>
+          <textarea id="md-reply" style="width:100%;padding:10px 12px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:inherit;font-size:.86rem;resize:vertical;min-height:100px;outline:none;transition:border .2s" placeholder="Javob matnini yozing..."></textarea>
         </div>` : ''}
       </div>
       <div class="fm-actions" style="flex-wrap:wrap;gap:8px">
@@ -1365,8 +1365,8 @@ async function openMsgDetail(contentEl, id) {
           <option value="read" ${m.status==='read'?'selected':''}>O'qilgan</option>
           <option value="answered" ${m.status==='answered'?'selected':''}>Javob berilgan</option>
         </select>
-        ${m.email ? `<button class="btn-primary" id="md-email-btn" style="background:linear-gradient(135deg,#0369a1,#0284c7)">📧 Email yuborish</button>` : ''}
-        ${m.phone ? `<a href="tel:${m.phone}" class="btn-outline" id="md-call-btn">📞 Qo'ng'iroq</a>` : ''}
+        ${m.email ? `<button class="btn-primary" id="md-send-btn">📨 Javob yuborish</button>` : ''}
+        ${m.phone ? `<a href="tel:${m.phone}" class="btn-outline">📞 ${esc(m.phone)}</a>` : ''}
         <button class="btn-primary" id="md-save">Saqlash</button>
         <button class="btn-secondary" id="md-close">Yopish</button>
       </div>
@@ -1378,25 +1378,20 @@ async function openMsgDetail(contentEl, id) {
   modal.addEventListener('click', e => { if (e.target === modal) close(); });
 
   if (m.email) {
-    document.getElementById('md-email-btn').addEventListener('click', async () => {
+    document.getElementById('md-send-btn').addEventListener('click', async () => {
       const reply = document.getElementById('md-reply')?.value.trim() || '';
-      const subject = encodeURIComponent('TIIU — Sizning murojatingizga javob');
-      const body = encodeURIComponent(reply
-        ? `Hurmatli ${m.first_name},\n\n${reply}\n\nHurmat bilan,\nTIIU`
-        : `Hurmatli ${m.first_name},\n\n`);
-      window.open(`mailto:${m.email}?subject=${subject}&body=${body}`, '_blank');
-      document.getElementById('md-status').value = 'answered';
-      await api(`/panel/api/messages/${id}/`, { method: 'POST', json: { status: 'answered' } });
-      updateMsgBadge();
-      toast('Email ilovasi ochildi');
-    });
-  }
-
-  if (m.phone) {
-    document.getElementById('md-call-btn').addEventListener('click', async () => {
-      document.getElementById('md-status').value = 'answered';
-      await api(`/panel/api/messages/${id}/`, { method: 'POST', json: { status: 'answered' } });
-      updateMsgBadge();
+      if (!reply) { toast('Javob matnini yozing', 'error'); return; }
+      const btn = document.getElementById('md-send-btn');
+      btn.disabled = true; btn.textContent = 'Yuborilmoqda...';
+      const r = await api(`/panel/api/messages/${id}/reply/`, { method: 'POST', json: { reply } });
+      if (r.success) {
+        toast('Javob muvaffaqiyatli yuborildi ✓');
+        updateMsgBadge();
+        close();
+      } else {
+        toast(r.error || 'Xato yuz berdi', 'error');
+        btn.disabled = false; btn.textContent = '📨 Javob yuborish';
+      }
     });
   }
 
