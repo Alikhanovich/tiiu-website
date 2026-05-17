@@ -92,6 +92,17 @@ EMAIL_HOST_USER     = os.environ.get('EMAIL_HOST_USER',     '')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
 DEFAULT_FROM_EMAIL  = os.environ.get('DEFAULT_FROM_EMAIL',  EMAIL_HOST_USER)
 
+# ── Security (production only) ────────────────────────────────────────────────
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+
 # ── Custom Admin UI ───────────────────────────────────────────────────────────
 # (Jazzmin removed — custom templates used instead)
 _REMOVED_JAZZMIN_SETTINGS = {

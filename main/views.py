@@ -62,8 +62,7 @@ def news_list(request):
 
 def news_detail(request, slug):
     article = get_object_or_404(News, slug=slug, is_active=True)
-    article.views += 1
-    article.save(update_fields=["views"])
+    News.objects.filter(pk=article.pk).update(views=article.views + 1)
     related = News.objects.filter(is_active=True).exclude(pk=article.pk)[:3]
     ctx = {"article": article, "related": related}
     return render(request, "main/news_detail.html", ctx)
@@ -101,13 +100,23 @@ def contact(request):
 @require_POST
 def contact_submit(request):
     data = request.POST
+    first_name = data.get("first_name", "").strip()[:100]
+    last_name  = data.get("last_name",  "").strip()[:100]
+    phone      = data.get("phone",      "").strip()[:20]
+    email      = data.get("email",      "").strip()[:254]
+    direction  = data.get("direction",  "").strip()[:200]
+    message    = data.get("message",    "").strip()[:2000]
+
+    if not first_name or not last_name:
+        return JsonResponse({"ok": False, "error": "Ism va familya talab qilinadi"}, status=400)
+
     ContactMessage.objects.create(
-        first_name=data.get("first_name", ""),
-        last_name=data.get("last_name", ""),
-        phone=data.get("phone", ""),
-        email=data.get("email", ""),
-        direction=data.get("direction", ""),
-        message=data.get("message", ""),
+        first_name=first_name,
+        last_name=last_name,
+        phone=phone,
+        email=email,
+        direction=direction,
+        message=message,
     )
     return JsonResponse({"ok": True})
 
@@ -154,7 +163,7 @@ def _paginate(request, qs, per=10):
 def articles_list(request):
     qs = ScientificArticle.objects.filter(is_active=True)
     cat_slug = request.GET.get('cat')
-    q = request.GET.get('q', '').strip()
+    q = request.GET.get('q', '').strip()[:200]
     year = request.GET.get('year')
     if cat_slug: qs = qs.filter(category__slug=cat_slug)
     if q: qs = qs.filter(title__icontains=q) | qs.filter(authors__icontains=q)
@@ -175,7 +184,7 @@ def article_detail(request, slug):
 
 def dissertations_list(request):
     qs = Dissertation.objects.filter(is_active=True)
-    q = request.GET.get('q', '').strip()
+    q = request.GET.get('q', '').strip()[:200]
     year = request.GET.get('year')
     degree = request.GET.get('degree')
     if q: qs = qs.filter(title__icontains=q) | qs.filter(author__icontains=q)
@@ -278,7 +287,7 @@ def schedule_list(request):
 
 def library_list(request):
     qs = LibraryResource.objects.filter(is_active=True)
-    q = request.GET.get('q', '').strip()
+    q = request.GET.get('q', '').strip()[:200]
     rtype = request.GET.get('type')
     if q: qs = qs.filter(title__icontains=q) | qs.filter(authors__icontains=q)
     if rtype: qs = qs.filter(resource_type=rtype)
