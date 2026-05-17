@@ -72,6 +72,36 @@ function previewImg(input, previewId) {
   reader.readAsDataURL(file);
 }
 
+/* ═══ Rasm o'lcham izohlari ════════════════════════════════════════════ */
+const IMG_HINTS = {
+  sliders:                     { w: 1920, h: 600,  note: 'Gorizontal — min 1200px kenglik' },
+  faculty:                     { w: 800,  h: 500,  note: 'Gorizontal (landscape)' },
+  'teachers.photo':            { w: 400,  h: 500,  note: 'Portrait yoki kvadrat' },
+  departments:                 { w: 800,  h: 400,  note: 'Gorizontal (landscape)' },
+  'leadership.photo':          { w: 400,  h: 500,  note: 'Portrait (vertikal)' },
+  centers:                     { w: 800,  h: 400,  note: 'Gorizontal (landscape)' },
+  news:                        { w: 1200, h: 600,  note: 'Gorizontal (landscape)' },
+  events:                      { w: 1200, h: 600,  note: 'Gorizontal (landscape)' },
+  'partners.logo':             { w: 300,  h: 150,  note: 'Logo — PNG (shaffof fon tavsiya)' },
+  'articles.cover_image':      { w: 800,  h: 400,  note: 'Gorizontal (landscape)' },
+  'dissertations.cover_image': { w: 400,  h: 600,  note: "Kitob qopqog'i (portrait)" },
+  'conferences.poster_image':  { w: 600,  h: 900,  note: 'Poster (vertikal)' },
+  'conferences.cover_image':   { w: 1200, h: 600,  note: 'Gorizontal (landscape)' },
+  'contests.cover_image':      { w: 800,  h: 400,  note: 'Gorizontal (landscape)' },
+  'videos.cover_image':        { w: 1280, h: 720,  note: '16:9 nisbat (YouTube thumbnail)' },
+  'talented.photo':            { w: 400,  h: 500,  note: 'Portrait yoki kvadrat' },
+  'journals.cover_image':      { w: 400,  h: 600,  note: 'Jurnal muqovasi (portrait)' },
+};
+
+function imgHint(page, fieldName) {
+  return IMG_HINTS[`${page}.${fieldName}`] || IMG_HINTS[page] || null;
+}
+
+function imgHintHtml(hint) {
+  if (!hint) return '';
+  return `<small style="display:block;margin-top:5px;color:var(--text2);font-size:11px;background:var(--bg2);border-left:3px solid var(--accent);padding:4px 8px;border-radius:0 4px 4px 0">📐 Tavsiya: <b>${hint.w}×${hint.h}px</b> — ${hint.note}</small>`;
+}
+
 /* ═══ Page configs ═════════════════════════════════════════════════════ */
 const PAGES = {
   dashboard: { title: 'Dashboard', special: 'dashboard' },
@@ -957,18 +987,12 @@ async function renderDetailPage(el, page, cfg, id) {
                 : `<div class="featured-drop" id="feat-preview">
                      <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
                      <span>Yuklash uchun bosing</span>
-                     <small>${page === 'sliders' ? 'PNG, JPG — Tavsiya: 1920×600px, min kenglik 1200px' : 'PNG, JPG — 5 MB gacha'}</small>
+                     <small>${(() => { const h = imgHint(page, 'image'); return h ? `Tavsiya: ${h.w}×${h.h}px — ${h.note}` : 'PNG, JPG — 5 MB gacha'; })()}</small>
                    </div>`}
             </div>
             <input type="file" name="image" id="feat-file" accept="image/*" style="display:none">
             ${item?.image ? `<button type="button" class="feat-change-btn" id="feat-change">Rasmni o'zgartirish</button>` : ''}
-            ${page === 'sliders' ? `<p style="margin-top:10px;font-size:12px;color:var(--text2);line-height:1.6;background:var(--bg2);border-left:3px solid var(--accent);padding:8px 12px;border-radius:0 6px 6px 0">
-              <b>Rasm talablari:</b><br>
-              • Minimal kenglik: <b>1920px</b><br>
-              • Nisbat: kenglik ÷ balandlik ≥ 1.5 (gorizontal bo'lishi shart)<br>
-              • Tavsiya etilgan razmer: <b>1920 × 600 px</b><br>
-              • Format: PNG yoki JPG, hajmi 5 MB gacha
-            </p>` : ''}
+            ${(() => { const h = imgHint(page, 'image'); return h ? `<p style="margin-top:10px;font-size:12px;color:var(--text2);line-height:1.6;background:var(--bg2);border-left:3px solid var(--accent);padding:8px 12px;border-radius:0 6px 6px 0">📐 <b>Tavsiya:</b> ${h.w}×${h.h}px — ${h.note}${page==='sliders'?' | Min kenglik: 1200px | Nisbat ≥ 1.5':''}</p>` : ''; })()}
           </div>` : ''}
 
         </div>
@@ -1198,7 +1222,7 @@ async function openForm(page, cfg, item) {
       </div>
       <form id="item-form" autocomplete="off">
         <div class="form-fields">
-          ${cfg.fields.map(f => buildField(f, item, remote)).join('')}
+          ${cfg.fields.map(f => buildField(f, item, remote, page)).join('')}
         </div>
         <div class="fm-actions">
           <button type="button" class="btn-secondary" id="fm-cancel">Bekor qilish</button>
@@ -1248,7 +1272,7 @@ async function openForm(page, cfg, item) {
   });
 }
 
-function buildField(f, item, remote) {
+function buildField(f, item, remote, page = '') {
   const val = item ? (item[f.n] ?? '') : (f.def ?? '');
 
   if (f.t === 'toggle') {
@@ -1267,10 +1291,12 @@ function buildField(f, item, remote) {
   if (f.t === 'image') {
     const src = item ? item[f.n] : null;
     const pid = `prev-${f.n}`;
+    const hint = imgHint(page, f.n);
     return `<div class="field">
       <label>${esc(f.l)}</label>
       ${src ? `<img src="${src}" class="img-thumb-preview" id="${pid}" style="margin-bottom:6px">` : `<div id="${pid}" class="img-empty-preview">Rasm yo'q</div>`}
       <input type="file" name="${f.n}" accept="image/*" data-prev="${pid}">
+      ${imgHintHtml(hint)}
     </div>`;
   }
 
