@@ -957,7 +957,7 @@ async function renderDetailPage(el, page, cfg, id) {
                 : `<div class="featured-drop" id="feat-preview">
                      <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
                      <span>Yuklash uchun bosing</span>
-                     <small>PNG, JPG — 5 MB gacha</small>
+                     <small>${page === 'sliders' ? 'PNG, JPG — Tavsiya: 1920×600px, min kenglik 1200px' : 'PNG, JPG — 5 MB gacha'}</small>
                    </div>`}
             </div>
             <input type="file" name="image" id="feat-file" accept="image/*" style="display:none">
@@ -1028,20 +1028,43 @@ async function renderDetailPage(el, page, cfg, id) {
   featFile.addEventListener('change', function () {
     const file = this.files[0];
     if (!file) return;
-    const reader = new FileReader();
-    reader.onload = ev => {
-      let prev = document.getElementById('feat-preview');
-      if (prev.tagName === 'IMG') { prev.src = ev.target.result; }
-      else {
-        const img = Object.assign(document.createElement('img'), { src: ev.target.result, className: 'featured-img', id: 'feat-preview' });
-        prev.replaceWith(img);
-        if (!document.getElementById('feat-change')) {
-          featArea.insertAdjacentHTML('afterend', `<button type="button" class="feat-change-btn" id="feat-change">Rasmni o'zgartirish</button>`);
-          document.getElementById('feat-change').addEventListener('click', e => { e.stopPropagation(); featFile.click(); });
+    const inputEl = this;
+
+    function doPreview(f) {
+      const reader = new FileReader();
+      reader.onload = ev => {
+        let prev = document.getElementById('feat-preview');
+        if (prev.tagName === 'IMG') { prev.src = ev.target.result; }
+        else {
+          const img = Object.assign(document.createElement('img'), { src: ev.target.result, className: 'featured-img', id: 'feat-preview' });
+          prev.replaceWith(img);
+          if (!document.getElementById('feat-change')) {
+            featArea.insertAdjacentHTML('afterend', `<button type="button" class="feat-change-btn" id="feat-change">Rasmni o'zgartirish</button>`);
+            document.getElementById('feat-change').addEventListener('click', e => { e.stopPropagation(); featFile.click(); });
+          }
         }
-      }
-    };
-    reader.readAsDataURL(file);
+      };
+      reader.readAsDataURL(f);
+    }
+
+    if (page === 'sliders') {
+      const objUrl = URL.createObjectURL(file);
+      const checkImg = new Image();
+      checkImg.onload = () => {
+        URL.revokeObjectURL(objUrl);
+        const w = checkImg.width, h = checkImg.height;
+        if (w < 1200 || w < h * 1.5) {
+          alert(`Slider rasmi talabga javob bermaydi!\n\nHozirgi razmer: ${w}×${h}px\n\nTalab:\n• Minimal kenglik: 1200px\n• Nisbat: kenglik ÷ balandlik ≥ 1.5 (gorizontal)\n• Tavsiya: 1920×600px`);
+          inputEl.value = '';
+          return;
+        }
+        doPreview(file);
+      };
+      checkImg.src = objUrl;
+      return;
+    }
+
+    doPreview(file);
   });
   } // end if (!isPage)
 

@@ -28,6 +28,23 @@ def img(obj, field):
     return f.url if f else None
 
 
+def _validate_slider_image(f):
+    if f.size > 5 * 1024 * 1024:
+        return "Fayl hajmi 5MB dan oshmasin"
+    try:
+        from PIL import Image as PilImage
+        pil = PilImage.open(f)
+        w, h = pil.size
+        f.seek(0)
+        if w < 1200:
+            return f"Rasm kengligi kamida 1200px bo'lishi kerak (hozir: {w}px)"
+        if w < h * 1.5:
+            return f"Rasm gorizontal bo'lishi kerak (kenglik ÷ balandlik ≥ 1.5). Hozir: {w}×{h}px. Tavsiya: 1920×600px"
+    except Exception:
+        return "Rasm o'qib bo'lmadi"
+    return None
+
+
 def dt(obj, field):
     v = getattr(obj, field, None)
     return v.strftime('%d.%m.%Y %H:%M') if v else None
@@ -140,6 +157,10 @@ def serialize_slider(o):
 def api_sliders(request):
     if request.method == 'POST':
         d = request.POST
+        if 'image' in request.FILES:
+            err = _validate_slider_image(request.FILES['image'])
+            if err:
+                return JsonResponse({'success': False, 'error': err}, status=400)
         o = Slider(title=d['title'], subtitle=d.get('subtitle',''),
                    btn_text=d.get('btn_text',''), btn_url=d.get('btn_url','/'),
                    order=int(d.get('order',0)), is_active=d.get('is_active')=='true')
@@ -158,6 +179,10 @@ def api_slider_detail(request, pk):
         o.delete(); return JsonResponse({'success':True})
     if request.method == 'POST':
         d = request.POST
+        if 'image' in request.FILES:
+            err = _validate_slider_image(request.FILES['image'])
+            if err:
+                return JsonResponse({'success': False, 'error': err}, status=400)
         for f in ['title','subtitle','btn_text','btn_url']:
             if f in d: setattr(o,f,d[f])
         if 'order' in d: o.order = int(d['order'])
