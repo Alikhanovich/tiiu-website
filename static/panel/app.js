@@ -962,6 +962,13 @@ async function renderDetailPage(el, page, cfg, id) {
             </div>
             <input type="file" name="image" id="feat-file" accept="image/*" style="display:none">
             ${item?.image ? `<button type="button" class="feat-change-btn" id="feat-change">Rasmni o'zgartirish</button>` : ''}
+            ${page === 'sliders' ? `<p style="margin-top:10px;font-size:12px;color:var(--text2);line-height:1.6;background:var(--bg2);border-left:3px solid var(--accent);padding:8px 12px;border-radius:0 6px 6px 0">
+              <b>Rasm talablari:</b><br>
+              • Minimal kenglik: <b>1920px</b><br>
+              • Nisbat: kenglik ÷ balandlik ≥ 1.5 (gorizontal bo'lishi shart)<br>
+              • Tavsiya etilgan razmer: <b>1920 × 600 px</b><br>
+              • Format: PNG yoki JPG, hajmi 5 MB gacha
+            </p>` : ''}
           </div>` : ''}
 
         </div>
