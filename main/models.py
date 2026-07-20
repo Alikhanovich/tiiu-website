@@ -87,7 +87,7 @@ class Faculty(models.Model):
     DEGREE_CHOICES = [("bachelor", "Bakalavr"), ("master", "Magistr")]
 
     name        = models.CharField("Nomi", max_length=300)
-    slug        = models.SlugField("Slug", unique=True, blank=True)
+    slug        = models.SlugField("Slug", max_length=255, unique=True, blank=True)
     short_name  = models.CharField("Qisqa nomi / Badge", max_length=100, blank=True)
     icon        = models.CharField("Emoji", max_length=10, default="🎓")
     image       = models.ImageField("Rasm", upload_to="faculties/", blank=True, null=True)
@@ -120,7 +120,7 @@ class Faculty(models.Model):
 # ─── Teacher ─────────────────────────────────────────────────────────────────
 class Teacher(models.Model):
     full_name  = models.CharField("To'liq ism", max_length=200)
-    slug       = models.SlugField("Slug", unique=True, blank=True)
+    slug       = models.SlugField("Slug", max_length=255, unique=True, blank=True)
     position   = models.CharField("Lavozim", max_length=200, blank=True)
     department = models.CharField("Kafedra", max_length=200, blank=True)
     faculty    = models.ForeignKey(Faculty, on_delete=models.SET_NULL, null=True, blank=True,
@@ -157,7 +157,7 @@ class Teacher(models.Model):
 # ─── News ─────────────────────────────────────────────────────────────────────
 class NewsCategory(models.Model):
     name  = models.CharField("Nomi", max_length=100)
-    slug  = models.SlugField("Slug", unique=True, blank=True)
+    slug  = models.SlugField("Slug", max_length=255, unique=True, blank=True)
     color = models.CharField("Rang", max_length=30, default="#3b82f6")
 
     class Meta:
@@ -175,7 +175,7 @@ class NewsCategory(models.Model):
 
 class News(models.Model):
     title       = models.CharField("Sarlavha", max_length=300)
-    slug        = models.SlugField("Slug", unique=True, blank=True)
+    slug        = models.SlugField("Slug", max_length=255, unique=True, blank=True)
     category    = models.ForeignKey(NewsCategory, on_delete=models.SET_NULL, null=True, blank=True,
                                     related_name="news", verbose_name="Kategoriya")
     image       = models.ImageField("Rasm", upload_to="news/")
@@ -224,7 +224,7 @@ class NewsImage(models.Model):
 # ─── Event ────────────────────────────────────────────────────────────────────
 class Event(models.Model):
     title       = models.CharField("Sarlavha", max_length=300)
-    slug        = models.SlugField("Slug", unique=True, blank=True)
+    slug        = models.SlugField("Slug", max_length=255, unique=True, blank=True)
     image       = models.ImageField("Rasm", upload_to="events/", blank=True, null=True)
     description = models.TextField("Qisqa tavsif", blank=True)
     body        = models.TextField("To'liq matn", blank=True)
@@ -270,7 +270,7 @@ class EventImage(models.Model):
 # ─── Gallery ──────────────────────────────────────────────────────────────────
 class Gallery(models.Model):
     title       = models.CharField("Album nomi", max_length=200)
-    slug        = models.SlugField("Slug", unique=True, blank=True)
+    slug        = models.SlugField("Slug", max_length=255, unique=True, blank=True)
     cover       = models.ImageField("Muqova rasmi", upload_to="gallery/covers/", blank=True, null=True)
     description = models.TextField("Tavsif", blank=True)
     is_active   = models.BooleanField("Faol", default=True)
@@ -369,7 +369,7 @@ class Leadership(models.Model):
 # ─── Department (Kafedra) ─────────────────────────────────────────────────────
 class Department(models.Model):
     name        = models.CharField("Kafedra nomi", max_length=300)
-    slug        = models.SlugField("Slug", unique=True, blank=True)
+    slug        = models.SlugField("Slug", max_length=255, unique=True, blank=True)
     head        = models.CharField("Kafedra mudiri", max_length=200, blank=True)
     description = models.TextField("Tavsif", blank=True)
     image       = models.ImageField("Rasm", upload_to="departments/", blank=True, null=True)
@@ -399,7 +399,7 @@ class Department(models.Model):
 # ─── Center (Markazlar va bo'limlar) ──────────────────────────────────────────
 class Center(models.Model):
     name        = models.CharField("Nomi", max_length=300)
-    slug        = models.SlugField("Slug", unique=True, blank=True)
+    slug        = models.SlugField("Slug", max_length=255, unique=True, blank=True)
     icon        = models.CharField("Emoji", max_length=10, default="🏢")
     head        = models.CharField("Rahbar ismi", max_length=200, blank=True)
     head_role   = models.CharField("Rahbar lavozimi", max_length=300, blank=True)
@@ -433,7 +433,7 @@ class Center(models.Model):
 # ─── Static Page ─────────────────────────────────────────────────────────────
 class StaticPage(models.Model):
     title      = models.CharField("Sarlavha", max_length=300)
-    slug       = models.SlugField("Slug", unique=True)
+    slug       = models.SlugField("Slug", max_length=255, unique=True)
     body       = models.TextField("Mazmun (HTML)", blank=True)
     is_active  = models.BooleanField("Faol", default=True)
     updated_at = models.DateTimeField("Yangilangan", auto_now=True)
@@ -450,7 +450,7 @@ class StaticPage(models.Model):
 # ─── Scientific Articles ─────────────────────────────────────────────────────
 class ArticleCategory(models.Model):
     name = models.CharField("Nomi", max_length=100)
-    slug = models.SlugField("Slug", unique=True, blank=True)
+    slug = models.SlugField("Slug", max_length=255, unique=True, blank=True)
 
     class Meta:
         verbose_name = "Maqola kategoriyasi"
@@ -474,7 +474,7 @@ def _unique_slug(Model, base):
 class ScientificArticle(models.Model):
     LANG = [('uz', "O'zbek"), ('ru', 'Русский'), ('en', 'English')]
     title          = models.CharField("Sarlavha", max_length=300)
-    slug           = models.SlugField("Slug", unique=True, blank=True)
+    slug           = models.SlugField("Slug", max_length=255, unique=True, blank=True)
     authors        = models.CharField("Mualliflar", max_length=400)
     journal_name   = models.CharField("Jurnal nomi", max_length=300, blank=True)
     published_date = models.DateField("Nashr sanasi", null=True, blank=True)
@@ -506,7 +506,7 @@ class ScientificArticle(models.Model):
 class Dissertation(models.Model):
     DEGREE = [('phd', 'PhD'), ('dsc', 'DSc'), ('candidate', 'Fan nomzodi')]
     title        = models.CharField("Sarlavha", max_length=400)
-    slug         = models.SlugField("Slug", unique=True, blank=True)
+    slug         = models.SlugField("Slug", max_length=255, unique=True, blank=True)
     author       = models.CharField("Muallif", max_length=200)
     supervisor   = models.CharField("Ilmiy rahbar", max_length=200, blank=True)
     specialty    = models.CharField("Mutaxassislik", max_length=300, blank=True)
@@ -538,7 +538,7 @@ class Dissertation(models.Model):
 # ─── Conferences ──────────────────────────────────────────────────────────────
 class Conference(models.Model):
     title            = models.CharField("Nomi", max_length=300)
-    slug             = models.SlugField("Slug", unique=True, blank=True)
+    slug             = models.SlugField("Slug", max_length=255, unique=True, blank=True)
     description      = models.TextField("Tavsif", blank=True)
     start_date       = models.DateTimeField("Boshlanish sanasi")
     end_date         = models.DateTimeField("Tugash sanasi", null=True, blank=True)
@@ -567,7 +567,7 @@ class Conference(models.Model):
 # ─── Contests ─────────────────────────────────────────────────────────────────
 class Contest(models.Model):
     title       = models.CharField("Nomi", max_length=300)
-    slug        = models.SlugField("Slug", unique=True, blank=True)
+    slug        = models.SlugField("Slug", max_length=255, unique=True, blank=True)
     description = models.TextField("Tavsif", blank=True)
     deadline    = models.DateTimeField("Muddati", null=True, blank=True)
     cover_image = models.ImageField("Muqova rasm", upload_to="contests/", blank=True, null=True)
@@ -592,7 +592,7 @@ class Contest(models.Model):
 # ─── Video Lessons ────────────────────────────────────────────────────────────
 class VideoLesson(models.Model):
     title       = models.CharField("Nomi", max_length=300)
-    slug        = models.SlugField("Slug", unique=True, blank=True)
+    slug        = models.SlugField("Slug", max_length=255, unique=True, blank=True)
     description = models.TextField("Tavsif", blank=True)
     youtube_url = models.URLField("YouTube havola", blank=True)
     cover_image = models.ImageField("Thumbnail", upload_to="videos/", blank=True, null=True)
@@ -619,7 +619,7 @@ class VideoLesson(models.Model):
 # ─── Talented Students ────────────────────────────────────────────────────────
 class TalentedStudent(models.Model):
     full_name   = models.CharField("F.I.O.", max_length=200)
-    slug        = models.SlugField("Slug", unique=True, blank=True)
+    slug        = models.SlugField("Slug", max_length=255, unique=True, blank=True)
     faculty     = models.ForeignKey(Faculty, on_delete=models.SET_NULL, null=True, blank=True,
                                     related_name="talented_students")
     achievement = models.CharField("Yutuq/Unvon", max_length=300)
@@ -645,7 +645,7 @@ class TalentedStudent(models.Model):
 # ─── Journal Issues ───────────────────────────────────────────────────────────
 class JournalIssue(models.Model):
     title       = models.CharField("Son nomi", max_length=300)
-    slug        = models.SlugField("Slug", unique=True, blank=True)
+    slug        = models.SlugField("Slug", max_length=255, unique=True, blank=True)
     year        = models.PositiveIntegerField("Yil")
     issue_number= models.PositiveIntegerField("Son raqami")
     cover_image = models.ImageField("Muqova rasm", upload_to="journal/covers/", blank=True, null=True)
@@ -671,7 +671,7 @@ class JournalIssue(models.Model):
 class ScheduleFile(models.Model):
     SEM = [(1, "1-semestr"), (2, "2-semestr")]
     title         = models.CharField("Nomi", max_length=300)
-    slug          = models.SlugField("Slug", unique=True, blank=True)
+    slug          = models.SlugField("Slug", max_length=255, unique=True, blank=True)
     faculty       = models.ForeignKey(Faculty, on_delete=models.SET_NULL, null=True, blank=True,
                                       related_name="schedules")
     academic_year = models.CharField("O'quv yili", max_length=20, default="2025-2026")
@@ -698,7 +698,7 @@ class LibraryResource(models.Model):
     RTYPE = [('book', 'Kitob'), ('article', 'Maqola'),
              ('manual', "Qo'llanma"), ('dissertation', 'Dissertatsiya'), ('other', 'Boshqa')]
     title         = models.CharField("Nomi", max_length=300)
-    slug          = models.SlugField("Slug", unique=True, blank=True)
+    slug          = models.SlugField("Slug", max_length=255, unique=True, blank=True)
     authors       = models.CharField("Mualliflar", max_length=400, blank=True)
     description   = models.TextField("Tavsif", blank=True)
     cover_image   = models.ImageField("Muqova rasm", upload_to="library/covers/", blank=True, null=True)

@@ -46,8 +46,8 @@ NEWS = [
          body="2026/2027 o'quv yilida universitetda 20 ga yaqin bakalavr va magistr dasturlari mavjud. "
               "Talabalarga stipendiya, xalqaro almashinuv dasturlari va zamonaviy ta'lim sharoitlari taqdim etiladi."),
     dict(title="Hujjatlarni masofadan onlayn topshiring",
-         short_text="admission.tiiu.uz orqali hujjatlaringizni uydan turib onlayn topshirishingiz mumkin.",
-         body="Universitetga hujjat topshirish endi yanada oson: admission.tiiu.uz portali orqali "
+         short_text="qabul.tiiu.uz orqali hujjatlaringizni uydan turib onlayn topshirishingiz mumkin.",
+         body="Universitetga hujjat topshirish endi yanada oson: qabul.tiiu.uz portali orqali "
               "hujjatlaringizni uydan turib masofadan onlayn topshirishingiz mumkin."),
 ]
 
@@ -55,7 +55,7 @@ NEWS = [
 SLIDERS = [
     dict(title="Kelajakni biz bilan quring",
          subtitle="Toshkent ijtimoiy innovatsiya universitetiga 2026/2027 o'quv yili uchun hujjat topshiring.",
-         btn_text="Hujjat topshirish", btn_url="https://admission.tiiu.uz/", order=1),
+         btn_text="Hujjat topshirish", btn_url="https://qabul.tiiu.uz/", order=1),
     dict(title="Barcha kunduzgi talabalarga stipendiya",
          subtitle="Zamonaviy dasturlar, kuchli professor-o'qituvchilar va innovatsion ta'lim muhiti.",
          btn_text="Yo'nalishlar", btn_url="#faculties", order=2),

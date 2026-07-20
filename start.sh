@@ -5,11 +5,13 @@ set -o errexit
 
 python manage.py migrate --noinput
 
-# Seed all site content (teachers, news, leadership, settings, ...) from the
-# committed fixture. Render's filesystem is ephemeral, so the SQLite DB is
-# empty on every start — this repopulates it from git each time, which means
-# production always mirrors the content you committed locally.
-python manage.py loaddata main/fixtures/initial_data.json || echo "WARNING: fixture load failed — site will start with empty content."
+# Re-seed content from the committed fixture. build.sh already did this, so
+# normally every object here is just overwritten with identical values; this is
+# the safety net for the case where the DB was reset between build and start.
+# Failure is not fatal (the build-time load is the authoritative one), but it
+# must be impossible to miss in the logs.
+python manage.py loaddata main/fixtures/initial_data.json \
+  || echo "!!!!! FIXTURE LOAD FAILED AT RUNTIME — check content on the live site !!!!!"
 
 # Create superuser only if env vars are explicitly set (idempotent).
 python manage.py shell -c "

@@ -41,7 +41,7 @@
     "subtitle": "Toshkent ijtimoiy innovatsiya universitetiga 2026/2027 o'quv yili uchun hujjat topshiring.",
     "image": "sliders/slider-1.jpg",
     "btn_text": "Hujjat topshirish",
-    "btn_url": "https://admission.tiiu.uz/",
+    "btn_url": "https://qabul.tiiu.uz/",
     "order": 1,
     "is_active": true
   }
@@ -754,8 +754,8 @@
     "slug": "hujjatlarni-masofadan-onlayn-topshiring",
     "category": 2,
     "image": "news/news-12.jpg",
-    "short_text": "admission.tiiu.uz orqali hujjatlaringizni uydan turib onlayn topshirishingiz mumkin.",
-    "body": "Universitetga hujjat topshirish endi yanada oson: admission.tiiu.uz portali orqali hujjatlaringizni uydan turib masofadan onlayn topshirishingiz mumkin.",
+    "short_text": "qabul.tiiu.uz orqali hujjatlaringizni uydan turib onlayn topshirishingiz mumkin.",
+    "body": "Universitetga hujjat topshirish endi yanada oson: qabul.tiiu.uz portali orqali hujjatlaringizni uydan turib masofadan onlayn topshirishingiz mumkin.",
     "author": "TIIU Matbuot xizmati",
     "views": 3,
     "is_active": true,
