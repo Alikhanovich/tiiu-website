@@ -16,7 +16,7 @@
     <h1 class="page-title" style="max-width:800px">{{ obj.title }}</h1>
     <div style="display:flex;flex-wrap:wrap;gap:16px;margin-top:16px;font-size:.82rem;color:var(--text3)">
       <span>👤 {{ obj.author }}</span>
-      {% if obj.defense_date %}<span>📅 {{ obj.defense_date|date:"d-B Y" }}</span>{% endif %}
+      {% if obj.defense_date %}<span>📅 {{ obj.defense_date|date:"d.m.Y" }}</span>{% endif %}
       <span>👁 {{ obj.views }} koʻrish</span>
     </div>
   </div>
@@ -50,7 +50,7 @@
             {% if obj.supervisor %}<div><span style="color:var(--text3)">Ilmiy rahbar:</span><br>{{ obj.supervisor }}</div>{% endif %}
             {% if obj.specialty %}<div><span style="color:var(--text3)">Mutaxassislik:</span><br>{{ obj.specialty }}</div>{% endif %}
             <div><span style="color:var(--text3)">Daraja:</span><br>{{ obj.get_degree_display }}</div>
-            {% if obj.defense_date %}<div><span style="color:var(--text3)">Himoya sanasi:</span><br>{{ obj.defense_date|date:"d-B Y" }}</div>{% endif %}
+            {% if obj.defense_date %}<div><span style="color:var(--text3)">Himoya sanasi:</span><br>{{ obj.defense_date|date:"d.m.Y" }}</div>{% endif %}
           </div>
         </div>
         {% if related %}

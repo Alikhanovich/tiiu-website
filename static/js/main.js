@@ -272,10 +272,10 @@ document.querySelectorAll('.why-card, .news-card, .cf-wrap, .teacher-card').forE
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
 
   const scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0x030710, 0.028);
+  scene.fog = new THREE.FogExp2(0x0b0f0b, 0.018);
 
-  const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 300);
-  camera.position.set(0, 4, 16);
+  const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 300);
+  camera.position.set(0, 0, 26);
 
   function onResize() {
     const W = canvas.offsetWidth, H = canvas.offsetHeight;
@@ -285,78 +285,64 @@ document.querySelectorAll('.why-card, .news-card, .cf-wrap, .teacher-card').forE
   onResize();
   window.addEventListener('resize', onResize);
 
-  scene.add(new THREE.AmbientLight(0x1a2a5a, 2.2));
-  const dir = new THREE.DirectionalLight(0xffffff, .8);
-  dir.position.set(8, 16, 8); scene.add(dir);
-  const bL = new THREE.PointLight(0x006933, 5, 24);
-  const pL = new THREE.PointLight(0x0b3d2b, 3.5, 20);
-  const cL = new THREE.PointLight(0x125875, 2.5, 18);
-  cL.position.set(0, 9, 0);
-  scene.add(bL, pL, cL);
+  // ══ Ijtimoiy tarmoq: ulangan tugunlar ══════════════════════════
+  // "Ijtimoiy innovatsiya" — odamlar/bilim tugunlari bir-biriga ulanib
+  // sekin suzadi; sichqoncha yaqinlashsa ular unga cho'ziladi.
+  const GREEN_A = new THREE.Color(0x2fae6a);
+  const GREEN_B = new THREE.Color(0x0f7a42);
+  const GOLD    = new THREE.Color(0xe4b363);
+  const BX = 40, BY = 24, BZ = 12;                  // tarqalish hajmi (yarim)
+  const LINK = 6.4;                                 // ulanish masofasi
+  const COUNT = innerWidth < 768 ? 60 : 120;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  const grid = new THREE.GridHelper(40, 40, 0x1a3a8a, 0x0d1f4a);
-  grid.position.y = -4.5; scene.add(grid);
-
-  function edges(mesh, col, op) {
-    mesh.add(new THREE.LineSegments(
-      new THREE.EdgesGeometry(mesh.geometry),
-      new THREE.LineBasicMaterial({ color: col, transparent: true, opacity: op || .85 })
-    ));
+  // yumshoq dumaloq nuqta sprite'i (glow effekti uchun)
+  function dotTexture() {
+    const s = 64, cv = document.createElement('canvas'); cv.width = cv.height = s;
+    const g = cv.getContext('2d');
+    const grd = g.createRadialGradient(s/2, s/2, 0, s/2, s/2, s/2);
+    grd.addColorStop(0,   'rgba(255,255,255,1)');
+    grd.addColorStop(0.4, 'rgba(255,255,255,0.75)');
+    grd.addColorStop(1,   'rgba(255,255,255,0)');
+    g.fillStyle = grd; g.beginPath(); g.arc(s/2, s/2, s/2, 0, Math.PI*2); g.fill();
+    return new THREE.CanvasTexture(cv);
   }
 
-  const G = new THREE.Group();
-  const bM = new THREE.MeshPhongMaterial({ color:0x0d1a0d,emissive:0x0a2a12,emissiveIntensity:.5,shininess:70,transparent:true,opacity:.96 });
-  const gM = new THREE.MeshPhongMaterial({ color:0x0a3d1a,emissive:0x006933,emissiveIntensity:.3,shininess:200,transparent:true,opacity:.55 });
-
-  const tower = new THREE.Mesh(new THREE.BoxGeometry(3.2, 9, 2.4), bM);
-  edges(tower, 0x006933); G.add(tower);
-
-  [[-3,-2.4,0],[3,-2.4,0]].forEach(p => {
-    const w = new THREE.Mesh(new THREE.BoxGeometry(2.8,4.2,2.4), bM.clone());
-    w.position.set(...p); edges(w, 0x125875, .65); G.add(w);
-  });
-
-  const roof = new THREE.Mesh(new THREE.BoxGeometry(3.2,.4,2.4), gM);
-  roof.position.y = 4.7; edges(roof, 0x00a550); G.add(roof);
-
-  const ant = new THREE.Mesh(new THREE.CylinderGeometry(.04,.04,3.8,8), new THREE.MeshBasicMaterial({color:0x125875}));
-  ant.position.y = 6.3; G.add(ant);
-  const tip = new THREE.Mesh(new THREE.SphereGeometry(.2,16,16), new THREE.MeshBasicMaterial({color:0x125875}));
-  tip.position.y = 8.2; G.add(tip);
-
-  const wMat = new THREE.MeshBasicMaterial({color:0x00a550,transparent:true});
-  for(let r=0;r<7;r++) for(let c=0;c<3;c++){
-    const wm=wMat.clone(); wm.opacity=.3+Math.random()*.5;
-    const wp=new THREE.Mesh(new THREE.PlaneGeometry(.3,.42),wm);
-    wp.position.set((c-1)*.78,r*1.05-2.5,1.21); G.add(wp);
+  const nodes = [];
+  const nPos = new Float32Array(COUNT * 3);
+  const nCol = new Float32Array(COUNT * 3);
+  for (let i = 0; i < COUNT; i++) {
+    const gold = Math.random() < 0.14;              // oltin urg'u ~14%
+    const c = gold ? GOLD : (Math.random() < 0.5 ? GREEN_A : GREEN_B);
+    const p = new THREE.Vector3((Math.random()-.5)*BX*2, (Math.random()-.5)*BY*2, (Math.random()-.5)*BZ*2);
+    const v = new THREE.Vector3((Math.random()-.5)*0.022, (Math.random()-.5)*0.02, (Math.random()-.5)*0.014);
+    nodes.push({ p, v, gold });
+    p.toArray(nPos, i*3); c.toArray(nCol, i*3);
   }
-  G.position.y = -4.5; scene.add(G);
 
-  const r1=new THREE.Mesh(new THREE.TorusGeometry(7,.055,8,100),new THREE.MeshBasicMaterial({color:0x006933,transparent:true,opacity:.3}));
-  r1.rotation.x=Math.PI/2; r1.position.y=2; scene.add(r1);
-  const r2=new THREE.Mesh(new THREE.TorusGeometry(5,.04,8,80),new THREE.MeshBasicMaterial({color:0x0b3d2b,transparent:true,opacity:.25}));
-  r2.rotation.set(Math.PI/3,0,Math.PI/6); r2.position.y=4.5; scene.add(r2);
-  const r3=new THREE.Mesh(new THREE.TorusGeometry(9,.03,8,120),new THREE.MeshBasicMaterial({color:0x125875,transparent:true,opacity:.15}));
-  r3.rotation.set(Math.PI/6,Math.PI/4,0); scene.add(r3);
+  const nodeGeo = new THREE.BufferGeometry();
+  nodeGeo.setAttribute('position', new THREE.BufferAttribute(nPos, 3).setUsage(THREE.DynamicDrawUsage));
+  nodeGeo.setAttribute('color',    new THREE.BufferAttribute(nCol, 3));
+  const points = new THREE.Points(nodeGeo, new THREE.PointsMaterial({
+    size: 1.15, map: dotTexture(), vertexColors: true, transparent: true,
+    opacity: 0.95, depthWrite: false, blending: THREE.AdditiveBlending
+  }));
+  scene.add(points);
 
-  const OC=[0x006933,0x0b3d2b,0x125875,0x00a550,0x0b3d2b,0x00c96a];
-  const orbs=OC.map((c,i)=>{
-    const m=new THREE.Mesh(new THREE.OctahedronGeometry(.25+i*.04,0),new THREE.MeshPhongMaterial({color:c,emissive:c,emissiveIntensity:.55}));
-    const a=(i/OC.length)*Math.PI*2;
-    m.position.set(Math.cos(a)*6,1+i*.7,Math.sin(a)*6);
-    m.userData={a,r:6,s:.22+i*.06,y:1+i*.7}; scene.add(m); return m;
-  });
+  // ulanish chiziqlari — har kadrda masofaga qarab qayta quriladi
+  const MAX_LINKS = COUNT * 18;
+  const lPos = new Float32Array(MAX_LINKS * 6);
+  const lCol = new Float32Array(MAX_LINKS * 6);
+  const linkGeo = new THREE.BufferGeometry();
+  linkGeo.setAttribute('position', new THREE.BufferAttribute(lPos, 3).setUsage(THREE.DynamicDrawUsage));
+  linkGeo.setAttribute('color',    new THREE.BufferAttribute(lCol, 3).setUsage(THREE.DynamicDrawUsage));
+  const links = new THREE.LineSegments(linkGeo, new THREE.LineBasicMaterial({
+    vertexColors: true, transparent: true, opacity: 0.62, depthWrite: false, blending: THREE.AdditiveBlending
+  }));
+  scene.add(links);
 
-  const pp=new Float32Array(4000*3);
-  for(let i=0;i<pp.length;i++) pp[i]=(Math.random()-.5)*60;
-  const pg=new THREE.BufferGeometry();
-  pg.setAttribute('position',new THREE.BufferAttribute(pp,3));
-  scene.add(new THREE.Points(pg,new THREE.PointsMaterial({color:0x006933,size:.06,transparent:true,opacity:.45})));
-
-  if(typeof gsap!=='undefined'){
-    gsap.from(G.position,{y:-14,duration:2.6,ease:'elastic.out(1,.55)',delay:.9});
-    gsap.from(G.rotation,{y:Math.PI*.65,duration:2.6,ease:'power3.out',delay:.9});
-  }
+  const mAnchor = new THREE.Vector3(0, 0, 3);        // sichqoncha "tuguni"
+  const MOUSE_R = 10;                                // ta'sir radiusi
 
   let mx=0,my=0;
   document.addEventListener('mousemove',e=>{mx=(e.clientX/innerWidth-.5)*2;my=(e.clientY/innerHeight-.5)*2;});
@@ -371,35 +357,81 @@ document.querySelectorAll('.why-card, .news-card, .cf-wrap, .teacher-card').forE
     updateScrollProgress();
   }, { passive: true });
 
-  const clock=new THREE.Clock();
-  const pts=scene.children.find(c=>c instanceof THREE.Points);
-  (function loop(){
+  const clock = new THREE.Clock();
+
+  // Tugunlar orasidagi (va sichqoncha bilan) ulanishlarni qayta chizadi.
+  function buildLinks() {
+    let n = 0;                                        // yozilgan vertex soni
+    for (let i = 0; i < COUNT; i++) {
+      const a = nodes[i].p;
+      for (let j = i + 1; j < COUNT; j++) {
+        const b = nodes[j].p;
+        const dx = a.x-b.x, dy = a.y-b.y, dz = a.z-b.z;
+        const d2 = dx*dx + dy*dy + dz*dz;
+        if (d2 > LINK*LINK) continue;
+        const s  = (1 - Math.sqrt(d2) / LINK) * 0.9;  // yaqinroq = yorqinroq
+        const warm = nodes[i].gold || nodes[j].gold;  // oltin tugun tegsa iliqroq
+        const r = (warm ? 0.52 : 0.10) * s;
+        const g = (warm ? 0.40 : 0.42) * s;
+        const bl= (warm ? 0.20 : 0.28) * s;
+        lPos[n*3]=a.x; lPos[n*3+1]=a.y; lPos[n*3+2]=a.z;
+        lCol[n*3]=r;   lCol[n*3+1]=g;   lCol[n*3+2]=bl;  n++;
+        lPos[n*3]=b.x; lPos[n*3+1]=b.y; lPos[n*3+2]=b.z;
+        lCol[n*3]=r;   lCol[n*3+1]=g;   lCol[n*3+2]=bl;  n++;
+        if (n >= MAX_LINKS*2 - 2) { i = COUNT; break; }
+      }
+      // sichqoncha tuguniga ulanish (iliq oltin-yashil)
+      const mdx=a.x-mAnchor.x, mdy=a.y-mAnchor.y, mdz=a.z-mAnchor.z;
+      const md2 = mdx*mdx + mdy*mdy + mdz*mdz;
+      if (md2 < MOUSE_R*MOUSE_R && n < MAX_LINKS*2 - 2) {
+        const s = 1 - Math.sqrt(md2) / MOUSE_R;
+        lPos[n*3]=a.x; lPos[n*3+1]=a.y; lPos[n*3+2]=a.z;
+        lCol[n*3]=0.60*s; lCol[n*3+1]=0.48*s; lCol[n*3+2]=0.22*s;  n++;
+        lPos[n*3]=mAnchor.x; lPos[n*3+1]=mAnchor.y; lPos[n*3+2]=mAnchor.z;
+        lCol[n*3]=0.60*s; lCol[n*3+1]=0.48*s; lCol[n*3+2]=0.22*s;  n++;
+      }
+    }
+    linkGeo.setDrawRange(0, n);
+    linkGeo.attributes.position.needsUpdate = true;
+    linkGeo.attributes.color.needsUpdate = true;
+  }
+
+  if (reduce) {                                       // harakat kamaytirilgan: bitta statik kadr
+    buildLinks();
+    camera.lookAt(0, 0, 0);
+    renderer.render(scene, camera);
+    return;
+  }
+
+  (function loop() {
     requestAnimationFrame(loop);
-    const t=clock.getElapsedTime();
-    // Scroll progress'ni smooth qilib modelga uzatamiz.
     scrollT += (scrollYNorm - scrollT) * 0.06;
-    const scrollRot = scrollT * Math.PI * 1.25;
-    const scrollLift = scrollT * 1.6;
-    G.rotation.y=Math.sin(t*.13)*.1+mx*.055;
-    G.rotation.y += scrollRot;
-    G.rotation.x = Math.sin(t * .09) * .03 + scrollT * .12;
-    G.position.y = -4.5 + scrollLift;
-    r1.rotation.z=t*.17; r2.rotation.y=t*.12; r3.rotation.x=t*.08;
-    r1.position.y = 2 + scrollT * .7;
-    r2.position.y = 4.5 + scrollT * .55;
-    r3.position.y = scrollT * .4;
-    orbs.forEach(o=>{
-      const d=o.userData; d.a+=d.s*.01;
-      o.position.set(Math.cos(d.a)*d.r,d.y+Math.sin(t+d.a)*.55,Math.sin(d.a)*d.r);
-      o.rotation.x+=.018; o.rotation.y+=.024;
-    });
-    if(pts){pts.rotation.y=t*.022;pts.rotation.x=t*.007;}
-    bL.position.set(Math.cos(t*.42)*9,4,Math.sin(t*.42)*9);
-    pL.position.set(Math.cos(t*.33+Math.PI)*8,3,Math.sin(t*.33+Math.PI)*8);
-    camera.position.y=4+Math.sin(t*.27)*.3-my*.28 + scrollT * .5;
-    camera.position.x=mx*1.3 + scrollT * .35;
-    camera.lookAt(0,1,0);
-    renderer.render(scene,camera);
+
+    // sichqoncha tugunini kamera oldida joylashtiramiz
+    mAnchor.set(camera.position.x + mx * 22, camera.position.y - my * 13, 3);
+
+    for (let i = 0; i < COUNT; i++) {
+      const p = nodes[i].p, v = nodes[i].v;
+      const mdx = mAnchor.x-p.x, mdy = mAnchor.y-p.y, mdz = mAnchor.z-p.z;
+      const md2 = mdx*mdx + mdy*mdy + mdz*mdz;
+      if (md2 < MOUSE_R*MOUSE_R) {                    // sichqonchaga yumshoq intilish
+        const f = 0.00016 * (1 - Math.sqrt(md2) / MOUSE_R);
+        v.x += mdx*f; v.y += mdy*f; v.z += mdz*f;
+      }
+      p.x += v.x; p.y += v.y; p.z += v.z;
+      if (p.x >  BX) { p.x =  BX; v.x*=-1; } else if (p.x < -BX) { p.x = -BX; v.x*=-1; }
+      if (p.y >  BY) { p.y =  BY; v.y*=-1; } else if (p.y < -BY) { p.y = -BY; v.y*=-1; }
+      if (p.z >  BZ) { p.z =  BZ; v.z*=-1; } else if (p.z < -BZ) { p.z = -BZ; v.z*=-1; }
+      v.multiplyScalar(0.995);                        // damping
+      p.toArray(nPos, i*3);
+    }
+    nodeGeo.attributes.position.needsUpdate = true;
+    buildLinks();
+
+    camera.position.x += (mx * 3.2 - camera.position.x) * 0.03;
+    camera.position.y += ((-my * 2.4 + scrollT * 8) - camera.position.y) * 0.03;
+    camera.lookAt(camera.position.x * 0.4, camera.position.y * 0.5, 0);
+    renderer.render(scene, camera);
   })();
 })();
 

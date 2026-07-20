@@ -50,10 +50,7 @@
         </div>
 
         <div class="socials">
-          {% if settings.facebook %}<a href="{{ settings.facebook }}" class="soc-btn" target="_blank"><b>f</b></a>{% endif %}
-          {% if settings.instagram %}<a href="{{ settings.instagram }}" class="soc-btn" target="_blank">📷</a>{% endif %}
-          {% if settings.telegram %}<a href="{{ settings.telegram }}" class="soc-btn" target="_blank">✈</a>{% endif %}
-          {% if settings.youtube %}<a href="{{ settings.youtube }}" class="soc-btn" target="_blank">▶</a>{% endif %}
+          {% include 'partials/socials.html' %}
         </div>
 
         <!-- Map placeholder -->

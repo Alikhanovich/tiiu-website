@@ -21,7 +21,7 @@
           <span class="nc-cat">Tanlov</span>
         </div>
         <div class="nc-body">
-          {% if c.deadline %}<div class="nc-date">⏰ Muddat: {{ c.deadline|date:"d-B Y" }}</div>{% endif %}
+          {% if c.deadline %}<div class="nc-date">⏰ Muddat: {{ c.deadline|date:"d.m.Y" }}</div>{% endif %}
           <div class="nc-title">{{ c.title|truncatewords:10 }}</div>
           {% if c.description %}<p style="font-size:.82rem;color:var(--text2);line-height:1.6;margin-bottom:10px">{{ c.description|truncatewords:16 }}</p>{% endif %}
           <span class="nc-more">Batafsil →</span>

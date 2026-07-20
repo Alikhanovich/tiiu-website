@@ -28,7 +28,7 @@
           <span class="nc-cat">Konferensiya</span>
         </div>
         <div class="nc-body">
-          <div class="nc-date">📅 {{ c.start_date|date:"d-B Y" }}{% if c.location %} · 📍 {{ c.location }}{% endif %}</div>
+          <div class="nc-date">📅 {{ c.start_date|date:"d.m.Y" }}{% if c.location %} · 📍 {{ c.location }}{% endif %}</div>
           <div class="nc-title">{{ c.title|truncatewords:10 }}</div>
           {% if c.description %}<p style="font-size:.82rem;color:var(--text2);line-height:1.6;margin-bottom:10px">{{ c.description|truncatewords:16 }}</p>{% endif %}
           <span class="nc-more">Batafsil →</span>

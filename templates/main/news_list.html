@@ -44,7 +44,7 @@
           {% endif %}
         </div>
         <div class="nc-body">
-          <div class="nc-date">{{ article.created_at|date:"d-B Y" }}</div>
+          <div class="nc-date">{{ article.created_at|date:"d.m.Y" }}</div>
           <div class="nc-title">{{ article.title }}</div>
           <p style="font-size:.82rem;color:var(--text2);margin-bottom:12px;line-height:1.6">{{ article.short_text|truncatewords:18 }}</p>
           <a href="{% url 'news_detail' article.slug %}" class="nc-more">Oʻqish <span>→</span></a>

@@ -14,7 +14,7 @@
     <div class="tag" style="margin-bottom:12px"><span class="dot"></span>Tadbir</div>
     <h1 class="page-title" style="max-width:800px">{{ event.title }}</h1>
     <div style="display:flex;align-items:center;gap:20px;margin-top:16px;font-size:.8rem;color:var(--text3)">
-      <span>📅 {{ event.event_date|date:"d-B Y, H:i" }}</span>
+      <span>📅 {{ event.event_date|date:"d.m.Y, H:i" }}</span>
       {% if event.location %}<span>📍 {{ event.location }}</span>{% endif %}
       <span>👁 {{ event.views }} koʻrish</span>
     </div>
@@ -73,7 +73,7 @@
             📅 Tadbir ma'lumotlari
           </div>
           <div style="font-size:.84rem;color:var(--text2);display:flex;flex-direction:column;gap:12px">
-            <div><span style="color:var(--text3)">Sana:</span><br>{{ event.event_date|date:"d-B Y" }}</div>
+            <div><span style="color:var(--text3)">Sana:</span><br>{{ event.event_date|date:"d.m.Y" }}</div>
             <div><span style="color:var(--text3)">Vaqt:</span><br>{{ event.event_date|date:"H:i" }}</div>
             {% if event.location %}
             <div><span style="color:var(--text3)">Joy:</span><br>{{ event.location }}</div>

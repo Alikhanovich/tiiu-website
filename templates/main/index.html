@@ -327,7 +327,7 @@
           <div class="fac-front" {% if f.image %}style="background-image:url('{{ f.image.url }}')"{% endif %}>
             {% if f.short_name %}<div class="fac-badge">{{ f.short_name }}</div>{% endif %}
             <div class="fac-front-c">
-              <div class="fac-num">0{{ forloop.counter }} — {{ f.get_degree_display }}</div>
+              <div class="fac-num">{{ forloop.counter|stringformat:"02d" }} — {{ f.get_degree_display }}</div>
               <div class="fac-title">{{ f.name }}</div>
             </div>
           </div>
@@ -412,7 +412,7 @@
           {% endif %}
         </div>
         <div class="nc-body">
-          <div class="nc-date">{{ article.created_at|date:"d-B Y" }}</div>
+          <div class="nc-date">{{ article.created_at|date:"d.m.Y" }}</div>
           <div class="nc-title">{{ article.title|truncatewords:14 }}</div>
           <a href="{% url 'news_detail' article.slug %}" class="nc-more">Batafsil oʻqish <span>→</span></a>
         </div>
@@ -448,7 +448,7 @@
           <span class="nc-cat">Tadbir</span>
         </div>
         <div class="nc-body">
-          <div class="nc-date">{{ ev.event_date|date:"d-B Y, H:i" }}</div>
+          <div class="nc-date">{{ ev.event_date|date:"d.m.Y, H:i" }}</div>
           <div class="nc-title">{{ ev.title }}</div>
           {% if ev.location %}<p style="font-size:.78rem;color:var(--text3);margin-bottom:10px">📍 {{ ev.location }}</p>{% endif %}
           <a href="{% url 'event_detail' ev.slug %}" class="nc-more">Batafsil <span>→</span></a>

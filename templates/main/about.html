@@ -114,7 +114,7 @@
           <div class="fac-front" {% if f.image %}style="background-image:url('{{ f.image.url }}')"{% endif %}>
             {% if f.short_name %}<div class="fac-badge">{{ f.short_name }}</div>{% endif %}
             <div class="fac-front-c">
-              <div class="fac-num">0{{ forloop.counter }} — {{ f.get_degree_display }}</div>
+              <div class="fac-num">{{ forloop.counter|stringformat:"02d" }} — {{ f.get_degree_display }}</div>
               <div class="fac-title">{{ f.name }}</div>
             </div>
           </div>

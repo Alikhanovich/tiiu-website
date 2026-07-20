@@ -16,7 +16,7 @@
     <h1 class="page-title" style="max-width:800px">{{ obj.title }}</h1>
     <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:16px;font-size:.82rem;color:var(--text3)">
       <span>✍️ {{ obj.authors }}</span>
-      {% if obj.published_date %}<span>📅 {{ obj.published_date|date:"d-B Y" }}</span>{% endif %}
+      {% if obj.published_date %}<span>📅 {{ obj.published_date|date:"d.m.Y" }}</span>{% endif %}
       {% if obj.journal_name %}<span>📚 {{ obj.journal_name }}</span>{% endif %}
       <span>👁 {{ obj.views }} koʻrish</span>
     </div>
@@ -60,7 +60,7 @@
           <div style="font-family:'Space Grotesk',sans-serif;font-size:.9rem;font-weight:700;margin-bottom:16px;color:#fff">📄 Maqola ma'lumotlari</div>
           <div style="font-size:.83rem;color:var(--text2);display:flex;flex-direction:column;gap:10px">
             <div><span style="color:var(--text3)">Mualliflar:</span><br>{{ obj.authors }}</div>
-            {% if obj.published_date %}<div><span style="color:var(--text3)">Nashr sanasi:</span><br>{{ obj.published_date|date:"d-B Y" }}</div>{% endif %}
+            {% if obj.published_date %}<div><span style="color:var(--text3)">Nashr sanasi:</span><br>{{ obj.published_date|date:"d.m.Y" }}</div>{% endif %}
             {% if obj.journal_name %}<div><span style="color:var(--text3)">Jurnal:</span><br>{{ obj.journal_name }}</div>{% endif %}
             <div><span style="color:var(--text3)">Til:</span><br>{{ obj.get_language_display }}</div>
           </div>

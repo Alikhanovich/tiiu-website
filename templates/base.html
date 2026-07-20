@@ -172,12 +172,9 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="footer-logo">{{ settings.site_name }}</div>
-        <p>{{ settings.about_text|default:settings.site_name_full }} — zamonaviy bilim va koʻnikmalar orqali kelajak mutaxassislarini tayyorlaydigan nodavlat oliy ta'lim muassasasi.</p>
+        <p>{{ settings.site_name_full }} — zamonaviy bilim va koʻnikmalar orqali kelajak mutaxassislarini tayyorlaydigan nodavlat oliy ta'lim muassasasi.</p>
         <div class="fsocials">
-          {% if settings.facebook %}<a href="{{ settings.facebook }}" class="soc-btn" target="_blank" rel="noopener"><b>f</b></a>{% endif %}
-          {% if settings.instagram %}<a href="{{ settings.instagram }}" class="soc-btn" target="_blank" rel="noopener">📷</a>{% endif %}
-          {% if settings.telegram %}<a href="{{ settings.telegram }}" class="soc-btn" target="_blank" rel="noopener">✈</a>{% endif %}
-          {% if settings.youtube %}<a href="{{ settings.youtube }}" class="soc-btn" target="_blank" rel="noopener">▶</a>{% endif %}
+          {% include 'partials/socials.html' %}
         </div>
       </div>
 
@@ -223,7 +220,7 @@
 <script src="{% static 'js/three.min.js' %}"></script>
 <script src="{% static 'js/gsap.min.js' %}"></script>
 <script src="{% static 'js/ScrollTrigger.min.js' %}"></script>
-<script src="{% static 'js/main.js' %}?v=6"></script>
+<script src="{% static 'js/main.js' %}?v=8"></script>
 {% block extra_js %}{% endblock %}
 </body>
 </html>

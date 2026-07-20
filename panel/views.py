@@ -50,6 +50,24 @@ def dt(obj, field):
     return v.strftime('%d.%m.%Y %H:%M') if v else None
 
 
+def parse_dt(value):
+    """DateTimeField uchun sanani parse qiladi. `datetime-local` ('2026-10-01T09:00')
+    va faqat-sana ('2026-10-01') formatlarining ikkalasini ham qo'llab-quvvatlaydi."""
+    if not value:
+        return None
+    from datetime import datetime, time
+    from django.utils import timezone
+    from django.utils.dateparse import parse_date, parse_datetime
+    parsed = parse_datetime(value)
+    if parsed is None:
+        d = parse_date(value)
+        if d is not None:
+            parsed = datetime.combine(d, time.min)
+    if parsed is not None and timezone.is_naive(parsed):
+        parsed = timezone.make_aware(parsed, timezone.get_current_timezone())
+    return parsed
+
+
 # ── SPA shell ────────────────────────────────────────────────────────────────
 @ensure_csrf_cookie
 def panel_home(request):
@@ -59,7 +77,10 @@ def panel_home(request):
 # ── Auth ─────────────────────────────────────────────────────────────────────
 @require_http_methods(['POST'])
 def api_login(request):
-    d = json.loads(request.body)
+    try:
+        d = json.loads(request.body)
+    except (ValueError, json.JSONDecodeError):
+        return JsonResponse({'success': False, 'error': "Noto'g'ri so'rov"}, status=400)
     user = authenticate(request, username=d.get('username'), password=d.get('password'))
     if user and user.is_staff:
         login(request, user)
@@ -498,10 +519,9 @@ def serialize_event(o):
 def api_events(request):
     if request.method == 'POST':
         d = request.POST
-        from django.utils.dateparse import parse_datetime
         o = Event(title=d['title'], description=d.get('description',''),
                   body=d.get('body',''), location=d.get('location',''),
-                  event_date=parse_datetime(d['event_date']), is_active=d.get('is_active')=='true')
+                  event_date=parse_dt(d['event_date']), is_active=d.get('is_active')=='true')
         if 'image' in request.FILES: o.image = request.FILES['image']
         o.save()
         return JsonResponse({'success':True,'data':serialize_event(o)})
@@ -540,11 +560,10 @@ def api_event_detail(request, pk):
     if request.method == 'DELETE':
         o.delete(); return JsonResponse({'success':True})
     if request.method == 'POST':
-        from django.utils.dateparse import parse_datetime
         d = request.POST
         for f in ['title','description','body','location']:
             if f in d: setattr(o,f,d[f])
-        if 'event_date' in d: o.event_date = parse_datetime(d['event_date'])
+        if 'event_date' in d: o.event_date = parse_dt(d['event_date'])
         if 'is_active' in d: o.is_active = d['is_active']=='true'
         if 'image' in request.FILES: o.image = request.FILES['image']
         o.save()
@@ -640,6 +659,9 @@ def api_messages(request):
 def api_message_detail(request, pk):
     try: o = ContactMessage.objects.get(pk=pk)
     except ContactMessage.DoesNotExist: return JsonResponse({'success':False,'error':'Topilmadi'},status=404)
+    if request.method == 'DELETE':
+        o.delete()
+        return JsonResponse({'success':True})
     if request.method == 'POST':
         d = json.loads(request.body)
         if 'status' in d: o.status = d['status']; o.save()
@@ -897,13 +919,12 @@ def serialize_conference(o):
 @staff_only
 def api_conferences(request):
     if request.method == 'POST':
-        from django.utils.dateparse import parse_date
         d = request.POST
         o = Conference(title=d['title'], description=d.get('description',''),
             location=d.get('location',''), registration_url=d.get('registration_url',''),
             is_active=d.get('is_active')=='true')
-        if d.get('start_date'): o.start_date = parse_date(d['start_date'])
-        if d.get('end_date'): o.end_date = parse_date(d['end_date'])
+        if d.get('start_date'): o.start_date = parse_dt(d['start_date'])
+        if d.get('end_date'): o.end_date = parse_dt(d['end_date'])
         if 'poster_image' in request.FILES: o.poster_image = request.FILES['poster_image']
         if 'cover_image' in request.FILES: o.cover_image = request.FILES['cover_image']
         if 'pdf_file' in request.FILES: o.pdf_file = request.FILES['pdf_file']
@@ -920,12 +941,11 @@ def api_conference_detail(request, pk):
     if request.method == 'DELETE':
         o.delete(); return JsonResponse({'success':True})
     if request.method == 'POST':
-        from django.utils.dateparse import parse_date
         d = request.POST
         for f in ['title','description','location','registration_url']:
             if f in d: setattr(o,f,d[f])
-        if 'start_date' in d and d['start_date']: o.start_date = parse_date(d['start_date'])
-        if 'end_date' in d and d['end_date']: o.end_date = parse_date(d['end_date'])
+        if 'start_date' in d and d['start_date']: o.start_date = parse_dt(d['start_date'])
+        if 'end_date' in d and d['end_date']: o.end_date = parse_dt(d['end_date'])
         if 'is_active' in d: o.is_active = d['is_active']=='true'
         if 'poster_image' in request.FILES: o.poster_image = request.FILES['poster_image']
         if 'cover_image' in request.FILES: o.cover_image = request.FILES['cover_image']
@@ -948,11 +968,10 @@ def serialize_contest(o):
 @staff_only
 def api_contests(request):
     if request.method == 'POST':
-        from django.utils.dateparse import parse_date
         d = request.POST
         o = Contest(title=d['title'], description=d.get('description',''),
             is_active=d.get('is_active')=='true')
-        if d.get('deadline'): o.deadline = parse_date(d['deadline'])
+        if d.get('deadline'): o.deadline = parse_dt(d['deadline'])
         if 'cover_image' in request.FILES: o.cover_image = request.FILES['cover_image']
         if 'pdf_file' in request.FILES: o.pdf_file = request.FILES['pdf_file']
         o.save()
@@ -968,11 +987,10 @@ def api_contest_detail(request, pk):
     if request.method == 'DELETE':
         o.delete(); return JsonResponse({'success':True})
     if request.method == 'POST':
-        from django.utils.dateparse import parse_date
         d = request.POST
         for f in ['title','description']:
             if f in d: setattr(o,f,d[f])
-        if 'deadline' in d and d['deadline']: o.deadline = parse_date(d['deadline'])
+        if 'deadline' in d and d['deadline']: o.deadline = parse_dt(d['deadline'])
         if 'is_active' in d: o.is_active = d['is_active']=='true'
         if 'cover_image' in request.FILES: o.cover_image = request.FILES['cover_image']
         if 'pdf_file' in request.FILES: o.pdf_file = request.FILES['pdf_file']
