@@ -621,6 +621,15 @@
   }
 },
 {
+  "model": "main.newscategory",
+  "pk": 3,
+  "fields": {
+    "name": "Yangiliklar",
+    "slug": "yangiliklar",
+    "color": "#3b82f6"
+  }
+},
+{
   "model": "main.news",
   "pk": 5,
   "fields": {
@@ -904,7 +913,7 @@
     "views": 0,
     "is_active": true,
     "is_featured": false,
-    "created_at": "2026-05-05T10:36:53Z",
+    "created_at": "2026-05-05T05:36:53Z",
     "updated_at": "2026-07-18T18:02:55.832Z"
   }
 },
@@ -1287,6 +1296,150 @@
   }
 },
 {
+  "model": "main.news",
+  "pk": 42,
+  "fields": {
+    "title": "HAFTANING JUMA KUNI- MILLIY KUN !",
+    "slug": "haftaning-juma-kuni-milliy-kun",
+    "category": 3,
+    "image": "news/haftaning-juma-kuni-milliy-kun.jpg",
+    "short_text": "Pedagogika va psixologiya kafedrasi professor-o‘qituvchilari milliyligimizni keng jamoatchilikka targ’ib qilish maqsadida JADIDLAR. Turkistonga maktublar ko’rgazmasiga milliy liboslarda tashrif buyurishdi.",
+    "body": "<p>Pedagogika va psixologiya kafedrasi professor-o‘qituvchilari milliyligimizni keng jamoatchilikka targ’ib qilish maqsadida JADIDLAR. Turkistonga maktublar ko’rgazmasiga milliy liboslarda tashrif buyurishdi.</p>\n<p><img src=\"/media/news/inline/haftaning-juma-kuni-milliy-kun-photo_2025-02-12_14-42-09-600x600.jpg\"></p>",
+    "author": "",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2025-02-12T09:43:38Z",
+    "updated_at": "2026-07-20T13:09:47.155Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 43,
+  "fields": {
+    "title": "SIRTQI TA’LIM TALABALARIGA DARSLAR BOSHLANMOQDA!",
+    "slug": "sirtqi-talim-talabalariga-darslar-boshlanmoqda",
+    "category": 3,
+    "image": "news/sirtqi-talim-talabalariga-darslar-boshlanmoqda.jpg",
+    "short_text": "Jadvalda koʻrsatilgan yoʻnalishlar boʻyicha sirtqi ta’lim talabalari uchun navbatdagi darslar ma’lum bo’ldi Oʻqish kunlari va soatlari bilan tanishib chiqing. Boshlanayotgan semestrda barchaga omad tilaymiz!",
+    "body": "<p>Jadvalda koʻrsatilgan yoʻnalishlar boʻyicha sirtqi ta’lim talabalari uchun navbatdagi darslar ma’lum bo’ldi</p>\n<p>Oʻqish kunlari va soatlari bilan tanishib chiqing.</p>\n<p>Boshlanayotgan semestrda barchaga omad tilaymiz!</p>\n<p><img src=\"/media/news/inline/sirtqi-talim-talabalariga-darslar-boshla-photo_2025-10-08_12-10-40-600x600.jpg\"></p>\n<p><img src=\"/media/news/inline/sirtqi-talim-talabalariga-darslar-boshla-photo_2025-10-08_12-10-44-600x600.jpg\"></p>\n<p><img src=\"/media/news/inline/sirtqi-talim-talabalariga-darslar-boshla-photo_2025-10-08_12-10-47-600x600.jpg\"></p>\n<p><img src=\"/media/news/inline/sirtqi-talim-talabalariga-darslar-boshla-photo_2025-10-08_12-10-49-600x600.jpg\"></p>\n<p><img src=\"/media/news/inline/sirtqi-talim-talabalariga-darslar-boshla-photo_2025-10-08_12-10-52-600x600.jpg\"></p>",
+    "author": "",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2025-10-04T07:12:56Z",
+    "updated_at": "2026-07-20T13:09:48.109Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 44,
+  "fields": {
+    "title": "TADBIR",
+    "slug": "tadbir",
+    "category": 3,
+    "image": "news/tadbir.jpg",
+    "short_text": "10-oktyabr soat 11:00 da Xalqaro qizlar kuni munosabati bilan “Rahbar ayolning jamiyatdagi o’rni” mavzusida davra suhbati bo’lib o’tadi. Ushbu davra suhbatiga juma- milliy kun ekanligini inobatga olib milliy liboslarda kelishingizni so’rab qolamiz.",
+    "body": "<p><img src=\"/media/news/inline/tadbir-photo_2025-10-08_12-04-37-600x600.jpg\"></p>\n<p>10-oktyabr soat 11:00 da Xalqaro qizlar kuni munosabati bilan “Rahbar ayolning jamiyatdagi o’rni” mavzusida davra suhbati bo’lib o’tadi.</p>\n<p>Ushbu davra suhbatiga juma- milliy kun ekanligini inobatga olib milliy liboslarda kelishingizni so’rab qolamiz.</p>",
+    "author": "",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2025-10-08T07:06:16Z",
+    "updated_at": "2026-07-20T13:09:49.056Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 45,
+  "fields": {
+    "title": "Kadrlar so‘zlaydi…",
+    "slug": "kadrlar-sozlaydi",
+    "category": 3,
+    "image": "news/kadrlar-sozlaydi.jpg",
+    "short_text": "Kuni kecha o‘tkazilgan tadbir haqiqiy bayram kayfiyati, samimiyat va yorqin lahzalar bilan esda qoldi. Biz esa o‘sha quvonchli onlarni siz uchun eng sara fotolavhalarga jamladik. Har bir surat — bir voqea. Har bir tabassum — bir esdalik. Har bir kadr — o‘ziga xos tarix. Bir ko‘z yugurtirib chiqing… balki shu suratlar orasida o‘zingizni, do‘stlaringizni […]",
+    "body": "<p>Kuni kecha o‘tkazilgan tadbir haqiqiy bayram kayfiyati, samimiyat va yorqin lahzalar bilan esda qoldi. Biz esa o‘sha quvonchli onlarni siz uchun eng sara fotolavhalarga jamladik.</p>\n<p><img src=\"/media/news/inline/kadrlar-sozlaydi-photo_2025-11-26_18-43-28-600x600.jpg\"></p>\n<p><img src=\"/media/news/inline/kadrlar-sozlaydi-photo_2025-11-26_18-43-32-600x600.jpg\"></p>\n<p><img src=\"/media/news/inline/kadrlar-sozlaydi-photo_2025-11-26_18-43-37-600x600.jpg\"></p>\n<p>Har bir surat — bir voqea.<br>\nHar bir tabassum — bir esdalik.<br>\nHar bir kadr — o‘ziga xos tarix.</p>\n<p>Bir ko‘z yugurtirib chiqing… balki shu suratlar orasida o‘zingizni, do‘stlaringizni yoki unutilmas lahzangizni ko`rishingiz mumkin.</p>\n<p><img src=\"/media/news/inline/kadrlar-sozlaydi-photo_2025-11-26_18-43-40-600x600.jpg\"></p>\n<p>Ha aytgancha, bayram sizga yoqdimi?<br>\nKayfiyatingiz qanday bo‘lganini izohlarda yozib qoldiring — biz uchun bu juda muhim!</p>\n<p><img src=\"/media/news/inline/kadrlar-sozlaydi-photo_2025-11-26_18-43-47-600x600.jpg\"></p>\n<p><img src=\"/media/news/inline/kadrlar-sozlaydi-photo_2025-11-26_18-43-43-600x600.jpg\"></p>\n<p><img src=\"/media/news/inline/kadrlar-sozlaydi-photo_2025-11-26_18-43-51-600x600.jpg\"></p>\n<p><img src=\"/media/news/inline/kadrlar-sozlaydi-photo_2025-11-26_18-43-54-600x600.jpg\"></p>",
+    "author": "",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2025-11-22T13:49:25Z",
+    "updated_at": "2026-07-20T13:09:50.304Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 46,
+  "fields": {
+    "title": "FOTOJAMLANMA",
+    "slug": "fotojamlanma",
+    "category": 3,
+    "image": "news/fotojamlanma.jpg",
+    "short_text": "",
+    "body": "<p><img src=\"/media/news/inline/fotojamlanma-f1-600x600.jpg\"></p>\n<p><img src=\"/media/news/inline/fotojamlanma-photo_2025-12-01_15-24-45-600x600.jpg\"></p>\n<p><img src=\"/media/news/inline/fotojamlanma-photo_2025-12-01_15-25-01-600x600.jpg\"></p>\n<p><img src=\"/media/news/inline/fotojamlanma-photo_2025-12-01_15-25-12-600x600.jpg\"></p>\n<p><img src=\"/media/news/inline/fotojamlanma-photo_2025-12-01_15-25-17-600x600.jpg\"></p>\n<p><img src=\"/media/news/inline/fotojamlanma-photo_2025-12-01_15-25-21-600x600.jpg\"></p>",
+    "author": "",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2025-12-01T10:50:46Z",
+    "updated_at": "2026-07-20T13:09:51.464Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 47,
+  "fields": {
+    "title": "Hurmatli ota-onalar, qadrli professor-o‘qituvchilar, aziz talabalar!",
+    "slug": "hurmatli-ota-onalar-qadrli-professor-oqituvchilar-aziz-talabalar",
+    "category": 3,
+    "image": "news/hurmatli-ota-onalar-qadrli-professor-oqituvchilar-aziz-talab.jpg",
+    "short_text": "Bugungi globallashuv jarayonida jamiyat va millat salomatligiga jiddiy xavf tug‘dirayotgan illatlardan biri — bu giyohvandlik va narkojinoyatlardir. Ushbu illat nafaqat yoshlarning hayotini, balki butun millatning genofondi, kelajagi va intellektual salohiyatiga katta zarar yetkazishini ta’kidlab o‘tish zarur. Universitet jamoasi sifatida bizning bosh maqsadimiz — yoshlarimizni sog‘lom, bilimli, ma’naviy yetuk va vatanparvar insonlar etib tarbiyalashdir. Bu esa, […]",
+    "body": "<p>Bugungi globallashuv jarayonida jamiyat va millat salomatligiga jiddiy xavf tug‘dirayotgan illatlardan biri — bu giyohvandlik va narkojinoyatlardir. Ushbu illat nafaqat yoshlarning hayotini, balki butun millatning genofondi, kelajagi va intellektual salohiyatiga katta zarar yetkazishini ta’kidlab o‘tish zarur.</p>\n<p>Universitet jamoasi sifatida bizning bosh maqsadimiz — yoshlarimizni sog‘lom, bilimli, ma’naviy yetuk va vatanparvar insonlar etib tarbiyalashdir. Bu esa, avvalo, ulami giyohvandlik kabi ofatlardan himoya qilish, sog‘lom turmush tarzi yo‘riqlarini bilish bilan chambarchas bog‘liq.</p>\n<p>Shu boisdan, biz barcha ota-onalar, professor-o‘qituvchilar va talabalardan quyidagi qoidalarga qat’iy rioya etishlarini so‘raymiz:</p>\n<p><strong>Hurmatli Ota-onalar!</strong></p>\n<p>Farzandlaringizning do‘stlari, bo‘sh vaqtini o‘tkazish joylari, psixologik holati va qiziqishlari bilan muntazam qiziqib boring. Oilada sog‘lom muhit va mehr-muhabbatning mavjudligi yoshlarni yomon yo‘ldan asraydi.</p>\n<p>Muhtaram ustozlar!</p>\n<p>Dars jarayonida va tashqi faoliyatda talabalarga sog‘lom hayot, mas’uliyat va yot g‘oyalardan ehtiyot bo‘lish zarurati haqida tushuntirish ishlarini kuchaytirishingizni so‘raymiz. Har bir pedagog yosh avlodning ma’naviy yo‘l-yo‘riqida ishonchli yo‘lboshchi bo‘lishi kerak.</p>\n<p><strong>Aziz talaba-yoshlar!</strong></p>\n<p>Siz mamlakatimiz kelajagisiz. Har biringizdan o‘zingiz, oilangiz va jamiyat oldida mas’uliyatli bo‘lishni so‘raymiz. Giyohvandlikdan yiroq bo‘lish — bu faqat shaxsiy tanlov emas, balki o‘z taqdiriga, kelajak avlod genofondiga bo‘lgan hurmatdir. Bir-biringizni ehtiyot qiling, ogohlik va hushyorlikni qo‘ldan bermang.</p>\n<p>Universitetda bu yo‘nalishda profilaktik mashg‘ulotlar, psixologik maslahatlar, sport va madaniy tadbirlar muntazam o‘tkazilmoqda. Bizning eng katta maqsadimiz — giyohvandlikka qarshi kurashda jamiyatning barcha bo‘g‘inlarini birlashtirish va ushbu xavfning ildiziga barham berishdir.</p>\n<p><strong>Hurmatli jamoa a’zolari!</strong></p>\n<p>Sog‘lom va barkamol avlod — millatning eng katta boyligidir. Keling, farzandlarimiz, talabalarimiz va butun jamiyatning kelajagi yo‘lida birgalikda mas’uliyatli bo‘laylik. Giyohvandlik va narkojinoyatlarga qarshi kurashda har birimizning hissamiz muhim.</p>\n<p>E’tiboringiz uchun rahmat!</p>\n<p>Akbar Maxmudov<br>\nToshkent ijtimoiy innovatsiya universiteti rektori</p>",
+    "author": "",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2025-12-04T05:07:52Z",
+    "updated_at": "2026-07-20T13:09:52.502Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 48,
+  "fields": {
+    "title": "Kitob olami” kitoblar festivali",
+    "slug": "kitob-olami-kitoblar-festivali",
+    "category": 3,
+    "image": "news/kitob-olami-kitoblar-festivali.jpg",
+    "short_text": "Ayni damda universitetimizning faol talabalari va professor-o‘qituvchilari O‘zbekiston Yoshlar Ittifoqi Markaziy Kengashi tomonidan Yoshlar ijod saroyida tashkil etilgan “Kitob olami” kitoblar festivalida ishtirok etib, o‘z bilimlari va ijodiy fikrlari bilan tadbirga yanada fayz bag‘ishlamoqdalar. Mazkur festival kitob mutolaasi, adabiyotga mehr, ijod va ma’rifatni targ‘ib qilishga qaratilgan bo‘lib, tashrif buyurgan yoshlar uchun turli ma’naviy uchrashuvlar, […]",
+    "body": "<p>Ayni damda universitetimizning faol talabalari va professor-o‘qituvchilari O‘zbekiston Yoshlar Ittifoqi Markaziy Kengashi tomonidan Yoshlar ijod saroyida tashkil etilgan “Kitob olami” kitoblar festivalida ishtirok etib, o‘z bilimlari va ijodiy fikrlari bilan tadbirga yanada fayz bag‘ishlamoqdalar.</p>\n<p><img src=\"/media/news/inline/kitob-olami-kitoblar-festivali-photo_2025-12-05_16-05-03-600x600.jpg\"></p>\n<p>Mazkur festival kitob mutolaasi, adabiyotga mehr, ijod va ma’rifatni targ‘ib qilishga qaratilgan bo‘lib, tashrif buyurgan yoshlar uchun turli ma’naviy uchrashuvlar, kitob taqdimotlari, yozuvchilar bilan suhbatlar va qiziqarli ko‘rgazmalar taqdim etilmoqda.</p>\n<p><img src=\"/media/news/inline/kitob-olami-kitoblar-festivali-photo_2025-12-05_16-05-33-600x600.jpg\"></p>\n<p><img src=\"/media/news/inline/kitob-olami-kitoblar-festivali-photo_2025-12-05_16-05-25-600x600.jpg\"></p>\n<p>📣 Eslatib o‘tamiz:<br>\nFestival 5–6 dekabr kunlari, soat 10:00 dan 18:00 gacha Yoshlar ijod saroyida davom etadi.</p>\n<p>📚 Kitobsevar talabalarimizni ushbu ma’rifiy va ilhom baxsh etuvchi tadbirda faol ishtirok etishga taklif etamiz!<br>\nAdabiyot olamini birga kashf etamiz!</p>",
+    "author": "",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2025-12-05T11:09:16Z",
+    "updated_at": "2026-07-20T13:09:53.527Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 49,
+  "fields": {
+    "title": "KO’CHMA DARS",
+    "slug": "kochma-dars",
+    "category": 3,
+    "image": "news/kochma-dars.jpg",
+    "short_text": "Filologiya va tillarni o‘qitish (arab tili) yo’nalishi talabalari bilan birgalikda “Hasti imom” majmuasida “Termiziy avlodlari” nomli ko’chma dars mashg‘uloti o’tkazildi. Talabalar majmua tarixi va bugungi kundagi faoliyati bilan tanishib, u yerda “Katta Langar Qur’oni” va uning turli xil tillarga tarjima qilingan nusxalari joylashgan Baroqxon madrasasi bilan tanishishdi.",
+    "body": "<p><img src=\"/media/news/inline/kochma-dars-photo_2025-12-05_16-02-32-600x600.jpg\"></p>\n<p>Filologiya va tillarni o‘qitish (arab tili) yo’nalishi talabalari bilan birgalikda “Hasti imom” majmuasida “Termiziy avlodlari” nomli ko’chma dars mashg‘uloti o’tkazildi.</p>\n<p>Talabalar majmua tarixi va bugungi kundagi faoliyati bilan tanishib, u yerda “Katta Langar Qur’oni” va uning turli xil tillarga tarjima qilingan nusxalari joylashgan Baroqxon madrasasi bilan tanishishdi.</p>\n<p><img src=\"/media/news/inline/kochma-dars-photo_2025-12-05_16-09-31-600x600.jpg\"></p>\n<p><img src=\"/media/news/inline/kochma-dars-photo_2025-12-05_16-02-25-600x600.jpg\"></p>\n<p><img src=\"/media/news/inline/kochma-dars-photo_2025-12-05_16-02-29-600x600.jpg\"></p>",
+    "author": "",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2025-12-05T11:12:58Z",
+    "updated_at": "2026-07-20T13:09:54.617Z"
+  }
+},
+{
   "model": "main.event",
   "pk": 1,
   "fields": {
@@ -1587,6 +1740,381 @@
     "body": "",
     "is_active": true,
     "updated_at": "2026-07-17T18:12:00.849Z"
+  }
+},
+{
+  "model": "main.scientificarticle",
+  "pk": 1,
+  "fields": {
+    "title": "Comparative linguistics, comparison of Russian and Uzbek languages",
+    "slug": "comparative-linguistics-comparison-of-russian-and-uzbek-languages",
+    "authors": "Sarimsakova",
+    "journal_name": "",
+    "published_date": null,
+    "abstract": "",
+    "category": null,
+    "pdf_file": "articles/pdf/31.sarimsakova-16084.pdf",
+    "cover_image": "",
+    "doi_url": "",
+    "language": "en",
+    "is_active": true,
+    "views": 0,
+    "created_at": "2026-07-20T13:17:16.028Z"
+  }
+},
+{
+  "model": "main.scientificarticle",
+  "pk": 2,
+  "fields": {
+    "title": "The main purpose of audio-visual tools in teaching English",
+    "slug": "the-main-purpose-of-audio-visual-tools-in-teaching-english",
+    "authors": "Inagamova",
+    "journal_name": "",
+    "published_date": null,
+    "abstract": "",
+    "category": null,
+    "pdf_file": "articles/pdf/inagamova-maqola.pdf",
+    "cover_image": "",
+    "doi_url": "",
+    "language": "en",
+    "is_active": true,
+    "views": 0,
+    "created_at": "2026-07-20T13:17:16.702Z"
+  }
+},
+{
+  "model": "main.scientificarticle",
+  "pk": 3,
+  "fields": {
+    "title": "International conference on modern development of pedagogy and linguistic",
+    "slug": "international-conference-on-modern-development-of-pedagogy-and-linguistic",
+    "authors": "Pulatova Nodirabegim Bakhtiyarovna",
+    "journal_name": "",
+    "published_date": null,
+    "abstract": "",
+    "category": null,
+    "pdf_file": "articles/pdf/pulatova-nodirabegim-bakhtiyarovna-fin-sert.pdf",
+    "cover_image": "",
+    "doi_url": "",
+    "language": "en",
+    "is_active": true,
+    "views": 0,
+    "created_at": "2026-07-20T13:17:17.379Z"
+  }
+},
+{
+  "model": "main.scientificarticle",
+  "pk": 4,
+  "fields": {
+    "title": "Good listening is as important as good speaking",
+    "slug": "good-listening-is-as-important-as-good-speaking",
+    "authors": "Ko‘rsatilmagan",
+    "journal_name": "",
+    "published_date": null,
+    "abstract": "",
+    "category": null,
+    "pdf_file": "articles/pdf/466-468goodlisteningisasimportantasgoodspeaking.pdf",
+    "cover_image": "",
+    "doi_url": "",
+    "language": "en",
+    "is_active": true,
+    "views": 0,
+    "created_at": "2026-07-20T13:17:17.982Z"
+  }
+},
+{
+  "model": "main.scientificarticle",
+  "pk": 5,
+  "fields": {
+    "title": "O‘quvchi shaxsining shakllanishi va rivojlanishi",
+    "slug": "oquvchi-shaxsining-shakllanishi-va-rivojlanishi",
+    "authors": "Xadicha Muxammadiyeva",
+    "journal_name": "",
+    "published_date": null,
+    "abstract": "Mazkur maqolada o‘quvchining shaxs sifatida shakllanishi va rivojlanishi murakkab jarayon bo‘lib, u o‘z-o‘zidan emas, balki boshqalar bilan o‘zaro munosabatda, turli omillar ta'sirida borishi yoritilgan.",
+    "category": null,
+    "pdf_file": "articles/pdf/maqola-muxammadiyeva-x.pdf",
+    "cover_image": "",
+    "doi_url": "",
+    "language": "uz",
+    "is_active": true,
+    "views": 0,
+    "created_at": "2026-07-20T13:17:18.687Z"
+  }
+},
+{
+  "model": "main.talentedstudent",
+  "pk": 1,
+  "fields": {
+    "full_name": "Mamasoliyeva Marjonaxon Bahrom qizi",
+    "slug": "mamasoliyeva-marjonaxon-bahrom-qizi",
+    "faculty": null,
+    "achievement": "Respublika DOʻRMON ijodkorlar klubi hamda Yoshlar qanoti boʻlimi,Turon Fanlar akademiyasi qoshidagi tashkil etilgan, Turon yosh ijodkorlar uyushmasi aʼzosi.",
+    "year": 2024,
+    "photo": "talented/talent-mamasoliyeva-marjonaxon-bahrom-qizi.jpg",
+    "description": "Respublika DOʻRMON ijodkorlar klubi hamda Yoshlar qanoti boʻlimi,Turon Fanlar akademiyasi qoshidagi tashkil etilgan, Turon yosh ijodkorlar uyushmasi aʼzosi. Mustaqilligimizning 31-yilligi munosabati bilan \"VATANIMNI KUYLAYMAN\" shiori ostida oʻtkazilgan respublika koʻrik-tanlovi 3-oʻrin sohibasi. Sheʼrlari tuman gazeta va jurnallarida chop etilgan. \"Ezgulik daraxti\" deb nomlangan bayozda sheʼrlari chiqqan",
+    "is_active": true,
+    "created_at": "2026-07-20T13:15:54.861Z"
+  }
+},
+{
+  "model": "main.talentedstudent",
+  "pk": 2,
+  "fields": {
+    "full_name": "Kamilova Go‘zalxon Rasuljon qizi",
+    "slug": "kamilova-gozalxon-rasuljon-qizi",
+    "faculty": null,
+    "achievement": "28.07.2023-yil - \"MDH YETAKCHILARI \" xalqaro ilmiy-amaliy ko’rik tanlovi g‘olibi;",
+    "year": 2023,
+    "photo": "talented/talent-kamilova-gozalxon-rasuljon-qizi.png",
+    "description": "28.07.2023-yil - \"MDH YETAKCHILARI \" xalqaro ilmiy-amaliy ko’rik tanlovi g‘olibi; 23.08.2023-yil - Tafakkur forumi “Ochiq mikrafon” loyihasining faol ishtirokchisi 25.02.2024-yil - “Tashabbus” forumining barcha loyihalarining faol ishtirokchisi va sovrindori “Xizmat ko‘rsatgan ijodkor” ko‘krak nishoni sohibasi 20.01.2024-yil - Germaniya-O‘zbekiston hamkorligidagi xalqaro konfirensiyada ishtirok etib “ILIM-FAN YETAKCHISI” ko‘krak nishoni sovrindori",
+    "is_active": true,
+    "created_at": "2026-07-20T13:15:55.709Z"
+  }
+},
+{
+  "model": "main.talentedstudent",
+  "pk": 3,
+  "fields": {
+    "full_name": "Hamrayeva Sabrina",
+    "slug": "hamrayeva-sabrina",
+    "faculty": null,
+    "achievement": "Iqtidorli talabamiz, Sabrina Hamrayeva Turkiyaning Alanya shahrida o‘tkazilgan “Sözler Dansı: Özbek Kızlarının Yaratıcı Çalışmaları” kitob taqdimotida ilmiy ishi bilan ishtirok etdi.",
+    "year": 2024,
+    "photo": "talented/talent-hamrayeva-sabrina.jpg",
+    "description": "Iqtidorli talabamiz, Sabrina Hamrayeva Turkiyaning Alanya shahrida o‘tkazilgan “Sözler Dansı: Özbek Kızlarının Yaratıcı Çalışmaları” kitob taqdimotida ilmiy ishi bilan ishtirok etdi. Psikosomatik - Kalbin Bedene bağlığı” mavzusidagi tadqiqot ishida Sabrina psixomatik kasalliklarning alomatlari, uning qalb bilan bog‘liqligini ochib berishga harakat qildi.",
+    "is_active": true,
+    "created_at": "2026-07-20T13:15:56.249Z"
+  }
+},
+{
+  "model": "main.talentedstudent",
+  "pk": 4,
+  "fields": {
+    "full_name": "Xasanboyeva Ruxshona Xayrulla qizi",
+    "slug": "xasanboyeva-ruxshona-xayrulla-qizi",
+    "faculty": null,
+    "achievement": "Iqtidorli talabamiz Hasanboyeva Ruxshona Oliy ta’lim fan va innovatsiyalar vazirligi tomonidan ta’sis etilgan “FIDOKORONA XIZMATLARI UCHUN” ko‘krak nishoni bilan taqdirlandi.",
+    "year": 2024,
+    "photo": "talented/talent-xasanboyeva-ruxshona-xayrulla-qizi.jpg",
+    "description": "Iqtidorli talabamiz Hasanboyeva Ruxshona Oliy ta’lim fan va innovatsiyalar vazirligi tomonidan ta’sis etilgan “FIDOKORONA XIZMATLARI UCHUN” ko‘krak nishoni bilan taqdirlandi. ✅Bunga asosiy sabab, kuchli ishtiyoq intizom va o‘z ustida ishlash deb, javob beradi talabamiz.",
+    "is_active": true,
+    "created_at": "2026-07-20T13:15:56.713Z"
+  }
+},
+{
+  "model": "main.talentedstudent",
+  "pk": 5,
+  "fields": {
+    "full_name": "Muzaffarova Diyora Eldor qizi",
+    "slug": "muzaffarova-diyora-eldor-qizi",
+    "faculty": null,
+    "achievement": "Futbol bo‘yicha qizlar terma jamoasi a’zosi bir nechta medallar sohibasi, Jismoniy tarbiya yo‘nalishi 1-kurs talabasi",
+    "year": 2024,
+    "photo": "talented/talent-muzaffarova-diyora-eldor-qizi.jpg",
+    "description": "Futbol bo‘yicha qizlar terma jamoasi a’zosi bir nechta medallar sohibasi, Jismoniy tarbiya yo‘nalishi 1-kurs talabasi",
+    "is_active": true,
+    "created_at": "2026-07-20T13:15:57.373Z"
+  }
+},
+{
+  "model": "main.talentedstudent",
+  "pk": 6,
+  "fields": {
+    "full_name": "O‘lmasova Madinabonu Faxriddin qizi",
+    "slug": "olmasova-madinabonu-faxriddin-qizi",
+    "faculty": null,
+    "achievement": "“NEW RENAISSANCE” xalqaro ilmiy jurnalining “MILLAT G‘URURI”–Mustaqil Davlatlar Hamdo‘stligi (MDH) miqyosida tashkil etilgan xalqaro ilmiy-amaliy ko‘rik-tanlovining 1-turida faol ishtirok etib“MILLAT G‘URURI” - esdaslik nishoni bilan taqdirlanishdi.",
+    "year": 2024,
+    "photo": "talented/talent-olmasova-madinabonu-faxriddin-qizi.jpg",
+    "description": "“NEW RENAISSANCE” xalqaro ilmiy jurnalining “MILLAT G‘URURI”–Mustaqil Davlatlar Hamdo‘stligi (MDH) miqyosida tashkil etilgan xalqaro ilmiy-amaliy ko‘rik-tanlovining 1-turida faol ishtirok etib“MILLAT G‘URURI” - esdaslik nishoni bilan taqdirlanishdi.",
+    "is_active": true,
+    "created_at": "2026-07-20T13:15:57.979Z"
+  }
+},
+{
+  "model": "main.talentedstudent",
+  "pk": 7,
+  "fields": {
+    "full_name": "Nurmatova Iroda Iskandar qizi",
+    "slug": "nurmatova-iroda-iskandar-qizi",
+    "faculty": null,
+    "achievement": "“NEW RENAISSANCE” xalqaro ilmiy jurnalining “MILLAT G‘URURI”–Mustaqil Davlatlar Hamdo‘stligi (MDH) miqyosida tashkil etilgan xalqaro ilmiy-amaliy ko‘rik-tanlovining 1-turida faol ishtirok etib“MILLAT G‘URURI” - esdaslik nishoni bilan taqdirlanishdi.",
+    "year": 2024,
+    "photo": "talented/talent-nurmatova-iroda-iskandar-qizi.jpg",
+    "description": "“NEW RENAISSANCE” xalqaro ilmiy jurnalining “MILLAT G‘URURI”–Mustaqil Davlatlar Hamdo‘stligi (MDH) miqyosida tashkil etilgan xalqaro ilmiy-amaliy ko‘rik-tanlovining 1-turida faol ishtirok etib“MILLAT G‘URURI” - esdaslik nishoni bilan taqdirlanishdi.",
+    "is_active": true,
+    "created_at": "2026-07-20T13:15:58.584Z"
+  }
+},
+{
+  "model": "main.libraryresource",
+  "pk": 1,
+  "fields": {
+    "title": "Yangi O'zbekiston iqtisodiyoti",
+    "slug": "yangi-ozbekiston-iqtisodiyoti",
+    "authors": "",
+    "description": "Universitet tavsiya qiladigan ilmiy jurnal.",
+    "cover_image": "",
+    "file": "",
+    "external_url": "https://journal.econuu.uz",
+    "resource_type": "other",
+    "is_active": true,
+    "views": 0,
+    "created_at": "2026-07-20T13:17:56.389Z"
+  }
+},
+{
+  "model": "main.libraryresource",
+  "pk": 2,
+  "fields": {
+    "title": "Academy of Science",
+    "slug": "academy-of-science",
+    "authors": "",
+    "description": "Universitet tavsiya qiladigan ilmiy jurnal.",
+    "cover_image": "",
+    "file": "",
+    "external_url": "https://academiascience.org",
+    "resource_type": "other",
+    "is_active": true,
+    "views": 0,
+    "created_at": "2026-07-20T13:17:56.391Z"
+  }
+},
+{
+  "model": "main.libraryresource",
+  "pk": 3,
+  "fields": {
+    "title": "Journal of Management Value & Ethics",
+    "slug": "journal-of-management-value-ethics",
+    "authors": "",
+    "description": "Universitet tavsiya qiladigan ilmiy jurnal.",
+    "cover_image": "",
+    "file": "",
+    "external_url": "http://www.jmveindia.com",
+    "resource_type": "other",
+    "is_active": true,
+    "views": 0,
+    "created_at": "2026-07-20T13:17:56.392Z"
+  }
+},
+{
+  "model": "main.libraryresource",
+  "pk": 4,
+  "fields": {
+    "title": "International Journal of Recent Research & Review",
+    "slug": "international-journal-of-recent-research-review",
+    "authors": "",
+    "description": "Universitet tavsiya qiladigan ilmiy jurnal.",
+    "cover_image": "",
+    "file": "",
+    "external_url": "http://sjifactor.com/passport.php?id=17819",
+    "resource_type": "other",
+    "is_active": true,
+    "views": 0,
+    "created_at": "2026-07-20T13:17:56.393Z"
+  }
+},
+{
+  "model": "main.libraryresource",
+  "pk": 5,
+  "fields": {
+    "title": "Evropean scientific academy reports",
+    "slug": "evropean-scientific-academy-reports",
+    "authors": "",
+    "description": "Universitet tavsiya qiladigan ilmiy jurnal.",
+    "cover_image": "",
+    "file": "",
+    "external_url": "https://t.me/scientificpublications",
+    "resource_type": "other",
+    "is_active": true,
+    "views": 0,
+    "created_at": "2026-07-20T13:17:56.394Z"
+  }
+},
+{
+  "model": "main.libraryresource",
+  "pk": 6,
+  "fields": {
+    "title": "European journal of research (Avstriya)",
+    "slug": "european-journal-of-research-avstriya",
+    "authors": "",
+    "description": "Universitet tavsiya qiladigan ilmiy jurnal.",
+    "cover_image": "",
+    "file": "",
+    "external_url": "https://journalofresearch.us/",
+    "resource_type": "other",
+    "is_active": true,
+    "views": 0,
+    "created_at": "2026-07-20T13:17:56.395Z"
+  }
+},
+{
+  "model": "main.libraryresource",
+  "pk": 7,
+  "fields": {
+    "title": "American Journal of Research (AJR)",
+    "slug": "american-journal-of-research-ajr",
+    "authors": "",
+    "description": "Universitet tavsiya qiladigan ilmiy jurnal.",
+    "cover_image": "",
+    "file": "",
+    "external_url": "https://journalofresearch.us",
+    "resource_type": "other",
+    "is_active": true,
+    "views": 0,
+    "created_at": "2026-07-20T13:17:56.396Z"
+  }
+},
+{
+  "model": "main.libraryresource",
+  "pk": 8,
+  "fields": {
+    "title": "Herald pedagogike. Nauka I Practika",
+    "slug": "herald-pedagogike-nauka-i-practika",
+    "authors": "",
+    "description": "Universitet tavsiya qiladigan ilmiy jurnal.",
+    "cover_image": "",
+    "file": "",
+    "external_url": "https://t.me/Scientificpublications/18197",
+    "resource_type": "other",
+    "is_active": true,
+    "views": 0,
+    "created_at": "2026-07-20T13:17:56.397Z"
+  }
+},
+{
+  "model": "main.libraryresource",
+  "pk": 9,
+  "fields": {
+    "title": "Thematic Journal of Applied Sciences",
+    "slug": "thematic-journal-of-applied-sciences",
+    "authors": "",
+    "description": "Universitet tavsiya qiladigan ilmiy jurnal.",
+    "cover_image": "",
+    "file": "",
+    "external_url": "https://ejournals.id/index.php/TJAS",
+    "resource_type": "other",
+    "is_active": true,
+    "views": 0,
+    "created_at": "2026-07-20T13:17:56.398Z"
+  }
+},
+{
+  "model": "main.libraryresource",
+  "pk": 10,
+  "fields": {
+    "title": "International Journal of Business Management and Accounting",
+    "slug": "international-journal-of-business-management-and-accounting",
+    "authors": "",
+    "description": "Universitet tavsiya qiladigan ilmiy jurnal.",
+    "cover_image": "",
+    "file": "",
+    "external_url": "https://ejournals.id/index.php/IJBMA",
+    "resource_type": "other",
+    "is_active": true,
+    "views": 0,
+    "created_at": "2026-07-20T13:17:56.399Z"
   }
 }
 ]
