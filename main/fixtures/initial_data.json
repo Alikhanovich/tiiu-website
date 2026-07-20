@@ -1,0 +1,1592 @@
+[
+{
+  "model": "main.sitesettings",
+  "pk": 1,
+  "fields": {
+    "site_name": "TIIU",
+    "site_name_full": "Toshkent ijtimoiy innovatsiya universiteti",
+    "logo": "",
+    "favicon": "",
+    "address": "Toshkent sh., Sergeli tumani, Bobur AP, Uzumzor ko'chasi, 37",
+    "phone1": "+998 78 113 17 17",
+    "phone2": "+998 55 506 12 77",
+    "email": "info@tiiu.uz",
+    "work_hours": "Du–Ju: 9:00–18:00 | Shanba: 9:00–14:00",
+    "facebook": "https://facebook.com/tiiu.uz",
+    "instagram": "https://instagram.com/tiiu_uz",
+    "telegram": "https://t.me/tiiu_universiteti",
+    "youtube": "https://youtube.com/@tiiu_uz",
+    "founded_year": 2022,
+    "student_count": 2000,
+    "teacher_count": 50,
+    "direction_count": 10,
+    "about_badge": "Missiya va Maqsad",
+    "about_title": "Bilim orqali kelajakni bunyod etamiz",
+    "about_text": "Toshkent ijtimoiy innovatsiya universiteti — ijtimoiy soha va iqtisodiyot tarmoqlari uchun zamonaviy bilim va ko'nikmalarga ega, mas'uliyatni o'z zimmasiga olishga qodir, mustaqil fikrlaydigan malakali kadrlarni yetishtirib beruvchi nodavlat oliy ta'lim tashkiloti.",
+    "about_text_2": "TIIU talaba-yoshlarga yuqori sifatli ta'lim xizmatlarini taklif etadi. Universitet mamlakatimizning yetakchi oliy ta'lim tashkiloti sifatida ijtimoiy-iqtisodiy sohadagi oʻzgarishlarga innovatsion yechimlar bilan hissa qoʻshishni maqsad qilib qoʻygan.",
+    "about_image": "",
+    "hero_title": "Mustaqil fikr, ijtimoiy ta'sir",
+    "hero_subtitle": "Ilg'or ta'lim texnologiyalari asosida ijtimoiy soha va iqtisodiyot tarmoqlari uchun malakali kadrlar tayyorlaydigan nodavlat oliy ta'lim tashkiloti.",
+    "smtp_host": "smtp.gmail.com",
+    "smtp_port": 587,
+    "smtp_user": "",
+    "smtp_password": ""
+  }
+},
+{
+  "model": "main.slider",
+  "pk": 1,
+  "fields": {
+    "title": "Kelajakni biz bilan quring",
+    "subtitle": "Toshkent ijtimoiy innovatsiya universitetiga 2026/2027 o'quv yili uchun hujjat topshiring.",
+    "image": "sliders/slider-1.jpg",
+    "btn_text": "Hujjat topshirish",
+    "btn_url": "https://admission.tiiu.uz/",
+    "order": 1,
+    "is_active": true
+  }
+},
+{
+  "model": "main.slider",
+  "pk": 2,
+  "fields": {
+    "title": "Barcha kunduzgi talabalarga stipendiya",
+    "subtitle": "Zamonaviy dasturlar, kuchli professor-o'qituvchilar va innovatsion ta'lim muhiti.",
+    "image": "sliders/slider-2.jpg",
+    "btn_text": "Yo'nalishlar",
+    "btn_url": "#faculties",
+    "order": 2,
+    "is_active": true
+  }
+},
+{
+  "model": "main.slider",
+  "pk": 3,
+  "fields": {
+    "title": "20 ga yaqin bakalavr va magistr dasturlari",
+    "subtitle": "Stipendiya va xalqaro almashinuv imkoniyatlari bilan sifatli ta'lim.",
+    "image": "sliders/slider-3.jpg",
+    "btn_text": "Batafsil",
+    "btn_url": "#about",
+    "order": 3,
+    "is_active": true
+  }
+},
+{
+  "model": "main.faculty",
+  "pk": 1,
+  "fields": {
+    "name": "Iqtisodiyot",
+    "slug": "iqtisodiyot",
+    "short_name": "Iqtisodiyot",
+    "icon": "🎓",
+    "image": "faculties/iqtisod.png",
+    "description": "Iqtisodiyot — bu cheklangan resurslardan foydalanib, insonlarning cheksiz ehtiyojlarini qondirish uchun tovar va xizmatlarni ishlab chiqarish, taqsimlash, ayirboshlash va isteʼmol qilish jarayonlarini oʻrganadigan fan va ijtimoiy munosabatlar tizimidir.",
+    "degree": "bachelor",
+    "study_forms": "Kunduzgi, Kechki, Sirtqi",
+    "duration": 4,
+    "order": 1,
+    "is_active": true
+  }
+},
+{
+  "model": "main.faculty",
+  "pk": 2,
+  "fields": {
+    "name": "Moliya va moliyaviy texnologiyalar",
+    "slug": "moliya-va-moliyaviy-texnologiyalar",
+    "short_name": "moliya",
+    "icon": "🎓",
+    "image": "faculties/moliya.jpeg",
+    "description": "Moliyaviy boshqaruv, investitsiya va fintech yechimlari. Klassik moliya tizimi bilan zamonaviy raqamli texnologiyalarning sintezidan iborat bo‘lgan, bugungi kunda eng tez rivojlanayotgan va istiqbolli sohalardan biridir.",
+    "degree": "bachelor",
+    "study_forms": "Kunduzgi, Kechki, Sirtqi",
+    "duration": 4,
+    "order": 2,
+    "is_active": true
+  }
+},
+{
+  "model": "main.faculty",
+  "pk": 3,
+  "fields": {
+    "name": "Buxgalteriya hisobi",
+    "slug": "buxgalteriya-hisobi-va-audit",
+    "short_name": "buxgalteriya",
+    "icon": "🎓",
+    "image": "faculties/buxgalteriya.jpeg",
+    "description": "Buxgalteriya hisobi — bu korxonaning moliyaviy holati, daromadlari va xarajatlari haqidagi maʼlumotlarni yigʻish, roʻyxatdan oʻtkazish va umumlashtirishning tizimli tizimidir. Oddiy qilib aytganda, bu — biznesning tili.",
+    "degree": "bachelor",
+    "study_forms": "Kunduzgi, Kechki, Sirtqi",
+    "duration": 4,
+    "order": 3,
+    "is_active": true
+  }
+},
+{
+  "model": "main.faculty",
+  "pk": 4,
+  "fields": {
+    "name": "Bank ishi",
+    "slug": "bank-ishi",
+    "short_name": "bank ishi",
+    "icon": "🎓",
+    "image": "faculties/bank_ishi.jpeg",
+    "description": "Bank ishi (Banking) – bu pul mablag'larini yig'ish, saqlash, boshqarish, kreditlar ajratish va turli moliyaviy amaliyotlarni bajarishga qaratilgan keng qamrovli iqtisodiy sohadir.",
+    "degree": "bachelor",
+    "study_forms": "Kunduzgi, Kechki, Sirtqi",
+    "duration": 4,
+    "order": 4,
+    "is_active": true
+  }
+},
+{
+  "model": "main.faculty",
+  "pk": 5,
+  "fields": {
+    "name": "Axborot tizimlari va texnologiyalari",
+    "slug": "axborot-tizimlari-va-texnologiyalari",
+    "short_name": "IT",
+    "icon": "🎓",
+    "image": "faculties/Axborot_texnologiyalari.jpeg",
+    "description": "Axborot tizimlari va texnologiyalari (ATT) — bu ma'lumotlarni yig'ish, saqlash, qayta ishlash, uzatish va himoya qilish jarayonlarini qamrab oluvchi zamonaviy va eng tez rivojlanayotgan sohalardan biridir. Bugungi kunda ushbu mutaxassislik raqamli iqtisodiyot va biznesning asosi hisoblanadi.",
+    "degree": "bachelor",
+    "study_forms": "Kunduzgi, Kechki, Sirtqi",
+    "duration": 4,
+    "order": 5,
+    "is_active": true
+  }
+},
+{
+  "model": "main.faculty",
+  "pk": 6,
+  "fields": {
+    "name": "Psixologiya",
+    "slug": "psixologiya",
+    "short_name": "",
+    "icon": "🎓",
+    "image": "faculties/faculty-6.jpg",
+    "description": "Shaxs psixologiyasi, maslahat va amaliy psixodiagnostika.",
+    "degree": "bachelor",
+    "study_forms": "Kunduzgi, Kechki, Sirtqi",
+    "duration": 4,
+    "order": 6,
+    "is_active": true
+  }
+},
+{
+  "model": "main.faculty",
+  "pk": 7,
+  "fields": {
+    "name": "Boshlang'ich ta'lim",
+    "slug": "boshlangich-talim",
+    "short_name": "",
+    "icon": "🎓",
+    "image": "faculties/faculty-7.jpg",
+    "description": "Boshlang'ich sinf o'qituvchisini tayyorlash metodikasi.",
+    "degree": "bachelor",
+    "study_forms": "Kunduzgi, Kechki, Sirtqi",
+    "duration": 4,
+    "order": 7,
+    "is_active": true
+  }
+},
+{
+  "model": "main.faculty",
+  "pk": 8,
+  "fields": {
+    "name": "Maktabgacha ta'lim",
+    "slug": "maktabgacha-talim",
+    "short_name": "",
+    "icon": "🎓",
+    "image": "faculties/faculty-8.jpg",
+    "description": "Bolalar rivojlanishi va maktabgacha ta'lim pedagogikasi.",
+    "degree": "bachelor",
+    "study_forms": "Kunduzgi, Kechki, Sirtqi",
+    "duration": 4,
+    "order": 8,
+    "is_active": true
+  }
+},
+{
+  "model": "main.faculty",
+  "pk": 9,
+  "fields": {
+    "name": "Jismoniy madaniyat",
+    "slug": "jismoniy-madaniyat",
+    "short_name": "",
+    "icon": "🎓",
+    "image": "faculties/faculty-9.jpg",
+    "description": "Sport pedagogikasi, salomatlik va jismoniy tarbiya.",
+    "degree": "bachelor",
+    "study_forms": "Kunduzgi, Kechki, Sirtqi",
+    "duration": 4,
+    "order": 9,
+    "is_active": true
+  }
+},
+{
+  "model": "main.faculty",
+  "pk": 10,
+  "fields": {
+    "name": "Filologiya va tillarni o'qitish",
+    "slug": "filologiya-va-tillarni-oqitish",
+    "short_name": "",
+    "icon": "🎓",
+    "image": "faculties/faculty-10.jpg",
+    "description": "Til va adabiyot, chet tillarini o'qitish metodikasi.",
+    "degree": "bachelor",
+    "study_forms": "Kunduzgi, Kechki, Sirtqi",
+    "duration": 4,
+    "order": 10,
+    "is_active": true
+  }
+},
+{
+  "model": "main.teacher",
+  "pk": 1,
+  "fields": {
+    "full_name": "Bazarov Qahramon Tashtemirovich",
+    "slug": "bazarov-qahramon-tashtemirovich",
+    "position": "Kafedra mudiri, dotsent",
+    "department": "\"Iqtisodiyot va raqamli texnologiyalar\" kafedrasi",
+    "faculty": null,
+    "kafedra": 1,
+    "photo": "teachers/Bazarov_Q.png",
+    "bio": "",
+    "email": "",
+    "phone": "",
+    "linkedin": "",
+    "experience": 0,
+    "order": 1,
+    "is_active": true
+  }
+},
+{
+  "model": "main.teacher",
+  "pk": 2,
+  "fields": {
+    "full_name": "Artikov Nodirjon Yakubdjanovich",
+    "slug": "artikov-nodirjon-yakubdjanovich",
+    "position": "Dotsent",
+    "department": "\"Iqtisodiyot va raqamli texnologiyalar\" kafedrasi",
+    "faculty": null,
+    "kafedra": 1,
+    "photo": "teachers/Artikov_N.png",
+    "bio": "",
+    "email": "",
+    "phone": "",
+    "linkedin": "",
+    "experience": 0,
+    "order": 2,
+    "is_active": true
+  }
+},
+{
+  "model": "main.teacher",
+  "pk": 3,
+  "fields": {
+    "full_name": "Valiyev Burxon",
+    "slug": "valiyev-burxon",
+    "position": "Dotsent",
+    "department": "\"Iqtisodiyot va raqamli texnologiyalar\" kafedrasi",
+    "faculty": null,
+    "kafedra": 1,
+    "photo": "teachers/valiyev.png",
+    "bio": "",
+    "email": "",
+    "phone": "",
+    "linkedin": "",
+    "experience": 0,
+    "order": 3,
+    "is_active": true
+  }
+},
+{
+  "model": "main.teacher",
+  "pk": 4,
+  "fields": {
+    "full_name": "Butaev Dovlatali Inomovich",
+    "slug": "butaev-dovlatali-inomovich",
+    "position": "Dotsent",
+    "department": "\"Iqtisodiyot va raqamli texnologiyalar\" kafedrasi",
+    "faculty": null,
+    "kafedra": 1,
+    "photo": "teachers/Butayev_D.png",
+    "bio": "",
+    "email": "",
+    "phone": "",
+    "linkedin": "",
+    "experience": 0,
+    "order": 4,
+    "is_active": true
+  }
+},
+{
+  "model": "main.teacher",
+  "pk": 5,
+  "fields": {
+    "full_name": "Kadirov Kamoliddin Batirovich",
+    "slug": "kadyrov-kamoliddin-batyrovich",
+    "position": "Kafedra mudiri, professor",
+    "department": "\"Pedagogika va psixologiya\" kafedrasi",
+    "faculty": null,
+    "kafedra": 2,
+    "photo": "teachers/kadyrov.png",
+    "bio": "",
+    "email": "",
+    "phone": "",
+    "linkedin": "",
+    "experience": 0,
+    "order": 5,
+    "is_active": true
+  }
+},
+{
+  "model": "main.teacher",
+  "pk": 6,
+  "fields": {
+    "full_name": "Soliyeva Dilfuza Abidovna",
+    "slug": "soliyeva-dilfuza-abidovna",
+    "position": "Dotsent",
+    "department": "\"Pedagogika va psixologiya\" kafedrasi",
+    "faculty": null,
+    "kafedra": 2,
+    "photo": "teachers/soliyeva.png",
+    "bio": "",
+    "email": "",
+    "phone": "",
+    "linkedin": "",
+    "experience": 0,
+    "order": 6,
+    "is_active": true
+  }
+},
+{
+  "model": "main.teacher",
+  "pk": 7,
+  "fields": {
+    "full_name": "Rasulov Kamol Karim o'g'li",
+    "slug": "rasulov-kamol-karim-ogli",
+    "position": "Dotsent",
+    "department": "\"Iqtisodiyot va raqamli texnologiyalar\" kafedrasi",
+    "faculty": null,
+    "kafedra": 1,
+    "photo": "teachers/rasulov-kamol-karim-ogli.png",
+    "bio": "",
+    "email": "",
+    "phone": "",
+    "linkedin": "",
+    "experience": 0,
+    "order": 7,
+    "is_active": true
+  }
+},
+{
+  "model": "main.teacher",
+  "pk": 8,
+  "fields": {
+    "full_name": "Kupaysinova Laziza Karimovna",
+    "slug": "kupaysinova-laziza-karimovna",
+    "position": "Dotsent",
+    "department": "\"Iqtisodiyot va raqamli texnologiyalar\" kafedrasi",
+    "faculty": null,
+    "kafedra": 1,
+    "photo": "teachers/kupaysinova-laziza-karimovna.png",
+    "bio": "",
+    "email": "",
+    "phone": "",
+    "linkedin": "",
+    "experience": 0,
+    "order": 8,
+    "is_active": true
+  }
+},
+{
+  "model": "main.teacher",
+  "pk": 9,
+  "fields": {
+    "full_name": "Ziyaeva Surayyo Djorabayevna",
+    "slug": "ziyaeva-surayyo-djorabayevna",
+    "position": "Katta o'qituvchi",
+    "department": "\"Iqtisodiyot va raqamli texnologiyalar\" kafedrasi",
+    "faculty": null,
+    "kafedra": 1,
+    "photo": "teachers/ziyaeva-surayyo-djorabayevna.png",
+    "bio": "",
+    "email": "",
+    "phone": "",
+    "linkedin": "",
+    "experience": 0,
+    "order": 9,
+    "is_active": true
+  }
+},
+{
+  "model": "main.teacher",
+  "pk": 10,
+  "fields": {
+    "full_name": "Oblomurodov To'ychi Xoshimovich",
+    "slug": "oblomurodov-toychi-xoshimovich",
+    "position": "Katta o'qituvchi",
+    "department": "\"Iqtisodiyot va raqamli texnologiyalar\" kafedrasi",
+    "faculty": null,
+    "kafedra": 1,
+    "photo": "teachers/oblomurodov-toychi-xoshimovich.png",
+    "bio": "",
+    "email": "",
+    "phone": "",
+    "linkedin": "",
+    "experience": 0,
+    "order": 10,
+    "is_active": true
+  }
+},
+{
+  "model": "main.teacher",
+  "pk": 11,
+  "fields": {
+    "full_name": "Bekturdiev Sanjar Sharifboyevich",
+    "slug": "bekturdiev-sanjar-sharifboyevich",
+    "position": "Katta o'qituvchi",
+    "department": "\"Iqtisodiyot va raqamli texnologiyalar\" kafedrasi",
+    "faculty": null,
+    "kafedra": 1,
+    "photo": "",
+    "bio": "",
+    "email": "",
+    "phone": "",
+    "linkedin": "",
+    "experience": 0,
+    "order": 11,
+    "is_active": true
+  }
+},
+{
+  "model": "main.teacher",
+  "pk": 12,
+  "fields": {
+    "full_name": "Nazarov Azizbek O'ktamovich",
+    "slug": "nazarov-azizbek-oktamovich",
+    "position": "Katta o'qituvchi",
+    "department": "\"Iqtisodiyot va raqamli texnologiyalar\" kafedrasi",
+    "faculty": null,
+    "kafedra": 1,
+    "photo": "",
+    "bio": "",
+    "email": "",
+    "phone": "",
+    "linkedin": "",
+    "experience": 0,
+    "order": 12,
+    "is_active": true
+  }
+},
+{
+  "model": "main.teacher",
+  "pk": 13,
+  "fields": {
+    "full_name": "Xudoyberdieva Dildora Baxodirovna",
+    "slug": "xudoyberdieva-dildora-baxodirovna",
+    "position": "O'qituvchi",
+    "department": "\"Iqtisodiyot va raqamli texnologiyalar\" kafedrasi",
+    "faculty": null,
+    "kafedra": 1,
+    "photo": "teachers/xudoyberdieva-dildora-baxodirovna.png",
+    "bio": "",
+    "email": "",
+    "phone": "",
+    "linkedin": "",
+    "experience": 0,
+    "order": 13,
+    "is_active": true
+  }
+},
+{
+  "model": "main.teacher",
+  "pk": 14,
+  "fields": {
+    "full_name": "Kuldashev Jaxongir Kamariddinovich",
+    "slug": "kuldashev-jaxongir-kamariddinovich",
+    "position": "Assistent",
+    "department": "\"Iqtisodiyot va raqamli texnologiyalar\" kafedrasi",
+    "faculty": null,
+    "kafedra": 1,
+    "photo": "",
+    "bio": "",
+    "email": "",
+    "phone": "",
+    "linkedin": "",
+    "experience": 0,
+    "order": 14,
+    "is_active": true
+  }
+},
+{
+  "model": "main.teacher",
+  "pk": 15,
+  "fields": {
+    "full_name": "Babaxanova Xusnora Qahramon qizi",
+    "slug": "babaxanova-xusnora-qahramon-qizi",
+    "position": "Assistent",
+    "department": "\"Iqtisodiyot va raqamli texnologiyalar\" kafedrasi",
+    "faculty": null,
+    "kafedra": 1,
+    "photo": "teachers/babaxanova-xusnora-qahramon-qizi.png",
+    "bio": "",
+    "email": "",
+    "phone": "",
+    "linkedin": "",
+    "experience": 0,
+    "order": 15,
+    "is_active": true
+  }
+},
+{
+  "model": "main.teacher",
+  "pk": 16,
+  "fields": {
+    "full_name": "Berdiyeva Gulmira Jurayevna",
+    "slug": "berdiyeva-gulmira-jurayevna",
+    "position": "Dotsent",
+    "department": "\"Pedagogika va psixologiya\" kafedrasi",
+    "faculty": null,
+    "kafedra": 2,
+    "photo": "teachers/berdiyeva-gulmira-jurayevna.png",
+    "bio": "",
+    "email": "",
+    "phone": "",
+    "linkedin": "",
+    "experience": 0,
+    "order": 16,
+    "is_active": true
+  }
+},
+{
+  "model": "main.teacher",
+  "pk": 17,
+  "fields": {
+    "full_name": "Sanakulova Aziza Raximovna",
+    "slug": "sanakulova-aziza-raximovna",
+    "position": "Dotsent",
+    "department": "\"Pedagogika va psixologiya\" kafedrasi",
+    "faculty": null,
+    "kafedra": 2,
+    "photo": "teachers/sanakulova-aziza-raximovna.png",
+    "bio": "",
+    "email": "",
+    "phone": "",
+    "linkedin": "",
+    "experience": 0,
+    "order": 17,
+    "is_active": true
+  }
+},
+{
+  "model": "main.teacher",
+  "pk": 18,
+  "fields": {
+    "full_name": "Asadullayev Nematulla Ravshan o`g`li",
+    "slug": "asadullayev-nematulla-ravshan-ogli",
+    "position": "O'qituvchi",
+    "department": "\"Pedagogika va psixologiya\" kafedrasi",
+    "faculty": null,
+    "kafedra": 2,
+    "photo": "teachers/asadullayev-nematulla-ravshan-ogli.png",
+    "bio": "",
+    "email": "",
+    "phone": "",
+    "linkedin": "",
+    "experience": 0,
+    "order": 18,
+    "is_active": true
+  }
+},
+{
+  "model": "main.newscategory",
+  "pk": 1,
+  "fields": {
+    "name": "Universitet yangiliklari",
+    "slug": "universitet-yangiliklari",
+    "color": "#0b6b39"
+  }
+},
+{
+  "model": "main.newscategory",
+  "pk": 2,
+  "fields": {
+    "name": "E'lonlar",
+    "slug": "elonlar",
+    "color": "#e4b363"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 5,
+  "fields": {
+    "title": "Yoshlar kuni muborak!",
+    "slug": "yoshlar-kuni-muborak",
+    "category": 2,
+    "image": "news/news-5.jpg",
+    "short_text": "Universitet jamoasi talabalarni Yoshlar kuni bilan tabriklaydi — yoshlik imkoniyatlar davri.",
+    "body": "Toshkent ijtimoiy innovatsiya universiteti jamoasi barcha yoshlarni Yoshlar kuni bilan samimiy tabriklaydi. Yoshlik — imkoniyatlar davri: universitetimizga hujjat topshirib, kelajagingizni biz bilan boshlang.",
+    "author": "TIIU Matbuot xizmati",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2026-07-18T17:38:04.020Z",
+    "updated_at": "2026-07-18T18:02:22.498Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 6,
+  "fields": {
+    "title": "Barcha kunduzgi talabalar uchun oylik stipendiya",
+    "slug": "barcha-kunduzgi-talabalar-uchun-oylik-stipendiya",
+    "category": 2,
+    "image": "news/news-6.jpg",
+    "short_text": "Kunduzgi ta'lim shaklidagi barcha talabalar oylik stipendiya olish imkoniyatiga ega.",
+    "body": "Universitetda kunduzgi ta'lim shaklida tahsil olayotgan barcha talabalar oylik stipendiya bilan ta'minlanadi. Zamonaviy dasturlar, kuchli professor-o'qituvchilar tarkibi va innovatsion ta'lim muhiti sizni kutmoqda.",
+    "author": "TIIU Matbuot xizmati",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2026-07-18T17:38:04.022Z",
+    "updated_at": "2026-07-18T18:02:23.515Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 7,
+  "fields": {
+    "title": "Zamonaviy talabalar turar joyi",
+    "slug": "zamonaviy-talabalar-turar-joyi",
+    "category": 2,
+    "image": "news/news-7.jpg",
+    "short_text": "Viloyatlardan kelgan talabalar uchun qulay va xavfsiz zamonaviy turar joy sharoiti.",
+    "body": "Universitet viloyatlardan kelgan talabalar uchun zamonaviy talabalar turar joyi bilan ta'minlaydi. Qulay va xavfsiz muhitda sifatli ta'lim oling — hujjatlaringizni o'z vaqtida topshiring.",
+    "author": "TIIU Matbuot xizmati",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2026-07-18T17:38:04.023Z",
+    "updated_at": "2026-07-18T18:02:24.040Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 8,
+  "fields": {
+    "title": "Arab tili yo'nalishi bitiruvchilari uchun kasb imkoniyatlari",
+    "slug": "arab-tili-yonalishi-bitiruvchilari-uchun-kasb-imkoniyatlari",
+    "category": 2,
+    "image": "news/news-8.jpg",
+    "short_text": "O'qituvchilik, tarjimonlik, diplomatiya, turizm va xalqaro tashkilotlarda faoliyat.",
+    "body": "Arab tili yo'nalishi bitiruvchilari uchun keng kasb imkoniyatlari ochiq: o'qituvchilik, tarjimonlik, diplomatiya sohasi, turizm hamda xalqaro tashkilotlarda faoliyat yuritish.",
+    "author": "TIIU Matbuot xizmati",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2026-07-18T17:38:04.024Z",
+    "updated_at": "2026-07-18T18:02:24.624Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 9,
+  "fields": {
+    "title": "TIIU talabasi xalqaro investitsiya forumida tarjimon bo'ldi",
+    "slug": "tiiu-talabasi-xalqaro-investitsiya-forumida-tarjimon-boldi",
+    "category": 2,
+    "image": "news/news-9.jpg",
+    "short_text": "Talabamiz Toshkentdagi xalqaro forumda Ummon delegatsiyasiga tarjimonlik qildi.",
+    "body": "Universitetimiz talabasi Toshkent shahrida bo'lib o'tgan xalqaro investitsiya forumida Ummon delegatsiyasi uchun tarjimon sifatida ishtirok etdi. Bu — talabalarimizning amaliy til ko'nikmalari va xalqaro tajribasining yorqin namunasi.",
+    "author": "TIIU Matbuot xizmati",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2026-07-18T17:38:04.025Z",
+    "updated_at": "2026-07-18T18:02:25.668Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 10,
+  "fields": {
+    "title": "Magistratura uchun chet tili sertifikati talab qilinmaydi",
+    "slug": "magistratura-uchun-chet-tili-sertifikati-talab-qilinmaydi",
+    "category": 2,
+    "image": "news/news-10.jpg",
+    "short_text": "Magistratura qabuliga chet tili sertifikatini taqdim etish endi shart emas.",
+    "body": "E'tiboringizga: magistratura bosqichiga qabul jarayonida chet tili sertifikatini taqdim etish talabi bekor qilindi. Bu qabul jarayonini abituriyentlar uchun yanada qulaylashtiradi.",
+    "author": "TIIU Matbuot xizmati",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2026-07-18T17:38:04.026Z",
+    "updated_at": "2026-07-18T18:02:26.467Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 11,
+  "fields": {
+    "title": "2026/2027 o'quv yili: 20 ga yaqin bakalavr va magistr dasturlari",
+    "slug": "20262027-oquv-yili-20-ga-yaqin-bakalavr-va-magistr-dasturlari",
+    "category": 2,
+    "image": "news/news-11.jpg",
+    "short_text": "Stipendiya va xalqaro almashinuv imkoniyatlari bilan 20 ga yaqin dastur.",
+    "body": "2026/2027 o'quv yilida universitetda 20 ga yaqin bakalavr va magistr dasturlari mavjud. Talabalarga stipendiya, xalqaro almashinuv dasturlari va zamonaviy ta'lim sharoitlari taqdim etiladi.",
+    "author": "TIIU Matbuot xizmati",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2026-07-18T17:38:04.028Z",
+    "updated_at": "2026-07-18T18:02:27.402Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 12,
+  "fields": {
+    "title": "Hujjatlarni masofadan onlayn topshiring",
+    "slug": "hujjatlarni-masofadan-onlayn-topshiring",
+    "category": 2,
+    "image": "news/news-12.jpg",
+    "short_text": "admission.tiiu.uz orqali hujjatlaringizni uydan turib onlayn topshirishingiz mumkin.",
+    "body": "Universitetga hujjat topshirish endi yanada oson: admission.tiiu.uz portali orqali hujjatlaringizni uydan turib masofadan onlayn topshirishingiz mumkin.",
+    "author": "TIIU Matbuot xizmati",
+    "views": 3,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2026-07-18T17:38:04.029Z",
+    "updated_at": "2026-07-18T18:02:28.312Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 13,
+  "fields": {
+    "title": "“TALABA EXPO — 2026” ko’rgazmasidan fotojamlanma.",
+    "slug": "talaba-expo-2026-korgazmasidan-fotojamlanma",
+    "category": 1,
+    "image": "news/news-13.jpg",
+    "short_text": "📥 Hujjat topshirishga shoshiling! 👇🏻👇🏻👇🏻👇🏻👇🏻 Ro`yhatdan o`tish Batafsil ma’lumot uchun: +998781131717 +998555061277",
+    "body": "📥 Hujjat topshirishga shoshiling!\n👇🏻👇🏻👇🏻👇🏻👇🏻\nRo`yhatdan o`tish\nBatafsil ma’lumot uchun:\n+998781131717\n+998555061277",
+    "author": "TIIU Matbuot xizmati",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2026-06-30T11:11:59Z",
+    "updated_at": "2026-07-18T18:02:55.815Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 14,
+  "fields": {
+    "title": "Magistartura bosqichi bo’yicha Turdosh yo’nalishlar ro’yxati",
+    "slug": "magistartura-bosqichi-boyicha-turdosh-yonalishlar-royxati",
+    "category": 1,
+    "image": "news/news-14.jpg",
+    "short_text": "Magistartura bosqichi bo’yicha Turdosh yo’nalishlar ro’yxati",
+    "body": "",
+    "author": "TIIU Matbuot xizmati",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2026-06-15T07:11:36Z",
+    "updated_at": "2026-07-18T18:02:55.818Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 15,
+  "fields": {
+    "title": "🎓 ILM-FAN FIDOIYSI",
+    "slug": "ilm-fan-fidoiysi",
+    "category": 1,
+    "image": "news/news-15.jpg",
+    "short_text": "🔊Iqtidorli va ilm yo‘lida charchamaydigan talabalarimiz safi kun sayin ortib bormoqda. 🔊Quvonarli jihati shundaki, universitetimizning Amaliy psixologiya yo‘nalishi talabasi Yunusova Nigora hamda Filologiya va tillarni o‘qitish yo‘nalishi magistranti Mahmudjonova Ro‘zigul ilm-fan sohasida ko‘rsatgan faolliklari, erishgan natijalari va intilishlari uchun bir vaqtning o‘zida “ILM-FAN FIDOIYSI” ko‘krak nishoni bilan taqdirlanishdi. 🔊Ushbu mukofot — talabalarimizning tinimsiz mehnati, izlanishlari [",
+    "body": "🔊Iqtidorli va ilm yo‘lida charchamaydigan talabalarimiz safi kun sayin ortib bormoqda.\n🔊Quvonarli jihati shundaki, universitetimizning Amaliy psixologiya yo‘nalishi talabasi Yunusova Nigora hamda Filologiya va tillarni o‘qitish yo‘nalishi magistranti Mahmudjonova Ro‘zigul ilm-fan sohasida ko‘rsatgan faolliklari, erishgan natijalari va intilishlari uchun bir vaqtning o‘zida “ILM-FAN FIDOIYSI” ko‘krak nishoni bilan taqdirlanishdi.\n\n\n🔊Ushbu mukofot — talabalarimizning tinimsiz mehnati, izlanishlari va ustozlar bergan bilimning munosib e’tirofidir.\n🔊Yunusova Nigora va Mahmudjonova Ro‘zigulni ushbu yuksak e’tirof bilan muborakbod etamiz!\nIlmiy safaringiz bardavom va muvaffaqiyatli bo‘lsin!\n📥 Hujjat topshirishga shoshiling!\n👇🏻👇🏻👇🏻👇🏻👇🏻\nRo`yhatdan o`tish\nBatafsil ma’lumot uchun:\n+998781131717\n+998555061277",
+    "author": "TIIU Matbuot xizmati",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2026-06-11T13:01:26Z",
+    "updated_at": "2026-07-18T18:02:55.821Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 16,
+  "fields": {
+    "title": "Toshkent Ijtimoiy Innovatsiya Universitetida “Kelajakka qadam” loyihasi doirasida talabalar bilan uchrashuv tashkil etildi.",
+    "slug": "toshkent-ijtimoiy-innovatsiya-universitetida-kelajakka-qadam-loyihasi-doirasida-talabalar-bilan-uchrashuv-tashkil-etildi",
+    "category": 1,
+    "image": "news/news-16.jpg",
+    "short_text": "Uchrashuv davomida yoshlarning bandligini ta’minlash, tadbirkorlikka jalb qilish, imtiyozli kreditlar va startap loyihalarni qo‘llab-quvvatlash bo‘yicha muhim ma’lumotlar berildi. Talabalar o‘zlarini qiziqtirgan savollarga mutaxassislardan batafsil javob oldilar.",
+    "body": "Uchrashuv davomida yoshlarning bandligini ta’minlash, tadbirkorlikka jalb qilish, imtiyozli kreditlar va startap loyihalarni qo‘llab-quvvatlash bo‘yicha muhim ma’lumotlar berildi. Talabalar o‘zlarini qiziqtirgan savollarga mutaxassislardan batafsil javob oldilar.",
+    "author": "TIIU Matbuot xizmati",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2026-05-22T09:59:40Z",
+    "updated_at": "2026-07-18T18:02:55.823Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 17,
+  "fields": {
+    "title": "ILMIY YUTUQ",
+    "slug": "ilmiy-yutuq",
+    "category": 1,
+    "image": "news/news-17.jpg",
+    "short_text": "Toshkent ijtimoiy innovatsiya universiteti “Iqtisodiyot va raqamli texnologiyalar ” kafedrasi v.b. dotsenti, f.-m.f.f.d. Kamol Rasulovning “Cross theorem for separately real-analytic functions”, “Extension of separately analytic functions with thin singularities on one-dimensional parallel sections” nomli ilmiy maqolalari Scopus bazasida indekslangan nufuzli ilmiy jurnallarda chop etildi. Ustozimizni ushbu ilmiy yutuq bilan tabriklaymiz va keyingi ilmiy ishlarida […]",
+    "body": "Toshkent ijtimoiy innovatsiya universiteti “Iqtisodiyot va raqamli texnologiyalar ” kafedrasi v.b. dotsenti, f.-m.f.f.d. Kamol Rasulovning\n“Cross theorem for separately real-analytic functions”,\n“Extension of separately analytic functions with thin singularities on one-dimensional parallel sections”\nnomli ilmiy maqolalari Scopus bazasida indekslangan nufuzli ilmiy jurnallarda chop etildi. Ustozimizni ushbu ilmiy yutuq bilan tabriklaymiz va keyingi ilmiy ishlarida ulkan muvaffaqiyatlar tilaymiz.\nMaqolani o`qish 👇🏻\nCross theorem for separately real-analytic functions | The Journal of Analysis\nExtension of separately analytic functions with thin singularities on one-dimensional parallel sections | Uzbek Mathematical Journal\nBu yutuq nafaqat ustozimiz, balki universitetimiz ilmiy salohiyatining yana bir isbotidir.",
+    "author": "TIIU Matbuot xizmati",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2026-04-08T10:24:20Z",
+    "updated_at": "2026-07-18T18:02:55.842Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 18,
+  "fields": {
+    "title": "Prezident va Davlat nomdor stipendiyalar tanlovi!",
+    "slug": "prezident-va-davlat-nomdor-stipendiyalar-tanlovi",
+    "category": 1,
+    "image": "news/news-18.jpg",
+    "short_text": "Universitetimizda nufuzli Prezident va Davlat nomdor stipendiyalari uchun ichki saralash tanloviga start berildi! Bu sizning bilimingiz, ilmiy va ijtimoiy faolligingizni butun respublikaga namoyish etish hamda munosib rag’batlantirish uchun ajoyib imkoniyatdir. 🎯 Bu tanlov kimlar uchun? ✅ Darslarni a’lo baholarga o’zlashtirayotgan; ✅ Ilmiy izlanishlar olib borish, turli anjumanlarda qatnashib, mahalliy va xalqaro nashrlarda o’z maqolalari bilan […]",
+    "body": "Universitetimizda nufuzli Prezident va Davlat nomdor stipendiyalari uchun ichki saralash tanloviga start berildi!\nBu sizning bilimingiz, ilmiy va ijtimoiy faolligingizni butun respublikaga namoyish etish hamda munosib rag’batlantirish uchun ajoyib imkoniyatdir.\n🎯 Bu tanlov kimlar uchun?\n✅ Darslarni a’lo baholarga o’zlashtirayotgan;\n✅ Ilmiy izlanishlar olib borish, turli anjumanlarda qatnashib, mahalliy va xalqaro nashrlarda o’z maqolalari bilan ishtirok etayotgan;\n✅ Xorijiy tillarni bilish darajasini tasdiqlovchi milliy yoki xalqaro sertifikati (IELTS, TOEFL, CEFR va h.k.) mavjud talabalar uchun.\n💡 Unutmang: Yuqoridagi talablarga javob bersangiz, sizda ushbu nufuzli stipendiyalar sohibi bo’lish ehtimoli juda yuqori bo`ladi!\n🚀 Nima qilish kerak?\nUniversitetimiz tomonidan tashkil etilgan dastlabki saralash bosqichida faol ishtirok eting, o’z iqtidoringizni ko’rsating va tanlovning keyingi, Respublika bosqichiga yo‘llanmani qo‘lga kiriting!\n📍 Batafsil ma’lumot va hujjatlar ro’yxati bilan tanishish uchun: @GBoboyev_a\n313-xonaga uchrashishingiz so’raladi.\nQarorni o’qish",
+    "author": "TIIU Matbuot xizmati",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2026-05-21T12:42:42Z",
+    "updated_at": "2026-07-18T18:02:55.828Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 19,
+  "fields": {
+    "title": "Bugun vakillar",
+    "slug": "bugun-vakillar",
+    "category": 1,
+    "image": "news/news-19.jpg",
+    "short_text": "Kadirov Kamoliddin Batirovich – professor, psixologiya fanlari doktori (DSc), O‘zbekiston Respublikasida shaxs psixologiyasi, kasbiy o‘zini aniqlash, psixofiziologiya va boshqaruv psixologiyasi sohalarida yetakchi mutaxassislardan biri. Bugun #vakillar rukni — bu yerda biz O‘zbekiston Psixologlar jamiyati a’zolari haqida so‘zlab beramiz🫂 Kamoliddin Batirovichning psixologiya sohasidagi professional faoliyati qariyb uch o‘n yillikni tashkil etadi va u fundamental ilmiy […]",
+    "body": "Kadirov Kamoliddin Batirovich – professor, psixologiya fanlari doktori (DSc), O‘zbekiston Respublikasida shaxs psixologiyasi, kasbiy o‘zini aniqlash, psixofiziologiya va boshqaruv psixologiyasi sohalarida yetakchi mutaxassislardan biri.\nBugun #vakillar rukni — bu yerda biz O‘zbekiston Psixologlar jamiyati a’zolari haqida so‘zlab beramiz🫂\nKamoliddin Batirovichning psixologiya sohasidagi professional faoliyati qariyb uch o‘n yillikni tashkil etadi va u fundamental ilmiy tadqiqotlarni psixologik diagnostika hamda boshqaruv kadrlari bilan ishlash bo‘yicha faol amaliy faoliyat bilan uyg‘unlashtirib kelmoqda.\nKamoliddin Batirovichning kasbiy shakllanishida Respublika diagnostika markazidagi faoliyati muhim bosqich bo‘ldi. Bu yerda u milliy ta’lim muhiti xususiyatlarini inobatga olgan holda psixodiagnostik metodikalarni ishlab chiqish, standartlashtirish va moslashtirish bilan shug‘ullandi. Mazkur metodikalar maktab amaliyotiga joriy etilgan bo‘lib, bugungi kunda ham O‘zbekiston ta’lim tizimidagi psixologik xizmat faoliyatida keng qo‘llanilmoqda.\nKamoliddin Batirovich tomonidan ishlab chiqilgan psixodiagnostik vositalar davlat xizmatchilarining psixologik portretini shakllantirish hamda ularning boshqaruv salohiyatini baholashda ham qo‘llaniladi.\nKamoliddin Batirovichning ilmiy faoliyatida shaxs rivojlanishining psixofiziologik mexanizmlarini o‘rganish alohida o‘rin tutadi. U bolalarning maktab ta’limiga psixofiziologik tayyorgarligiga bag‘ishlangan yirik ilmiy loyihalarga rahbarlik qilgan, shuningdek, sport psixofiziologiyasi yo‘nalishidagi kompleks tadqiqotlarda ishtirok etib, professional futbolchilar va O‘zbekiston milliy terma jamoasi bilan elektroensefalografiya usullaridan foydalangan holda ishlagan.\nKamoliddin Batirovich 120 dan ortiq ilmiy ishlar muallifi bo‘lib, ular qatoriga monografiyalar, o‘quv qo‘llanmalar hamda respublika va xalqaro nashrlarda chop etilgan maqolalar kiradi.",
+    "author": "TIIU Matbuot xizmati",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2026-05-21T12:39:39Z",
+    "updated_at": "2026-07-18T18:02:55.831Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 20,
+  "fields": {
+    "title": "Qabul boshlandi!!!",
+    "slug": "qabul-boshlandi",
+    "category": 1,
+    "image": "news/news-20.png",
+    "short_text": "Qabul boshlandi!!!",
+    "body": "Qabul boshlandi!!!",
+    "author": "TIIU Matbuot xizmati",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2026-05-05T10:36:53Z",
+    "updated_at": "2026-07-18T18:02:55.832Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 21,
+  "fields": {
+    "title": "Hamkorlik",
+    "slug": "hamkorlik",
+    "category": 1,
+    "image": "news/news-21.jpg",
+    "short_text": "Kuni kecha Toshkent ijtimoiy innovatsiya universiteti va Chirchiq davlat pedagogika universiteti o‘rtasida o‘zaro hamkorlik memorandumi imzolandi. Ushbu hamkorlik talabalarimiz uchun ko‘plab imkoniyatlar eshigini ochib, ularning kelajakdagi muvaffaqiyati uchun mustahkam zamin yaratadi.",
+    "body": "Kuni kecha Toshkent ijtimoiy innovatsiya universiteti va Chirchiq davlat pedagogika universiteti o‘rtasida o‘zaro hamkorlik memorandumi imzolandi.\nUshbu hamkorlik talabalarimiz uchun ko‘plab imkoniyatlar eshigini ochib, ularning kelajakdagi muvaffaqiyati uchun mustahkam zamin yaratadi.",
+    "author": "TIIU Matbuot xizmati",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2026-04-17T12:24:40Z",
+    "updated_at": "2026-07-18T18:02:55.834Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 22,
+  "fields": {
+    "title": "Toshkent ijtimoiy innovatsiya universitetida bir qator muhim o‘zgarishlar amalga oshirildi",
+    "slug": "toshkent-ijtimoiy-innovatsiya-universitetida-bir-qator-muhim-ozgarishlar-amalga-oshirildi",
+    "category": 1,
+    "image": "news/news-22.jpg",
+    "short_text": "✅ Kutubxonamiz kengaytirildi va yangi kitoblar bilan boyitildi. ✅ 40 o‘ringa mo‘ljallangan zamonaviy kompyuter xonasi ishga tushirildi ✅ Futbol, voleybol, tennis va boshqa sport turlari uchun zamonaviy sport zal ochildi ✅200 o‘ringa mo‘ljallangan Faollar zali ishga tushirildi",
+    "body": "✅ Kutubxonamiz kengaytirildi va yangi kitoblar bilan boyitildi.\n\n\n\n✅ 40 o‘ringa mo‘ljallangan zamonaviy kompyuter xonasi ishga tushirildi\n\n\n✅ Futbol, voleybol, tennis va boshqa sport turlari uchun zamonaviy sport zal ochildi\n\n\n\n✅200 o‘ringa mo‘ljallangan Faollar zali ishga tushirildi",
+    "author": "TIIU Matbuot xizmati",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2026-04-17T12:21:02Z",
+    "updated_at": "2026-07-18T18:02:55.836Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 23,
+  "fields": {
+    "title": "TIIU talabalari Samarqandda",
+    "slug": "tiiu-talabalari-samarqandda",
+    "category": 1,
+    "image": "news/news-23.jpg",
+    "short_text": "Iqtisodiyot hamda Moliya va moliyaviy texnologiyalr yo‘nalishida tahsil olayotgan talabalarimiz professor-o‘qituvchilar Laziza Ko‘paysinova va Surayyo Ziyayeva boshchiligida Samarqand shahriga sayohat uyushtirishdi. 🟢Ushbu ziyorat davomida talabalar tarixiy obidalar, muqaddas qadamjolar hamda shaharning boy madaniy merosi bilan yaqindan tanishish imkoniyatiga ega bo‘lishdi.",
+    "body": "Iqtisodiyot hamda Moliya va moliyaviy texnologiyalr yo‘nalishida tahsil olayotgan talabalarimiz professor-o‘qituvchilar Laziza Ko‘paysinova va Surayyo Ziyayeva boshchiligida Samarqand shahriga sayohat uyushtirishdi.\n🟢Ushbu ziyorat davomida talabalar tarixiy obidalar, muqaddas qadamjolar hamda shaharning boy madaniy merosi bilan yaqindan tanishish imkoniyatiga ega bo‘lishdi.",
+    "author": "TIIU Matbuot xizmati",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2026-04-09T12:07:59Z",
+    "updated_at": "2026-07-18T18:02:55.838Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 24,
+  "fields": {
+    "title": "INFRATUZILMASINI TAKOMILLASHTIRISH MAQSADIDA 2026-YIL MART OYI DAVOMIDA O‘TKAZILADIGAN ANKETA VA SO‘ROVNOMA HISOBOTI",
+    "slug": "infratuzilmasini-takomillashtirish-maqsadida-2026-yil-mart-oyi-davomida-otkaziladigan-anketa-va-sorovnoma-hisoboti",
+    "category": 1,
+    "image": "",
+    "short_text": "2026-yil 14-mart kuni Toshkent ijtimoiy innovatsiya universitetida ta’lim-tarbiya jarayonini yaxshilash hamda talabalarining ijtimoiy-psixologik holatlarini o‘rganish maqsadida universitetning “TIIU Ma’naviy-ma’rifiy va spotr” telegram kanalida so‘rovnoma o‘tkazildi. So‘rovnoma natijalariga ko‘ra, respondentlarning mutaxassislik yo‘nalishlari bo‘yicha taqsimoti quyidagicha bo‘ldi. Talabalarning 61 % Iqtisodiyot va raqamli texnologiyalar yo‘nalishida, 39 % esa Pedagogika va psixologiya yo‘nalishi",
+    "body": "2026-yil 14-mart kuni Toshkent ijtimoiy innovatsiya universitetida ta’lim-tarbiya jarayonini yaxshilash hamda talabalarining ijtimoiy-psixologik holatlarini o‘rganish maqsadida universitetning “TIIU Ma’naviy-ma’rifiy va spotr” telegram kanalida so‘rovnoma o‘tkazildi.\n\n\n\n\n\n\nSo‘rovnoma natijalariga ko‘ra, respondentlarning mutaxassislik yo‘nalishlari bo‘yicha taqsimoti quyidagicha bo‘ldi. Talabalarning 61 % Iqtisodiyot va raqamli texnologiyalar yo‘nalishida, 39 % esa Pedagogika va psixologiya yo‘nalishida tahsil olayotganliklarini bildirgan. Bu natija universitetda iqtisodiyot va texnologiyalar yo‘nalishidagi talabalar ulushi ko‘proq ekanligini ko‘rsatadi.\nUniversitet infratuzilmasi bo‘yicha berilgan savollarga talabalarning javoblari ham tahlil qilindi. Jumladan, universitetdagi o‘quv xonalari sharoitlari haqida so‘ralganda respondentlarning 37 % juda yaxshi, 46 % yaxshi, 16 % o‘rtacha, 1 % esa qoniqarsiz deb baholagan. Bu natija universitetdagi o‘quv jarayoni uchun yaratilgan sharoitlar aksariyat talabalarni qoniqtirayotganini ko‘rsatadi.\nKutubxona sharoitlari bo‘yicha esa talabalarning 35 % juda yaxshi, 51 % yaxshi, 13 % o‘rtacha, 1 % qoniqarsiz degan fikrni bildirgan. Ushbu ko‘rsatkichlar universitet kutubxonasi talabalarning aksariyati tomonidan ijobiy baholanayotganini ko‘rsatadi.\nUniversitet hududidagi internet (Wi-Fi) sifati bo‘yicha talabalarning fikrlari quyidagicha taqsimlandi: 20 % juda yaxshi, 43 % yaxshi, 23 % o‘rtacha, 14 % juda past deb baholagan. Bu esa internet sifati umumiy jihatdan qoniqarli bo‘lsa-da, ayrim hollarda uni yanada yaxshilash zarurligini ko‘rsatadi.\nUniversitet hududidagi dam olish joylari (o‘rindiqlar, ayvonlar, yashil hududlar) yetarliligi bo‘yicha respondentlarning 32 % yetarli, 50 % qisman yetarli, 18 % yetarli emas deb javob bergan. Ushbu natijalar talabalar uchun dam olish hududlarini kengaytirish zarurligini ko‘rsatadi.\nOshxona yoki bufet xizmatlari bo‘yicha so‘rov natijalariga ko‘ra, 44 % talaba juda mamnun, 51 % qisman mamnun, 5 % qoniqarsiz degan fikrni bildirgan. Bu ko‘rsatkichlar umumiy xizmat sifati qoniqarli ekanligini bildiradi, ammo ayrim jihatlarni takomillashtirish talab etiladi.\nTalabalarning fikriga ko‘ra, universitet infratuzilmasida ko‘proq takomillashtirilishi kerak bo‘lgan yo‘nalishlar ham aniqlandi. Natijalarga ko‘ra, 38 % talaba sport inshootlarini, 21 % dam olish hududlarini, 16 % internet tarmog‘ini, 14 % kutubxonani, 11 % esa oshxona va ovqatlanish joylarini rivojlantirish zarurligini ta’kidlagan.\nShuningdek, talabalar universitet hududida tashkil etilishi kerak bo‘lgan qo‘shimcha imkoniyatlar haqida ham o‘z fikrlarini bildirdilar. So‘rov natijalariga ko‘ra, 40 % talaba dam olish zonalarini, 36 % sport maydonchalarini, 20 % “CO-WORKING” zonalarini, 4 % esa boshqa turdagi imkoniyatlarni tashkil etishni taklif qilgan.\n\nSo‘rovnoma natijalariga ko‘ra:\n\n\n\n\nO‘tkazilgan so‘rovnoma natijalariga ko‘ra, talabalarning aksariyati berilgan savollarga ijobiy munosabat bildirganliklari aniqlandi. Xususan, umumiy baholash natijalarida “juda yaxshi” baholashlar ulushi 38 % ni “o‘rta yaxshi” ko‘rsatkichi 47 % bilan yetakchi o‘rinni egallagan bo‘lsa, tashkil etdi. Bu esa talabalar tomonidan universitetdagi ta’lim jarayoni va yaratilgan sharoitlar asosan ijobiy baholanayotganini ko‘rsatadi.\nShu bilan birga, “qoniqarli” baholar 12% ni tashkil etib, ayrim yo‘nalishlarda hali takomillashtirish zarurligini bildiradi. “Salbiy” baholarning 3% ni tashkil etishi esa kamchiliklar mavjud bo‘lsa-da, ularning ulushi nisbatan past ekanligini ko‘rsatadi.\nTahlil natijalariga ko‘ra, so‘rovnoma savollari kesimida ayrim yo‘nalishlarda yuqori ijobiy natijalar kuzatilgan bo‘lsa, ba’zi savollarda nisbatan pastroq baholar qayd etilgan. Bu esa universitet faoliyatining ayrim jihatlarini yanada rivojlantirish va takomillashtirish zarurligini ko‘rsatadi.\nUmuman olganda, so‘rovnoma natijalari universitetda ta’lim sifati va infratuzilma sharoitlari talabalar tomonidan asosan ijobiy baholanayotganini, shu bilan birga ayrim yo‘nalishlarda rivojlanish uchun imkoniyatlar mavjudligini tasdiqlaydi.",
+    "author": "TIIU Matbuot xizmati",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2026-04-08T12:54:31Z",
+    "updated_at": "2026-07-18T18:02:55.840Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 25,
+  "fields": {
+    "title": "DIQQAT INSHOLAR TANLOVI",
+    "slug": "diqqat-insholar-tanlovi",
+    "category": 1,
+    "image": "",
+    "short_text": "Toshkent Ijtimoiy Innovatsiya Universitetida talabalar o‘rtasida “Amir Temur va temuriylar merosi”, “Amir Temur va Temuriylar davri – Markaziy Osiyoda ilm-fan hamda madaniyatning yuksalish davri” mavzularida insholar tanlovi o‘tkaziladi. Tanlovdan maqsad: Talabalar o‘rtasida Amir Temur va Temuriylar davri tarixini keng targ‘ib qilish Yoshlarning tarixiy merosimizga bo‘lgan hurmatini oshirish Talabalarning ijodiy fikrlashi va yozma nutqini rivojlantirish Iqtidorli […]",
+    "body": "Toshkent Ijtimoiy Innovatsiya Universitetida talabalar o‘rtasida “Amir Temur va temuriylar merosi”, “Amir Temur va Temuriylar davri – Markaziy Osiyoda ilm-fan hamda madaniyatning yuksalish davri” mavzularida insholar tanlovi o‘tkaziladi.\nTanlovdan maqsad:\nTalabalar o‘rtasida Amir Temur va Temuriylar davri tarixini keng targ‘ib qilish\nYoshlarning tarixiy merosimizga bo‘lgan hurmatini oshirish\nTalabalarning ijodiy fikrlashi va yozma nutqini rivojlantirish\nIqtidorli talabalarni aniqlash va rag‘batlantirish\nTanlov shartlari:\nTanlovda universitetning barcha talabalari ishtirok etishi mumkin\nInsho hajmi: 3–5 bet\nInsholar o‘zbek tilida yozilishi kerak\nIshlar Word formatda topshiriladi\nHar bir ishtirokchi faqat bitta insho bilan qatnashadi\nBaholash mezonlari:\nMavzuning yoritilishi\nTarixiy faktlardan foydalanish\nIjodkorlik va mustaqil fikr\nSavodxonlik va uslub\nTanlovda qatnashish uchun ariza 6-aprel 15:00 qadar qabul qilinadi.\nINSHOLAR TANLOVI 8-aprel 14:00da bo`lib o`tadi\nG‘oliblar:\nTanlov g‘oliblari diplom va esdalik sovg‘alari bilan taqdirlanadi.\nBatafsil ma’lumot uchun:\nTel:+998 99 231 00 44\nTelegram: @GBoboyev_a @Imomqulova_0205",
+    "author": "TIIU Matbuot xizmati",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2026-04-06T07:21:28Z",
+    "updated_at": "2026-07-18T18:02:55.844Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 26,
+  "fields": {
+    "title": "Navro‘z Party’dan fotolar",
+    "slug": "navroz-partydan-fotolar",
+    "category": 1,
+    "image": "news/news-26.jpg",
+    "short_text": "Bayramona kayfiyat, quvonchli onlar va unutilmas lahzalar — barchasi Navro‘z Party’da!",
+    "body": "Bayramona kayfiyat, quvonchli onlar va unutilmas lahzalar — barchasi Navro‘z Party’da!",
+    "author": "TIIU Matbuot xizmati",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2026-04-01T14:31:04Z",
+    "updated_at": "2026-07-18T18:02:55.847Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 27,
+  "fields": {
+    "title": "Faol talabalar taqdirlandilar",
+    "slug": "faol-talabalar-taqdirlandilar",
+    "category": 1,
+    "image": "news/news-27.jpg",
+    "short_text": "Toshkent ijtimoiy innovatsiya universitetida Navro‘z bayrami munosabati bilan universitet hayotida faol ishtirok etib kelayotgan bir guruh faol talabalar taqdirlandilar. Taqdirlash marosimida universitet rahbariyati tomonidan tashakkurnoma va esdalik sovg‘alari topshirildi. Faol, tashabbuskor va iqtidorli talabalarimiz universitetimiz faxri hisoblanadi. Barcha taqdirlangan talabalarimizni muborakbod etamiz va kelgusi ishlarida ulkan muvaffaqiyatlar tilaymiz.",
+    "body": "Toshkent ijtimoiy innovatsiya universitetida Navro‘z bayrami munosabati bilan universitet hayotida faol ishtirok etib kelayotgan bir guruh faol talabalar taqdirlandilar.\n\nTaqdirlash marosimida universitet rahbariyati tomonidan tashakkurnoma va esdalik sovg‘alari topshirildi. Faol, tashabbuskor va iqtidorli talabalarimiz universitetimiz faxri hisoblanadi.\nBarcha taqdirlangan talabalarimizni muborakbod etamiz va kelgusi ishlarida ulkan muvaffaqiyatlar tilaymiz.",
+    "author": "TIIU Matbuot xizmati",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2026-04-01T14:25:29Z",
+    "updated_at": "2026-07-18T18:02:55.848Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 28,
+  "fields": {
+    "title": "Navro‘z sayli ko‘tarinki ruhda nishonlandi",
+    "slug": "navroz-sayli-kotarinki-ruhda-nishonlandi",
+    "category": 1,
+    "image": "news/news-28.jpg",
+    "short_text": "Toshkent ijtimoiy innovatsiya universitetida Navro‘z umumxalq bayrami ko‘tarinki ruhda keng nishonlandi. Bayram tadbiri davomida milliy taomlar ko‘rgazmasi, sumalak sayli, milliy kuy-qo‘shiqlar, raqslar hamda turli madaniy chiqishlar tashkil etildi. Talabalar tomonidan tayyorlangan bayram dasturxonlari tadbirga alohida fayz bag‘ishladi. Navro‘z sayli universitet jamoasiga bayramona kayfiyat, birlik va ko‘tarinki ruh ulashdi.",
+    "body": "Toshkent ijtimoiy innovatsiya universitetida Navro‘z umumxalq bayrami ko‘tarinki ruhda keng nishonlandi.\n\nBayram tadbiri davomida milliy taomlar ko‘rgazmasi, sumalak sayli, milliy kuy-qo‘shiqlar, raqslar hamda turli madaniy chiqishlar tashkil etildi. Talabalar tomonidan tayyorlangan bayram dasturxonlari tadbirga alohida fayz bag‘ishladi.\nNavro‘z sayli universitet jamoasiga bayramona kayfiyat, birlik va ko‘tarinki ruh ulashdi.",
+    "author": "TIIU Matbuot xizmati",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2026-04-01T14:22:05Z",
+    "updated_at": "2026-07-18T18:02:55.850Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 29,
+  "fields": {
+    "title": "Sumalak party",
+    "slug": "sumalak-party",
+    "category": 1,
+    "image": "news/news-29.jpg",
+    "short_text": "Universitetimiz rektori va professor-o‘qituvchilari sumalak qozoni boshida jam bo‘lishdi. Sumalak — bu shunchaki taom emas, bu birlik, mehr va an’ana. Qozon boshidagi samimiy lahzalar esa eng unutilmas xotiralardir.",
+    "body": "Universitetimiz rektori va professor-o‘qituvchilari sumalak qozoni boshida jam bo‘lishdi.\n\nSumalak — bu shunchaki taom emas, bu birlik, mehr va an’ana.\nQozon boshidagi samimiy lahzalar esa eng unutilmas xotiralardir.",
+    "author": "TIIU Matbuot xizmati",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2026-04-01T14:18:29Z",
+    "updated_at": "2026-07-18T18:02:55.851Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 30,
+  "fields": {
+    "title": "Profilaktik tadbir",
+    "slug": "profilaktik-tadbir",
+    "category": 1,
+    "image": "",
+    "short_text": "2026 yil 5 yanvarda qabul qilingan “Respublika mahallalarida xavfsiz muhit yaratish yo‘nalishida yaxlit manzilli ishlash tizimini joriy etishga qaratilgan qo‘shimcha chora-tadbirlar to‘g‘risida”gi PQ–1-son qarorida belgilangan vazifalar ijrosini ta’minlash maqsadida Toshkent ijtimoiy innovatsiya universitetida ma’naviy-ma’rifiy tadbir tashkil etildi. Tadbirda Bojxona qo‘mitasi Bojxona instituti mas’ul xodimlari J. Farmanov, J. Ergashev hamda U. Xamrayevlar ishtirok etib, talabalar bilan […]",
+    "body": "2026 yil 5 yanvarda qabul qilingan “Respublika mahallalarida xavfsiz muhit yaratish yo‘nalishida yaxlit manzilli ishlash tizimini joriy etishga qaratilgan qo‘shimcha chora-tadbirlar to‘g‘risida”gi PQ–1-son qarorida belgilangan vazifalar ijrosini ta’minlash maqsadida Toshkent ijtimoiy innovatsiya universitetida ma’naviy-ma’rifiy tadbir tashkil etildi.\n\nTadbirda Bojxona qo‘mitasi Bojxona instituti mas’ul xodimlari J. Farmanov, J. Ergashev hamda U. Xamrayevlar ishtirok etib, talabalar bilan ochiq muloqot o‘tkazdilar. Uchrashuv davomida yoshlar orasida uyushgan jinoyatchilikning oldini olish, ayniqsa giyohvandlik vositalarining noqonuniy muomalasi va savdosining jamiyat uchun xavfli oqibatlari haqida atroflicha ma’lumotlar berildi.\n\nSuhbat jarayonida giyohvandlik inson salomatligiga jiddiy, ayrim hollarda esa qaytarib bo‘lmas zarar yetkazishi, ruhiy va jismoniy qaramlikni keltirib chiqarishi haqida tushuntirishlar berildi. Shuningdek, bu illat insonning ma’naviy-axloqiy qiyofasiga salbiy ta’sir ko‘rsatishi, uning oilaviy muhiti va ijtimoiy hayotiga ham jiddiy zarar yetkazishi alohida ta’kidlandi.\n\nTadbir davomida talabalarga giyohvandlikka qarshi kurashish, sog‘lom turmush tarzini targ‘ib qilish hamda yoshlarni turli salbiy illatlardan asrash borasida amalga oshirilayotgan ishlar haqida ham ma’lumot berildi. Uchrashuv savol-javoblar, fikr almashishlar va talabalarning qiziqishlari asosida davom etdi.",
+    "author": "TIIU Matbuot xizmati",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2026-03-16T12:34:13Z",
+    "updated_at": "2026-07-18T18:02:55.853Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 31,
+  "fields": {
+    "title": "TAYINLOV",
+    "slug": "tayinlov",
+    "category": 1,
+    "image": "news/news-31.png",
+    "short_text": "Toshkent Ijtimoiy Innovatsiya Universitetida kadrlar salohiyatini yanada mustahkamlash, ta’lim sifatini oshirish hamda bitiruvchilar bilan ishlash tizimini samarali tashkil etish maqsadida yangi tayinlovlar amalga oshirildi. Unga ko‘ra, Ruslan Yesbosinov Yesbergenovich universitetning Ta’lim sifatini nazorat qilish bo‘limi boshlig‘i lavozimiga tayinlandi. Shuningdek, Nafisa Xo‘jayeva Bandlik va bitiruvchilar bilan ishlash bo‘limi boshlig‘i lavozimiga tayinlandi. Mazkur bo‘limning bosh mutaxassis",
+    "body": "Toshkent Ijtimoiy Innovatsiya Universitetida kadrlar salohiyatini yanada mustahkamlash, ta’lim sifatini oshirish hamda bitiruvchilar bilan ishlash tizimini samarali tashkil etish maqsadida yangi tayinlovlar amalga oshirildi.\nUnga ko‘ra, Ruslan Yesbosinov Yesbergenovich universitetning Ta’lim sifatini nazorat qilish bo‘limi boshlig‘i lavozimiga tayinlandi.\n\nShuningdek, Nafisa Xo‘jayeva Bandlik va bitiruvchilar bilan ishlash bo‘limi boshlig‘i lavozimiga tayinlandi.\n\nMazkur bo‘limning bosh mutaxassisi lavozimiga esa Sarvarjon Botirov etib belgilandi.\n\nUshbu tayinlovlar universitet faoliyatini yanada takomillashtirish, ta’lim sifati ustidan nazoratni kuchaytirish hamda bitiruvchilar bandligini ta’minlash borasidagi ishlarni yangi bosqichga olib chiqishga xizmat qiladi.",
+    "author": "TIIU Matbuot xizmati",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2026-03-16T10:36:29Z",
+    "updated_at": "2026-07-18T18:02:55.854Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 32,
+  "fields": {
+    "title": "Toshkent ijtimoiy innovatsiya universitetida ta’lim-tarbiya jarayonini yaxshilash va talabalarning ijtimoiy-psixologik holatlarini o‘rganish maqsadida 2026-yil yanvar oyi davomida o‘tkaziladigan anketa va SO‘ROVNOMA HISOBOTI",
+    "slug": "toshkent-ijtimoiy-innovatsiya-universitetida-talim-tarbiya-jarayonini-yaxshilash-va-talabalarning-ijtimoiy-psixologik-holatlarini-organish-maqsadida-2026-yil-yanvar-oyi-davomida-otkaziladigan-anketa-va-sorovnoma-hisoboti",
+    "category": 1,
+    "image": "news/news-32.jpg",
+    "short_text": "Akademik samaradorlik – Talabalar uchun anketa(so‘rovnoma)si natijasi: 2026-yil 15-yanvar kuni Toshkent ijtimoiy innovatsiya universitetida ta’lim-tarbiya jarayonini yaxshilash hamda talabalarining ijtimoiy-psixologik holatlarini o‘rganish maqsadida universitetning TIIU Ma’naviy-ma’rifiy va spotr https://t.me/tiiu_mmvs kanalida so‘rovnoma o‘tkazildi. Mazkur so‘rovnoma kunduzgi ta’lim shaklida tahsil olayotgan talabalar orasida tashkil etildi. Hozirgi kunda tahsil olayotgan talabalar faol ishtiro",
+    "body": "Akademik samaradorlik – Talabalar uchun anketa(so‘rovnoma)si natijasi:\n2026-yil 15-yanvar kuni Toshkent ijtimoiy innovatsiya universitetida ta’lim-tarbiya jarayonini yaxshilash hamda talabalarining ijtimoiy-psixologik holatlarini o‘rganish maqsadida universitetning TIIU Ma’naviy-ma’rifiy va spotr https://t.me/tiiu_mmvs kanalida so‘rovnoma o‘tkazildi.\n\n\n\nMazkur so‘rovnoma kunduzgi ta’lim shaklida tahsil olayotgan talabalar orasida tashkil etildi. Hozirgi kunda tahsil olayotgan talabalar faol ishtirok etishdi. Statistika hisob-kitoblarga ko‘ra:\n\nso‘rovnomada ishtirok etgan talabalar ulushi 41,6 % ni tashkil etdi;\nso‘rovnomada ishtirok etmagan talabalar ulushi esa 58,4 % ga teng bo‘ldi.\n\n\n\nO‘tkazilgan so‘rovnoma natijalari talabalarining akademik samaradorligi, o‘qituvchi va talaba o‘rtasidagi munosabatlar, shuningdek, ta’lim jarayonini yanada takomillashtirish bo‘yicha fikr-mulohazalarini aniqlash imkonini berdi.\n\n\n\n\n\nMazkur so‘rovnoma natijalari asosida kelgusida ta’lim sifatini oshirish, talabalar bilan ishlash mexanizmlarini takomillashtirish va psixologik qo‘llab-quvvatlash tizimini kuchaytirish bo‘yicha tegishli xulosalar va takliflar ishlab chiqilishi rejalashtirilgan.\n\n\nSo‘rovnoma natijalari asosida aytish mumkinki, talabalarning aksariyati amaliy, interaktiv va onlayn resurslarga boy darslarni afzal ko‘rmoqda. Ta’lim jarayonida zamonaviy pedagogik texnologiyalarni keng joriy etish, o‘qituvchi va talaba o‘rtasidagi muloqotni kuchaytirish hamda raqamli resurslardan samarali foydalanish maqsadga muvofiqdir.\n\nSo‘rovnoma natijasiga ko‘ra aniqlangan 10 % qoniqarli va 4 % qoniqarsis javoblarga ko‘ra aniqlangan kamchiliklar ustida ishlash bo‘yicha kafedralarda o‘qituvchilar o‘rtasida ish olib borish rejalashtirildi.",
+    "author": "TIIU Matbuot xizmati",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2026-03-12T07:44:18Z",
+    "updated_at": "2026-07-18T18:02:55.856Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 33,
+  "fields": {
+    "title": "IFTIXOR",
+    "slug": "iftixor",
+    "category": 1,
+    "image": "news/news-33.jpg",
+    "short_text": "Mustaqil Davlatlar Hamdo‘stligi tomonidan tashkil etilgan nufuzli “Yosh tadqiqotchi” ko‘rik-tanlovida universitetimizning Iqtisodiyot yo‘nalishi magistranti Sherali Umarov munosib ishtirok etib, sovrindorlar safidan joy oldi. Mazkur tanlov yosh olimlarning ilmiy salohiyatini namoyon etish hamda innovatsion g‘oyalarni qo‘llab-quvvatlashga qaratilgan bo‘lib, unda turli davlatlardan iqtidorli tadqiqotchilar o‘z ilmiy ishlari bilan qatnashdilar. ⏺ Sherali Umarov tomonidan taqdim etilgan […]",
+    "body": "Mustaqil Davlatlar Hamdo‘stligi tomonidan tashkil etilgan nufuzli “Yosh tadqiqotchi” ko‘rik-tanlovida universitetimizning Iqtisodiyot yo‘nalishi magistranti Sherali Umarov munosib ishtirok etib, sovrindorlar safidan joy oldi.\n\n\n\n\n\nMazkur tanlov yosh olimlarning ilmiy salohiyatini namoyon etish hamda innovatsion g‘oyalarni qo‘llab-quvvatlashga qaratilgan bo‘lib, unda turli davlatlardan iqtidorli tadqiqotchilar o‘z ilmiy ishlari bilan qatnashdilar.\n⏺ Sherali Umarov tomonidan taqdim etilgan ilmiy loyiha dolzarbligi, amaliy ahamiyati hamda puxta tahliliy yondashuvi bilan hakamlar hay’ati tomonidan yuqori baholandi.\n⏺ Ushbu yutuq nafaqat magistrantimizning shaxsiy muvaffaqiyati, balki universitetimizning ilmiy salohiyati va yosh tadqiqotchilarga yaratilgan keng imkoniyatlarning yorqin ifodasidir.\n⏺Talabamizni ushbu yuksak natija bilan samimiy tabriklaymiz hamda kelgusi ilmiy faoliyatida ulkan zafarlar tilaymiz!",
+    "author": "TIIU Matbuot xizmati",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2026-03-06T06:56:50Z",
+    "updated_at": "2026-07-18T18:02:55.858Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 34,
+  "fields": {
+    "title": "Diqqat e’lon!!! “Mirzo Ulug’bek vorislari” tanlovini o’tkazilmoqda.",
+    "slug": "diqqat-elon-mirzo-ulugbek-vorislari-tanlovini-otkazilmoqda",
+    "category": 1,
+    "image": "news/news-34.jpg",
+    "short_text": "O’zbekiston Respublikasi Oliy ta’lim, fan va innovatsiyalar vazirligining 2026-yi| 1З-fеvrаldаg| 22-sonli xdfu buyrug’ida talaba yoshlarning ilmiy salohiyatini oshirishga qaratilgan “Mirzo Ulug’bek vorislari” tanlovini o’tkazish vazifasi belgilangan. Маzkur buyruqning 2-l\\ovasi bilan tasdiqlangan nizomiga muvofiq, tanlovning l-universitet bosqichi joriy yitning 7-mаrt sanasiga qadar o’tkaziladi. Ishtirokchilar Nizomga muvofiq maqola yozishi talab etiladi. Universitet bosqichi g’olibi Hududiy bos",
+    "body": "O’zbekiston Respublikasi Oliy ta’lim, fan va innovatsiyalar vazirligining 2026-yi| 1З-fеvrаldаg| 22-sonli xdfu buyrug’ida talaba yoshlarning ilmiy salohiyatini oshirishga qaratilgan “Mirzo Ulug’bek vorislari” tanlovini o’tkazish vazifasi belgilangan.\nМаzkur buyruqning 2-l\\ovasi bilan tasdiqlangan nizomiga muvofiq, tanlovning l-universitet bosqichi joriy yitning 7-mаrt sanasiga qadar o’tkaziladi.\nIshtirokchilar Nizomga muvofiq maqola yozishi talab etiladi.\nUniversitet bosqichi g’olibi Hududiy bosqichga tavsiya etiladi.\nRespublika bosqichida g’olib bo’lgan talabalar quyidagicha taqdirlanadi:\n1-o’rin: 5 000 000 so’m;\n2-o’rin: 3 000 000 so’m;\n3-o’rin: 2 000 000 so’m. pul mukofoti bilan taqdirlanadi.\nmaqola @GBoboyev_a yoki @Imomqulova_0205 ga elektron shhakilda 6-mart soat: 16: 00 ga qadar taqdim etilishi so’raladi.",
+    "author": "TIIU Matbuot xizmati",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2026-03-04T05:49:20Z",
+    "updated_at": "2026-07-18T18:02:55.859Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 35,
+  "fields": {
+    "title": "Diqqat e’lon!!! Insholar tanlovi",
+    "slug": "diqqat-elon-insholar-tanlovi",
+    "category": 1,
+    "image": "news/news-35.jpg",
+    "short_text": "Talaba-yoshlar oʻrtasida “Jadidlar jasorati – millatimiz faxri” hamda “Jadidlar: milliy oʻzlik, istiqlol va davlatchilik gʻoyalari” mavzularida insholar tanlovi boʻlib oʻtadi. Tanlov ikki bosqichda oʻtkaziladi: universitet bosqichi va respublika bosqichi. Oʻtkazilish vaqti : 5-mart, soat 11:30 da Oʻtkazilish joyi : 205 – xona",
+    "body": "Talaba-yoshlar oʻrtasida “Jadidlar jasorati – millatimiz faxri” hamda “Jadidlar: milliy oʻzlik, istiqlol va davlatchilik gʻoyalari” mavzularida insholar tanlovi boʻlib oʻtadi.\nTanlov ikki bosqichda oʻtkaziladi: universitet bosqichi va respublika bosqichi.\nOʻtkazilish vaqti : 5-mart, soat 11:30 da\nOʻtkazilish joyi : 205 – xona",
+    "author": "TIIU Matbuot xizmati",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2026-03-03T08:59:47Z",
+    "updated_at": "2026-07-18T18:02:55.861Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 36,
+  "fields": {
+    "title": "Toshkent Ijtimoiy Innovatsiya Universitetida “Jaholatga qarshi ma’rifat bilan kurashish” mavzusida uchrashuv o‘tkazildi",
+    "slug": "toshkent-ijtimoiy-innovatsiya-universitetida-jaholatga-qarshi-marifat-bilan-kurashish-mavzusida-uchrashuv-otkazildi",
+    "category": 1,
+    "image": "",
+    "short_text": "Sergeli tuman IIO FMB TQSB xodimi Qo‘ldoshyev Ibrohim Talat o‘g‘li, Xonobod jome masjidi imom noibi Murodjon Sadriddinov hamda universitet profilaktika inspektori To‘ranazar Mamadaliyev ishtirokida talaba-yoshlar bilan profilaktik uchrashuv bo‘lib o‘tdi. Tadbir davomida quyidagi muhim masalalar atroflicha muhokama qilindi: 🟢 Jaholat jamiyat taraqqiyotiga to‘sqinlik qiluvchi eng katta illatlardan biri ekani; 🟢 Ma’rifatli, bilimli va […]",
+    "body": "Sergeli tuman IIO FMB TQSB xodimi Qo‘ldoshyev Ibrohim Talat o‘g‘li, Xonobod jome masjidi imom noibi Murodjon Sadriddinov hamda universitet profilaktika inspektori To‘ranazar Mamadaliyev ishtirokida talaba-yoshlar bilan profilaktik uchrashuv bo‘lib o‘tdi.\n\n\n\n\nTadbir davomida quyidagi muhim masalalar atroflicha muhokama qilindi:\n🟢 Jaholat jamiyat taraqqiyotiga to‘sqinlik qiluvchi eng katta illatlardan biri ekani;\n🟢 Ma’rifatli, bilimli va mustaqil fikrlaydigan yoshlarni tarbiyalash bugungi kunning dolzarb vazifasi hisoblanishi;\n🟢 Yot g‘oyalar va zararli axborotlardan himoyalanish uchun har bir yoshda tanqidiy fikrlash, kitobxonlik madaniyati hamda media savodxonlikni shakllantirish zarurligi;\n🟢 Oila, ta’lim muassasasi va mahalla hamkorligida ma’naviy-ma’rifiy ishlarni kuchaytirish lozimligi ta’kidlandi.\n\n\n\nMa’ruzachilar “Jaholatga qarshi ma’rifat” tamoyili asosida yoshlarni ilm-fan, kasb-hunar egallash, vatanparvarlik, milliy va umuminsoniy qadriyatlarga sodiqlik ruhida tarbiyalash muhim ekanini alohida qayd etdilar.\nTadbir yakunida talaba-yoshlar o‘zlarini qiziqtirgan savollarga javob oldilar hamda ochiq va samimiy muloqot tashkil etildi.",
+    "author": "TIIU Matbuot xizmati",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2026-02-24T09:20:04Z",
+    "updated_at": "2026-07-18T18:02:55.863Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 37,
+  "fields": {
+    "title": "She’riyat osmonidagi Bobur yulduzi” adabiy kechasi bo‘lib o‘tdi",
+    "slug": "sheriyat-osmonidagi-bobur-yulduzi-adabiy-kechasi-bolib-otdi",
+    "category": 1,
+    "image": "news/news-37.jpg",
+    "short_text": "Universitetimizda buyuk shoir, davlat arbobi va tarixnavis Zahiriddin Muhammad Bobur tavalludiga bag‘ishlangan adabiy kecha yuqori saviyada tashkil etildi. Tadbir davomida: 🟢 Boburning boy adabiy merosi 🟢G‘azal va ruboiylari 🟢Axloqiy-falsafiy qarashlari 🟢Vatanga muhabbat va insonparvarlik ruhidagi fikrlari keng yoritildi. Talabalar tomonidan she’rlar o‘qildi, sahna ko‘rinishlari namoyish etildi va Bobur ijodining ma’naviy ahamiyati haqida fikr-mulohazalar bildirildi. Mazkur […]",
+    "body": "Universitetimizda buyuk shoir, davlat arbobi va tarixnavis Zahiriddin Muhammad Bobur tavalludiga bag‘ishlangan adabiy kecha yuqori saviyada tashkil etildi.\n\n\nTadbir davomida:\n🟢 Boburning boy adabiy merosi\n🟢G‘azal va ruboiylari\n🟢Axloqiy-falsafiy qarashlari\n🟢Vatanga muhabbat va insonparvarlik ruhidagi fikrlari keng yoritildi.\nTalabalar tomonidan she’rlar o‘qildi, sahna ko‘rinishlari namoyish etildi va Bobur ijodining ma’naviy ahamiyati haqida fikr-mulohazalar bildirildi.\nMazkur ma’naviy-ma’rifiy tadbir barchaga unutilmas taassurot qoldirdi.",
+    "author": "TIIU Matbuot xizmati",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2026-02-16T09:53:01Z",
+    "updated_at": "2026-07-18T18:02:55.865Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 38,
+  "fields": {
+    "title": "Magistrantlar dissertatsiya ishlari bo‘yicha 6 oylik monitoring o‘tkazildi",
+    "slug": "magistrantlar-dissertatsiya-ishlari-boyicha-6-oylik-monitoring-otkazildi",
+    "category": 1,
+    "image": "news/news-38.png",
+    "short_text": "Magistratura Lingvistika yo‘nalishi 1–2-kurs magistrantlarining dissertatsiya ishlari yuzasidan 6 oylik monitoring tashkil etildi. 📊 Monitoring davomida magistrantlar o‘tgan 6 oy mobaynida bajarilgan ilmiy-tadqiqot ishlari, erishilgan natijalar hamda keyingi bosqich rejalari bo‘yicha taqdimotlar qilishdi. 👥 Tadbirda: — barcha ilmiy rahbarlar — O‘quv bo‘limi vakillari — magistrantlar faol ishtirok etdilar. 📌 Monitoring ishlari v.b. professor I.S. Kaxarova, […]",
+    "body": "Magistratura Lingvistika yo‘nalishi 1–2-kurs magistrantlarining dissertatsiya ishlari yuzasidan 6 oylik monitoring tashkil etildi.\n\n📊 Monitoring davomida magistrantlar o‘tgan 6 oy mobaynida bajarilgan ilmiy-tadqiqot ishlari, erishilgan natijalar hamda keyingi bosqich rejalari bo‘yicha taqdimotlar qilishdi.\n👥 Tadbirda:\n— barcha ilmiy rahbarlar\n— O‘quv bo‘limi vakillari\n— magistrantlar\nfaol ishtirok etdilar.\n📌 Monitoring ishlari v.b. professor I.S. Kaxarova, dotsent (PhD) O. Bayjanova, dotsent N.B. Pulatova, v.b. dotsent Z.Sh. Abdullayeva hamda dotsent G. Meliyeva tomonidan qabul qilindi.\n📚 Mazkur monitoring magistrantlarning ilmiy faoliyatini tizimli baholash, dissertatsiya ishlarining sifatini oshirish va ilmiy jarayonni yanada takomillashtirishga xizmat qildi.",
+    "author": "TIIU Matbuot xizmati",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2026-02-09T13:00:41Z",
+    "updated_at": "2026-07-18T18:02:55.866Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 39,
+  "fields": {
+    "title": "Arab tili — ilm va kelajak sari ko‘prik",
+    "slug": "arab-tili-ilm-va-kelajak-sari-koprik",
+    "category": 1,
+    "image": "news/news-39.jpg",
+    "short_text": "Toshkent ijtimoiy innovatsiya universitetida Xalqaro Arab tili kuni munosabati bilan mazmunli va esda qolarli tadbir tashkil etildi. Tadbir “Arab tili — bilim, madaniyat va kelajak” hamda “Yoshlar tanlovi — bilimli kelajak” mavzulari asosida o‘tkazilib, unda talabalar arab tiliga oid bilimlari, ijodiy chiqishlari va faol ishtiroklari bilan qatnashdilar. Uchrashuv davomida arab tilining jahon […]",
+    "body": "Toshkent ijtimoiy innovatsiya universitetida Xalqaro Arab tili kuni munosabati bilan mazmunli va esda qolarli tadbir tashkil etildi.\nTadbir “Arab tili — bilim, madaniyat va kelajak” hamda “Yoshlar tanlovi — bilimli kelajak” mavzulari asosida o‘tkazilib, unda talabalar arab tiliga oid bilimlari, ijodiy chiqishlari va faol ishtiroklari bilan qatnashdilar.\n\n\n\n\n\nUchrashuv davomida arab tilining jahon ilm-fani va madaniyatidagi o‘rni, bugungi yoshlar hayotidagi ahamiyati haqida fikr-mulohazalar bildirildi hamda iqtidorli talabalar munosib e’tirof etildi.\n📖Til — bu faqat aloqa vositasi emas, balki yangi imkoniyatlar eshigidir.",
+    "author": "TIIU Matbuot xizmati",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2025-12-19T04:39:06Z",
+    "updated_at": "2026-07-18T18:02:55.868Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 40,
+  "fields": {
+    "title": "“MILLAT G’URURI”",
+    "slug": "millat-gururi",
+    "category": 1,
+    "image": "news/news-40.jpg",
+    "short_text": "Toshkent Ijtimoiy innovatsiya universitetining pedagogika va psixologiya kafedrasi v.v.b. dosenti A.R. Sanakulova “USTOZ- SHOGIRD” an’anasiga muvofiq Maktabgacha ta’lim yo‘nalishi 3-bosqich talabalari. O‘lmasova Madinabonu Faxriddin qizi hamda Nurmatova Iroda Iskandar qizi bilan birgalikda “MILLAT GURURI”–Mustaqil Davlatlar Hamdo’stligi (MDH) miqyosida tashkil etilgan xalqaro ilmiy-amaliy ko‘rik-tanlovining 1-turida maqolalari bilan faol ishtirok etdilar. Ushbu ko‘rik-tanlovda […]",
+    "body": "Toshkent Ijtimoiy innovatsiya universitetining pedagogika va psixologiya kafedrasi v.v.b. dosenti A.R. Sanakulova “USTOZ- SHOGIRD” an’anasiga muvofiq Maktabgacha ta’lim yo‘nalishi 3-bosqich talabalari.\n\n\n\n\nO‘lmasova Madinabonu Faxriddin qizi hamda Nurmatova Iroda Iskandar qizi bilan birgalikda\n“MILLAT GURURI”–Mustaqil Davlatlar Hamdo’stligi (MDH) miqyosida tashkil etilgan xalqaro ilmiy-amaliy ko‘rik-tanlovining 1-turida maqolalari bilan faol ishtirok etdilar.\n\n\n\nUshbu ko‘rik-tanlovda g’oliblikni qo’lga kiritgan talabalarimiz “MILLAT G’URURI” esdalik ko‘krak nishoni(rasmiy guvohnomasi), sertifikat, diplom, tashakkurnoma va esdalik sovg’alar bilan taqdirlandilar.",
+    "author": "TIIU Matbuot xizmati",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2025-12-11T04:37:03Z",
+    "updated_at": "2026-07-18T18:02:55.869Z"
+  }
+},
+{
+  "model": "main.news",
+  "pk": 41,
+  "fields": {
+    "title": "10-dekabr — O‘zbekiston Respublikasi Davlat Madhiyasi qabul qilingan kun",
+    "slug": "10-dekabr-ozbekiston-respublikasi-davlat-madhiyasi-qabul-qilingan-kun",
+    "category": 1,
+    "image": "",
+    "short_text": "Bugun yuragimizda faxr bilan yangraydigan, bir xalqni birlashtiradigan, mustaqilligimiz timsoli bo‘lgan Davlat Madhiyamiz qabul qilinganiga yana bir yil to‘ldi. Bu kun — Vatan oldidagi sadoqatni eslatadi, Yurtga muhabbatni uyg‘otadi, Har birimizni birdamlikka chorlaydi. Madhiyamiz — bizning g‘ururimiz, sha’nimiz va milliy qadriyatimizdir.",
+    "body": "Bugun yuragimizda faxr bilan yangraydigan, bir xalqni birlashtiradigan, mustaqilligimiz timsoli bo‘lgan Davlat Madhiyamiz qabul qilinganiga yana bir yil to‘ldi.\n\n\n\n\nBu kun —\n\nVatan oldidagi sadoqatni eslatadi,\nYurtga muhabbatni uyg‘otadi,\nHar birimizni birdamlikka chorlaydi.\n\nMadhiyamiz — bizning g‘ururimiz, sha’nimiz va milliy qadriyatimizdir.",
+    "author": "TIIU Matbuot xizmati",
+    "views": 0,
+    "is_active": true,
+    "is_featured": false,
+    "created_at": "2025-12-10T04:31:56Z",
+    "updated_at": "2026-07-18T18:02:55.871Z"
+  }
+},
+{
+  "model": "main.event",
+  "pk": 1,
+  "fields": {
+    "title": "\"Milliylikka zamonaviy yondashuv!\" — Xon Atlas kuni",
+    "slug": "milliylikka-zamonaviy-yondashuv-xon-atlas-kuni",
+    "image": "",
+    "description": "O'zbek milliy madaniyatini targ'ib qilish maqsadida Xon Atlas kuni tashkil etildi.",
+    "body": "O'zbek milliy madaniyatini targ'ib qilish maqsadida Xon Atlas kuni tashkil etildi.",
+    "location": "TIIU",
+    "event_date": "2024-04-10T05:00:00Z",
+    "is_active": true,
+    "views": 1,
+    "created_at": "2026-07-18T17:13:43.769Z"
+  }
+},
+{
+  "model": "main.event",
+  "pk": 2,
+  "fields": {
+    "title": "P. Qodirovning \"Yulduzli tunlar\" va Oybekning \"Navoiy\" — kitob tanlovi",
+    "slug": "p-qodirovning-yulduzli-tunlar-va-oybekning-navoiy-kitob-tanlovi",
+    "image": "",
+    "description": "Kitobxonlik tanlovida 2-kurs talabasi Islomov Mujahiddin 1-o'rinni egalladi.",
+    "body": "Kitobxonlik tanlovida 2-kurs talabasi Islomov Mujahiddin 1-o'rinni egalladi.",
+    "location": "TIIU",
+    "event_date": "2024-03-20T09:00:00Z",
+    "is_active": true,
+    "views": 2,
+    "created_at": "2026-07-18T17:13:43.771Z"
+  }
+},
+{
+  "model": "main.event",
+  "pk": 3,
+  "fields": {
+    "title": "\"Kitobxon\" tanlovi — Abdulla Qahhor asarlari",
+    "slug": "kitobxon-tanlovi-abdulla-qahhor-asarlari",
+    "image": "",
+    "description": "Adib Abdulla Qahhor asarlari bo'yicha tanlovda filologiya 2-kurs talabasi Mamasoliyeva Marjona 1-o'rinni qo'lga kiritdi.",
+    "body": "Adib Abdulla Qahhor asarlari bo'yicha tanlovda filologiya 2-kurs talabasi Mamasoliyeva Marjona 1-o'rinni qo'lga kiritdi.",
+    "location": "TIIU",
+    "event_date": "2024-03-15T09:00:00Z",
+    "is_active": true,
+    "views": 0,
+    "created_at": "2026-07-18T17:13:43.772Z"
+  }
+},
+{
+  "model": "main.event",
+  "pk": 4,
+  "fields": {
+    "title": "Sport musobaqasi — \"Talabalar ligasi\"",
+    "slug": "sport-musobaqasi-talabalar-ligasi",
+    "image": "",
+    "description": "Voleybol, shashka va shaxmat bo'yicha \"Talabalar ligasi\" musobaqasi bo'lib o'tdi.",
+    "body": "Voleybol, shashka va shaxmat bo'yicha \"Talabalar ligasi\" musobaqasi bo'lib o'tdi.",
+    "location": "TIIU",
+    "event_date": "2024-03-12T10:00:00Z",
+    "is_active": true,
+    "views": 0,
+    "created_at": "2026-07-18T17:13:43.773Z"
+  }
+},
+{
+  "model": "main.event",
+  "pk": 5,
+  "fields": {
+    "title": "8-mart — Xalqaro xotin-qizlar kuni",
+    "slug": "8-mart-xalqaro-xotin-qizlar-kuni",
+    "image": "",
+    "description": "Universitetda Xalqaro xotin-qizlar kuni tantanali nishonlandi.",
+    "body": "Universitetda Xalqaro xotin-qizlar kuni tantanali nishonlandi.",
+    "location": "TIIU",
+    "event_date": "2024-03-08T07:00:00Z",
+    "is_active": true,
+    "views": 0,
+    "created_at": "2026-07-18T17:13:43.774Z"
+  }
+},
+{
+  "model": "main.leadership",
+  "pk": 1,
+  "fields": {
+    "full_name": "Maxmudov Akbar Abduxamidovich",
+    "rank": "Dotsent",
+    "position": "Rektor",
+    "qualification": "Iqtisod fanlari bo'yicha falsafa doktori (PhD)",
+    "photo": "leadership/30.png",
+    "bio": "",
+    "email": "rector@tiiu.uz",
+    "phone": "+998 97 009 79 75",
+    "reception_days": "Seshanba, Payshanba, Juma",
+    "reception_time": "15:00–16:00",
+    "order": 1,
+    "is_active": true
+  }
+},
+{
+  "model": "main.leadership",
+  "pk": 2,
+  "fields": {
+    "full_name": "Nazarov Abdukarim Kusharovich",
+    "rank": "PhD, Dotsent",
+    "position": "Ma'naviy-ma'rifiy ishlar bo'yicha prorektor",
+    "qualification": "Iqtisod fanlari bo'yicha falsafa doktori (PhD)",
+    "photo": "leadership/abdukarim.jpg",
+    "bio": "",
+    "email": "anazarov@tiiu.uz",
+    "phone": "+998 97 009 79 75",
+    "reception_days": "Dushanba–Juma",
+    "reception_time": "10:00–15:00",
+    "order": 2,
+    "is_active": true
+  }
+},
+{
+  "model": "main.leadership",
+  "pk": 3,
+  "fields": {
+    "full_name": "Ro'ziyev Nasim Ibragimovich",
+    "rank": "",
+    "position": "Moliyaviy resurslarni rejalashtirish bo'limi boshlig'i",
+    "qualification": "",
+    "photo": "leadership/ruziyev.png",
+    "bio": "",
+    "email": "roziev@tiiu.uz",
+    "phone": "+998 97 009 79 75",
+    "reception_days": "Dushanba–Juma",
+    "reception_time": "10:00–15:00",
+    "order": 3,
+    "is_active": true
+  }
+},
+{
+  "model": "main.leadership",
+  "pk": 4,
+  "fields": {
+    "full_name": "Shaxasanova Malika Abduzaxidovna",
+    "rank": "",
+    "position": "Kadrlar bo'yicha inspektor",
+    "qualification": "",
+    "photo": "leadership/shaxasanova.png",
+    "bio": "",
+    "email": "mshahasanova@tiiu.uz",
+    "phone": "+998 97 009 79 75",
+    "reception_days": "Dushanba–Juma",
+    "reception_time": "10:00–15:00",
+    "order": 4,
+    "is_active": true
+  }
+},
+{
+  "model": "main.department",
+  "pk": 1,
+  "fields": {
+    "name": "\"Iqtisodiyot va raqamli texnologiyalar\" kafedrasi",
+    "slug": "iqtisodiyot-va-raqamli-texnologiyalar-kafedrasi",
+    "head": "Bazarov Qahramon Tashtemirovich",
+    "description": "Iqtisodiyot va raqamli texnologiyalar sohasida bilim beruvchi kafedra. Mudir — iqtisod fanlari bo'yicha falsafa doktori (PhD), dotsent.",
+    "image": "",
+    "faculty": null,
+    "order": 1,
+    "is_active": true
+  }
+},
+{
+  "model": "main.department",
+  "pk": 2,
+  "fields": {
+    "name": "\"Pedagogika va psixologiya\" kafedrasi",
+    "slug": "pedagogika-va-psixologiya-kafedrasi",
+    "head": "Kadirov Kamoliddin Batirovich",
+    "description": "Pedagogika va psixologiya kafedrasi. Mudir — psixologiya fanlari doktori, professor.",
+    "image": "",
+    "faculty": null,
+    "order": 2,
+    "is_active": true
+  }
+},
+{
+  "model": "main.center",
+  "pk": 1,
+  "fields": {
+    "name": "O'quv-uslubiy bo'lim",
+    "slug": "oquv-uslubiy-bolim",
+    "icon": "📚",
+    "head": "Ismatullaev Fazliddin Rajabovich",
+    "head_role": "Bo'lim boshlig'i",
+    "head_phone": "+998 97 009 79 75",
+    "head_email": "fismatullaev@tiiu.uz",
+    "work_hours": "Dushanba–Juma 10:00–15:00",
+    "description": "",
+    "image": "",
+    "order": 1,
+    "is_active": true
+  }
+},
+{
+  "model": "main.center",
+  "pk": 2,
+  "fields": {
+    "name": "Moliyaviy resurslarni rejalashtirish bo'limi",
+    "slug": "moliyaviy-resurslarni-rejalashtirish-bolimi",
+    "icon": "💰",
+    "head": "Ro'ziyev Nasim Ibragimovich",
+    "head_role": "Bo'lim boshlig'i",
+    "head_phone": "+998 97 009 79 75",
+    "head_email": "roziev@tiiu.uz",
+    "work_hours": "Dushanba–Juma 10:00–15:00",
+    "description": "",
+    "image": "",
+    "order": 2,
+    "is_active": true
+  }
+},
+{
+  "model": "main.center",
+  "pk": 3,
+  "fields": {
+    "name": "Axborot texnologiyalari markazi",
+    "slug": "axborot-texnologiyalari-markazi",
+    "icon": "💻",
+    "head": "Orziqulov Shohruh Ismatullayevich",
+    "head_role": "Markaz rahbari",
+    "head_phone": "+998 99 842 27 60",
+    "head_email": "shorziqulov@tiiu.uz",
+    "work_hours": "Dushanba–Juma 10:00–15:00",
+    "description": "",
+    "image": "",
+    "order": 3,
+    "is_active": true
+  }
+},
+{
+  "model": "main.center",
+  "pk": 4,
+  "fields": {
+    "name": "Kadrlar bo'limi",
+    "slug": "kadrlar-bolimi",
+    "icon": "👥",
+    "head": "Shaxasanova Malika Abduzaxidovna",
+    "head_role": "Inspektor",
+    "head_phone": "+998 97 009 79 75",
+    "head_email": "mshahasanova@tiiu.uz",
+    "work_hours": "Dushanba–Juma 10:00–15:00",
+    "description": "",
+    "image": "",
+    "order": 4,
+    "is_active": true
+  }
+},
+{
+  "model": "main.center",
+  "pk": 5,
+  "fields": {
+    "name": "Yoshlar bilan ishlash va talabalar xizmati bo'limi",
+    "slug": "yoshlar-bilan-ishlash-va-talabalar-xizmati-bolimi",
+    "icon": "🎓",
+    "head": "",
+    "head_role": "Bo'lim",
+    "head_phone": "+998 97 009 79 75",
+    "head_email": "gboboeva@tiiu.uz",
+    "work_hours": "Dushanba–Juma 10:00–15:00",
+    "description": "",
+    "image": "",
+    "order": 5,
+    "is_active": true
+  }
+},
+{
+  "model": "main.staticpage",
+  "pk": 1,
+  "fields": {
+    "title": "Ilmiy faoliyat",
+    "slug": "ilmiy-faoliyat",
+    "body": "",
+    "is_active": true,
+    "updated_at": "2026-07-17T18:12:00.845Z"
+  }
+},
+{
+  "model": "main.staticpage",
+  "pk": 6,
+  "fields": {
+    "title": "Elektron Ta'lim Tizimi",
+    "slug": "elektron-talim-tizimi",
+    "body": "",
+    "is_active": true,
+    "updated_at": "2026-07-17T18:12:00.847Z"
+  }
+},
+{
+  "model": "main.staticpage",
+  "pk": 11,
+  "fields": {
+    "title": "Talabalar O'rtasida So'rovnoma",
+    "slug": "sorovnoma",
+    "body": "",
+    "is_active": true,
+    "updated_at": "2026-07-17T18:12:00.849Z"
+  }
+}
+]

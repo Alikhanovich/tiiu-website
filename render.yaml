@@ -1,8 +1,7 @@
-databases:
-  - name: tiiu-db
-    databaseName: tiiu
-    user: tiiu
-    plan: free
+# Baza: SQLite (kod bilan birga keladi). Kontent main/fixtures/initial_data.json
+# dan har deploy'da start.sh orqali yuklanadi. Postgres ishlatilmaydi —
+# shuning uchun bepul Postgres'ning 30-kunlik muddati muammosi ham yo'q.
+# DATABASE_URL berilmagani uchun settings.py avtomatik SQLite'ga tushadi.
 
 services:
   - type: web
@@ -12,10 +11,6 @@ services:
     buildCommand: "./build.sh"
     startCommand: "./start.sh"
     envVars:
-      - key: DATABASE_URL
-        fromDatabase:
-          name: tiiu-db
-          property: connectionString
       - key: SECRET_KEY
         generateValue: true
       - key: DEBUG

@@ -5,6 +5,12 @@ set -o errexit
 
 python manage.py migrate --noinput
 
+# Seed all site content (teachers, news, leadership, settings, ...) from the
+# committed fixture. Render's filesystem is ephemeral, so the SQLite DB is
+# empty on every start — this repopulates it from git each time, which means
+# production always mirrors the content you committed locally.
+python manage.py loaddata main/fixtures/initial_data.json || echo "WARNING: fixture load failed — site will start with empty content."
+
 # Create superuser only if env vars are explicitly set (idempotent).
 python manage.py shell -c "
 from django.contrib.auth import get_user_model
